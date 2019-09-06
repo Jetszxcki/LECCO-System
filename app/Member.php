@@ -25,7 +25,7 @@ class Member extends Model
     }
 
 	// other functions
-	public function formColumnNameFormat($column)
+	public function getColumnNameForView($column)
 	{
 		return ucwords(str_replace('_', ' ', $column));
 	}

@@ -24,8 +24,10 @@
 			table.rows[i].style.display = includes ? '' : 'none';
 		}
 
-		if (!visible) {
-			document.getElementById('no-record').style.display = '';
+		const noRecordDiv = document.getElementById('no-record');
+
+		if (!visible && noRecordDiv) {
+			noRecordDiv.style.display = '';
 		}
 	}
 </script>

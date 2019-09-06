@@ -12,34 +12,55 @@ class MembersController extends Controller
     public function index()
     {
     	$members = Member::names()->get();
-
     	return view('members.index', compact('members'));
     }
 
     // REMIND: install dependency via composer require doctrine/dbal
     public function create()
     {
-        $column_names = Member::columnNames();
-        $column_types = array_map(function($value) {
-            return DB::getSchemaBuilder()->getColumnType('members', $value);
-        }, $column_names);
-
-        $columns = array_combine($column_names, $column_types);
+        $columns = $this->getColumns();
         $member = new Member();
-
     	return view('members.create', compact('columns', 'member'));
     }
 
     public function store(Request $request)
     {
         Member::create($this->validateRequest($request));
-
         return redirect('members');
     }
 
     public function show(Member $member)
-    {
+    {	
     	return view('members.show', compact('member'));
+    }
+
+    public function edit(Member $member)
+    {	
+		$columns = $this->getColumns();
+    	return view('members.edit', compact('member', 'columns'));
+    }
+
+    public function update(Member $member, Request $request)
+    {
+    	$member->update($this->validateRequest($request));
+    	return redirect('members/' . $member->id);
+    }
+
+    public function destroy(Member $member)
+    {	
+    	$member->delete();
+    	return redirect('members');
+    }
+
+    // other functions
+    private function getColumns()
+    {
+    	$column_names = Member::columnNames();
+        $column_types = array_map(function($name) {
+            return DB::getSchemaBuilder()->getColumnType('members', $name);
+        }, $column_names);
+
+        return array_combine($column_names, $column_types);
     }
 
     private function validateRequest($request)

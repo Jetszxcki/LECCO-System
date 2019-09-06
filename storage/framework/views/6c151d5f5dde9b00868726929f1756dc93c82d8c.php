@@ -146,7 +146,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <a href="" class="d-flex flex-column align-items-stretch">
+                    <a href="<?php echo e(route('signatories.index')); ?>" class="d-flex flex-column align-items-stretch">
                         <img src="<?php echo e(asset('img/dota.png')); ?>" alt="Error fetching image">
                     </a>
                 </div>

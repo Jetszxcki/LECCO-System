@@ -6,12 +6,12 @@
 		<a href="{{ route('members.edit', [$member]) }}" class="btn btn-warning">Edit</a>
 	</div>
 
-	<div class="form-group">
-		<div class="row">
-			<label><strong>Name:</strong>{{ $member->full_name }}</label>
-		</div>
-		<div class="row">
-			<label><strong>TIN:</strong>{{ $member->TIN }}</label>
-		</div>
+	<div class="container">
+		@foreach ($member->getAttributes() as $column => $value)
+			<div class="row">
+				<label>{{ $member->getColumnNameForView($column) }}</label>
+				<label>{{ $value }}</label>
+			</div>
+		@endforeach
 	</div>
 @endsection

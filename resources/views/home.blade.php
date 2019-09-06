@@ -141,7 +141,7 @@
                         </div>
                     @endif
 
-                    <a href="" class="d-flex flex-column align-items-stretch">
+                    <a href="{{ route('signatories.index') }}" class="d-flex flex-column align-items-stretch">
                         <img src="{{ asset('img/dota.png') }}" alt="Error fetching image">
                     </a>
                 </div>

@@ -13,9 +13,8 @@
 
 Route::view('/', 'welcome');
 
-Route::resource('members', 'MembersController')->names([
-	'name' => ['index' => 'members.index']
-])->middleware('auth');
+Route::resource('members', 'MembersController')->names(['name' => ['index' => 'members.index']])->middleware('auth');
+Route::resource('signatories', 'SignatoriesController')->names(['name' => ['index' => 'signatories.index']])->middleware('auth');
 
 Auth::routes();
 
