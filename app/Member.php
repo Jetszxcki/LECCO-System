@@ -24,6 +24,12 @@ class Member extends Model
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
 
+    // relationships
+    public function shares()
+    {
+    	return $this->hasMany(Share::class);
+    }
+
 	// other functions
 	public function getColumnNameForView($column)
 	{

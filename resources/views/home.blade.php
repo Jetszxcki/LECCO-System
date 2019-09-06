@@ -69,14 +69,14 @@
                         </div>
                     @endif
 
-                    <a href="" class="d-flex flex-column align-items-stretch">
+                    <a href="{{ route('loan_types.index') }}" class="d-flex flex-column align-items-stretch">
                         <img src="{{ asset('img/dota.png') }}" alt="Error fetching image">
                     </a>
                 </div>
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a href="{{-- {{ route('loan_types.create') }} --}}" class="btn btn-primary col">Add Loan Type</a>
+                        <a href="{{ route('loan_types.create') }}" class="btn btn-primary col">Add Loan Type</a>
                     </li>
                 </ul>
             </div>
@@ -93,14 +93,14 @@
                         </div>
                     @endif
 
-                    <a href="" class="d-flex flex-column align-items-stretch">
+                    <a href="{{ route('shares.index') }}" class="d-flex flex-column align-items-stretch">
                         <img src="{{ asset('img/dota.png') }}" alt="Error fetching image">
                     </a>
                 </div>
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a href="{{-- {{ route('shares.create') }} --}}" class="btn btn-primary col">Add Shares</a>
+                        <a href="{{ route('shares.create') }}" class="btn btn-primary col">Add Shares</a>
                     </li>
                 </ul>
             </div>
@@ -148,7 +148,7 @@
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a href="{{-- {{ route('signatories.create') }} --}}" class="btn btn-primary col">Add Signatory</a>
+                        <a href="{{ route('signatories.create') }}" class="btn btn-primary col">Add Signatory</a>
                     </li>
                 </ul>
             </div>

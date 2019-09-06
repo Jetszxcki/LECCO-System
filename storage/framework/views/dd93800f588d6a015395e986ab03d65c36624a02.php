@@ -25,9 +25,11 @@
 		}
 
 		const noRecordDiv = document.getElementById('no-record');
+		const noRecordText = document.getElementById('no-record-text');
 
 		if (!visible && noRecordDiv) {
 			noRecordDiv.style.display = '';
+			noRecordText.innerHTML = 'No record found for "' + searchBar.value + '"';
 		}
 	}
 </script>

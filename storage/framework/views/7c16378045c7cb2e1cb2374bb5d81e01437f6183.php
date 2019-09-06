@@ -8,9 +8,9 @@
 	</div>
 
 	<table class="container" id="main-table">
-		<tr id="theader" class="d-flex p-1 mb-2">
+		<tr id="theader" class="d-flex p-1 mb-2 text-center">
 			<?php if($signatories->isEmpty()): ?>
-				<th nosearch class="col text-center py-5">No record of signatories yet.</th>
+				<th nosearch class="col text-center py-5">No signatories added yet.</th>
 			<?php else: ?>
 				<th nosearch class="col-md-1">ID</th>
 				<th nosearch class="col-md-4">Name</th>
@@ -20,7 +20,7 @@
 		</tr>
 
 		<?php $__currentLoopData = $signatories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $signatory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-			<tr class="p-1 mb-2">
+			<tr class="p-1 mb-2 text-center">
 				<td nosearch class="col-md-1"><?php echo e($signatory->id); ?></td>
 				<td class="col-md-4"><?php echo e($signatory->name); ?></td>
 				<td class="col-md-4"><?php echo e($signatory->designation); ?></td>
@@ -36,11 +36,7 @@
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-		<?php if(! $signatories->isEmpty()): ?>
-			<tr id="no-record" class="col text-center py-5" style="display: none">
-				<th nosearch class="col text-center">No record</th>
-			</tr>
-		<?php endif; ?>
+		<?php echo $__env->make('partials.not_found_alert', ['model' => $signatories], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</table>
 <?php $__env->stopSection(); ?>
 

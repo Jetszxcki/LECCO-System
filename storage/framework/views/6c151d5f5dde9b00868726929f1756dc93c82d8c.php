@@ -71,7 +71,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <a href="" class="d-flex flex-column align-items-stretch">
+                    <a href="<?php echo e(route('loan_types.index')); ?>" class="d-flex flex-column align-items-stretch">
                         <img src="<?php echo e(asset('img/dota.png')); ?>" alt="Error fetching image">
                     </a>
                 </div>
@@ -96,7 +96,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <a href="" class="d-flex flex-column align-items-stretch">
+                    <a href="<?php echo e(route('shares.index')); ?>" class="d-flex flex-column align-items-stretch">
                         <img src="<?php echo e(asset('img/dota.png')); ?>" alt="Error fetching image">
                     </a>
                 </div>

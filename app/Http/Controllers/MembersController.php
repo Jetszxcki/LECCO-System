@@ -19,8 +19,8 @@ class MembersController extends Controller
     public function create()
     {
         $columns = $this->getColumns();
-        $member = new Member();
-    	return view('members.create', compact('columns', 'member'));
+        $model = new Member();
+    	return view('members.create', compact('columns', 'model'));
     }
 
     public function store(Request $request)
@@ -35,9 +35,10 @@ class MembersController extends Controller
     }
 
     public function edit(Member $member)
-    {	
+    {	 
+        $model = $member;
 		$columns = $this->getColumns();
-    	return view('members.edit', compact('member', 'columns'));
+    	return view('members.edit', compact('model', 'columns'));
     }
 
     public function update(Member $member, Request $request)

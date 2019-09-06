@@ -9,9 +9,9 @@
 	</div>
 
 	<table class="container" id="main-table">
-		<tr id="theader" class="d-flex p-1 mb-2">
+		<tr id="theader" class="d-flex p-1 mb-2 text-center">
 			@if ($signatories->isEmpty())
-				<th nosearch class="col text-center py-5">No record of signatories yet.</th>
+				<th nosearch class="col text-center py-5">No signatories added yet.</th>
 			@else
 				<th nosearch class="col-md-1">ID</th>
 				<th nosearch class="col-md-4">Name</th>
@@ -21,7 +21,7 @@
 		</tr>
 
 		@foreach ($signatories as $signatory)
-			<tr class="p-1 mb-2">
+			<tr class="p-1 mb-2 text-center">
 				<td nosearch class="col-md-1">{{ $signatory->id }}</td>
 				<td class="col-md-4">{{ $signatory->name }}</td>
 				<td class="col-md-4">{{ $signatory->designation }}</td>
@@ -37,10 +37,6 @@
 			</tr>
 		@endforeach
 
-		@if (! $signatories->isEmpty())
-			<tr id="no-record" class="col text-center py-5" style="display: none">
-				<th nosearch class="col text-center">No record</th>
-			</tr>
-		@endif
+		@include('partials.not_found_alert', ['model' => $signatories])
 	</table>
 @endsection
