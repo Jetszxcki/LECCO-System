@@ -84,30 +84,30 @@ The Laravel framework is open-source software licensed under the [MIT license](h
 > If we have online copy, put link here.
 
 ## Setup:
-1. Install WAMPServer
-	a. Adjust the version of wampserver to 7.2.18
-	b. Add php to path in environment variables.
-		- PHP bin is in `./wamp64/bin/php/`
+#### Install WAMPServer
+- Adjust the version of wampserver to 7.2.18
+- Add php to path in environment variables.
+    - PHP bin is in `./wamp64/bin/php/`
 
-2. Install SQLServer 2012
-	a. Forgot prerequisites (e.g. Redists). Please update this.
-	b. Forgot installation details. Please update this.
+#### Install SQLServer 2012
+- Forgot prerequisites (e.g. Redists). Please update this.
+- Forgot installation details. Please update this.
 
-3. Replace php.ini on `./wamp64/bin/php/php7.2.18/`.
-	a. Download php.ini here: `link_to_file_here`
-	b. Manual edit:
-		- put instructions here
+#### Replace php.ini on `./wamp64/bin/php/php7.2.18/`.
+- Download php.ini here: `link_to_file_here`
+- Manual edit:
+    - put instructions here
 
-4. Since SQLSRV4.0 is incompatible to php 7.2.* download SQLSRV5.3 files to `./wamp64/bin/php/php7.2.18/ext/`
-	a. Download link: [SQLSRV5.3 download site](https://www.microsoft.com/en-us/download/details.aspx?id=57163&WT.mc_id=rss_alldownloads_devresources)
-	b. Install the download. It will give a folder of SQLServer drivers for PHP.
-	c. Copy files in `php_pdo_sqlsrv_72_ts_x64.dll` and `php_sqlsrv_72_ts_x64.dll> to <./wamp64/bin/php/php7.2.18/ext/`
+#### Download SQL Srver drivers for PHP. SQLSRV5.3 files to `./wamp64/bin/php/php7.2.18/ext/`
+- Download link: [SQLSRV5.3 download site](https://www.microsoft.com/en-us/download/details.aspx?id=57163&WT.mc_id=rss_alldownloads_devresources)
+- Install the download. It will give a folder of SQLServer drivers for PHP.
+- Copy files in `php_pdo_sqlsrv_72_ts_x64.dll` and `php_sqlsrv_72_ts_x64.dll> to <./wamp64/bin/php/php7.2.18/ext/`
 
-5. Clone repository or get copy of repository from Github to Wamp folder `./wamp64/www/`:
-	a. Repository: https://github.com/Jetszxcki/LECCO-System
-	b. SSH : git@github.com:Jetszxcki/LECCO-System.git
+#### Clone repository or get copy of repository from Github to Wamp folder `./wamp64/www/`:
+- Repository: https://github.com/Jetszxcki/LECCO-System
+- SSH : git@github.com:Jetszxcki/LECCO-System.git
 
-6. Run Laravel server:
-	a. Run: `php artisan serve`
-		- If it runs but localhost:8000 keeps loading, run “php artisan config:cache” then restart server.
-	b. Alternative command: `php -S localhost:8000 -t public/`
+#### Run Laravel server:
+- Run: `php artisan serve`
+    - If it runs but localhost:8000 keeps loading, run `php artisan config:cache` then restart server.
+- Alternative command: `php -S localhost:8000 -t public/`
