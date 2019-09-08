@@ -4,7 +4,10 @@
 @section('content')
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Loan Types</h2>
-		<a href="{{ route('loan_types.create') }}" class="btn btn-primary">Add Loan Type</a>
+
+		@accessright('loan_types_create')
+			<a href="{{ route('loan_types.create') }}" class="btn btn-primary">Add Loan Type</a>
+		@endaccessright
 
 		@include('partials.search_bar')
 	</div>
@@ -25,15 +28,22 @@
 				<td nosearch class="col-md-1">{{ $loan_type->id }}</td>
 				<td class="col-md-6">{{ $loan_type->name }}</td>
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
-					<a href="{{ route('loan_types.show', [$loan_type]) }}" class="btn btn-success mr-1">View</a>
-					<a href="{{ route('loan_types.edit', [$loan_type]) }}" class="btn btn-warning mr-1">Edit</a>
+					@accessright('loan_types_view')
+						<a href="{{ route('loan_types.show', [$loan_type]) }}" class="btn btn-success mr-1">View</a>
+					@endaccessright
 
-					<form action="{{ route('loan_types.destroy', [$loan_type]) }}" method="POST">
-						@method('DELETE')
-						@csrf
+					@accessright('loan_types_edit')
+						<a href="{{ route('loan_types.edit', [$loan_type]) }}" class="btn btn-warning mr-1">Edit</a>
+					@endaccessright
 
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>
+					@accessright('loan_types_delete')
+						<form action="{{ route('loan_types.destroy', [$loan_type]) }}" method="POST">
+							@method('DELETE')
+							@csrf
+
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					@endaccessright
 				</td>
 			</tr>
 		@endforeach

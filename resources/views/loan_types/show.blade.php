@@ -3,7 +3,18 @@
 
 @section('content')
 	<div class="form-group">
-		<a href="{{ route('loan_types.edit', [$loan_type]) }}" class="btn btn-warning">Edit</a>
+		@accessright('loan_types_edit')
+			<a href="{{ route('loan_types.edit', [$loan_type]) }}" class="btn btn-warning">Edit</a>
+		@endaccessright
+
+		@accessright('loan_types_delete')
+			<form action="{{ route('loan_types.destroy', [$loan_type]) }}" method="POST">
+				@method('DELETE')
+				@csrf
+
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+		@endaccessright
 	</div>
 
 	<div class="container">

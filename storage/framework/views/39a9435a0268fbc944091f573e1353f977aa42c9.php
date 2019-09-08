@@ -16,7 +16,18 @@
 	</div>
 
 	<div class="container bg-dark mt-3">
-		<a href="<?php echo e(route('members.edit', [$member])); ?>" class="btn btn-warning">Edit</a>
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_edit')): ?>
+			<a href="<?php echo e(route('members.edit', [$member])); ?>" class="btn btn-warning">Edit</a>
+		<?php endif; ?>
+		
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_delete')): ?>
+			<form action="<?php echo e(route('members.destroy', [$member])); ?>" method="POST">
+				<?php echo method_field('DELETE'); ?>
+				<?php echo csrf_field(); ?>
+
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+		<?php endif; ?>
 		<?php $__currentLoopData = $member->getAttributes(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="row">
 				<label><?php echo e($member->getColumnNameForView($column)); ?></label>

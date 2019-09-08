@@ -4,7 +4,10 @@
 @section('content')
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Shares</h2>
-		<a href="{{ route('shares.create') }}" class="btn btn-primary">Add Share</a>
+
+		@accessright('shares_create')
+			<a href="{{ route('shares.create') }}" class="btn btn-primary">Add Share</a>
+		@endaccessright
 
 		@include('partials.search_bar')
 	</div>

@@ -16,6 +16,8 @@ Route::view('/', 'welcome');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('user/profile/{user}', 'UsersController@profile')->name('users.profile')->middleware('auth');
+Route::patch('user/update_avatar/{user}', 'UsersController@update_avatar')->name('users.update_avatar')->middleware('auth');
 Route::get('users', 'UsersController@index')->name('users.index')->middleware('auth');
 Route::get('users/show_rights/{user}', 'UsersController@show_rights')->name('users.show_rights')->middleware('auth');
 Route::patch('users/update_rights/{user}', 'UsersController@update_rights')->name('users.update_rights')->middleware('auth');

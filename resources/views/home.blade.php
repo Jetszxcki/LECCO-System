@@ -10,14 +10,37 @@
         <a href="" class="btn btn-primary rounded-circle px-3 py-2" id="right-scroll-btn">
             <span>></span>
         </a> --}}
-       @include('partials.panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'user.jpg'])
-       @include('partials.panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg'])
+
+        @accessright('user_view')
+            @include('partials.panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user.jpg'])
+        @endaccessright
+
+        @accessright('member_view')
+            @include('partials.panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
+        @endaccessright
+
+        {{-- @accessright('loans_view')
+            @include('partials.panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
+        @endaccessright --}}
+
+        @accessright('loan_types_view')
+            @include('partials.panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'])
+        @endaccessright
+
+        @accessright('shares_view')
+            @include('partials.panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'user.jpg'])
+        @endaccessright
+
+        {{-- @include('partials.panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg']) --}}
+
+        @accessright('signatories_view')
+            @include('partials.panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'user.jpg'])
+        @endaccessright
+        
+        {{-- @include('partials.panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg']) --}}
+
+
+
 
     {{-- <script type="text/javascript">
         const buttonScroll = function () {

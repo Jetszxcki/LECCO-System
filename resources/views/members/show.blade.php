@@ -17,7 +17,19 @@
 	</div>
 
 	<div class="container bg-dark mt-3">
-		<a href="{{ route('members.edit', [$member]) }}" class="btn btn-warning">Edit</a>
+		@accessright('member_edit')
+			<a href="{{ route('members.edit', [$member]) }}" class="btn btn-warning">Edit</a>
+		@endaccessright
+		
+		@accessright('member_delete')
+			<form action="{{ route('members.destroy', [$member]) }}" method="POST">
+				@method('DELETE')
+				@csrf
+
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+		@endaccessright
+
 		@foreach ($member->getAttributes() as $column => $value)
 			<div class="row">
 				<label>{{ $member->getColumnNameForView($column) }}</label>
@@ -25,7 +37,9 @@
 			</div>
 		@endforeach
 		<div class="row">
-			<a href="{{ route('shares.show', [$member]) }}">Shares</a>
+			@accessright('shares_view')
+				<a href="{{ route('shares.show', [$member]) }}" class="btn btn-primary">Shares</a>
+			@endaccessright
 		</div>
 	</div>
 @endsection

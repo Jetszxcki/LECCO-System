@@ -3,7 +3,10 @@
 <?php $__env->startSection('content'); ?>
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Members</h2>
-		<a href="<?php echo e(route('members.create')); ?>" class="btn btn-primary">Add Member</a>
+
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_create')): ?>
+			<a href="<?php echo e(route('members.create')); ?>" class="btn btn-primary">Add Member</a>
+		<?php endif; ?>
 		
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
@@ -24,14 +27,22 @@
 				<td nosearch class="col-md-1"><?php echo e($member->id); ?></td>
 				<td class="col-md-5"><?php echo e($member->full_name); ?></td>
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
-					<a href="<?php echo e(route('members.show', [$member])); ?>" class="btn btn-success mr-1">View</a>
-					<a href="<?php echo e(route('members.edit', [$member])); ?>" class="btn btn-warning mr-1">Edit</a>
-					<form action="<?php echo e(route('members.destroy', [$member])); ?>" method="POST">
-						<?php echo method_field('DELETE'); ?>
-						<?php echo csrf_field(); ?>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_view')): ?>
+						<a href="<?php echo e(route('members.show', [$member])); ?>" class="btn btn-success mr-1">View</a>
+					<?php endif; ?>
 
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_edit')): ?>
+						<a href="<?php echo e(route('members.edit', [$member])); ?>" class="btn btn-warning mr-1">Edit</a>
+					<?php endif; ?>
+
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_delete')): ?>
+						<form action="<?php echo e(route('members.destroy', [$member])); ?>" method="POST">
+							<?php echo method_field('DELETE'); ?>
+							<?php echo csrf_field(); ?>
+
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					<?php endif; ?>
 				</td>
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

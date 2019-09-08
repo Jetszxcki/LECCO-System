@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasOne(AccessRight::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
     public function getColumnNameForView($column)
     {
         return ucwords(str_replace('_', ' ', $column));

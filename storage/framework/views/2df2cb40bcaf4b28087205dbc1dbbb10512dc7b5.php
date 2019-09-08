@@ -6,7 +6,7 @@
 		
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
-
+	
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			<?php if($users->isEmpty()): ?>
@@ -16,6 +16,7 @@
 				<th nosearch class="col-md-2">Profile Pic</th>
 				<th nosearch class="col-md-3">Name</th>
 				<th nosearch class="col-md-3">Email</th>
+
 				<th nosearch class="col d-flex flex-row justify-content-center">Actions</th>
 			<?php endif; ?>
 		</tr>
@@ -34,13 +35,18 @@
 				<td class="col-md-3 align-self-center"><?php echo e($user->email); ?></td>
 
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
-					<a href="<?php echo e(route('users.show_rights', [$user])); ?>" class="btn btn-warning mr-1">Edit Privileges</a>
-					<form action="<?php echo e(route('users.destroy', [$user])); ?>" method="POST">
-						<?php echo method_field('DELETE'); ?>
-						<?php echo csrf_field(); ?>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'invoke_rights')): ?>
+						<a href="<?php echo e(route('users.show_rights', [$user])); ?>" class="btn btn-warning mr-1">Edit Privileges</a>
+					<?php endif; ?>
 
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'user_delete')): ?>
+						<form action="<?php echo e(route('users.destroy', [$user])); ?>" method="POST">
+							<?php echo method_field('DELETE'); ?>
+							<?php echo csrf_field(); ?>
+
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					<?php endif; ?>
 				</td>
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

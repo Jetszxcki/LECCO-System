@@ -15,18 +15,18 @@ class CreateAccessRightsTable extends Migration
     {
         Schema::create('access_rights', function (Blueprint $table){
             $table->unsignedInteger('user_id');
-            $table->boolean('users_view')->default(false);
-            $table->boolean('users_edit')->default(false);
-            $table->boolean('users_delete')->default(false);
+            $table->boolean('user_view')->default(false);
+            $table->boolean('user_edit')->default(false);
+            $table->boolean('user_delete')->default(false);
             $table->boolean('invoke_rights')->default(false);
             $table->boolean('member_view')->default(true);
             $table->boolean('member_delete')->default(false);
             $table->boolean('member_edit')->default(false);
             $table->boolean('member_create')->default(false);
-            $table->boolean('loans_types_view')->default(true);
-            $table->boolean('loans_types_edit')->default(false);
-            $table->boolean('loans_types_delete')->default(false);
-            $table->boolean('loans_types_create')->default(false);
+            $table->boolean('loan_types_view')->default(true);
+            $table->boolean('loan_types_edit')->default(false);
+            $table->boolean('loan_types_delete')->default(false);
+            $table->boolean('loan_types_create')->default(false);
             // $table->boolean('loans_view')->default(true);
             // $table->boolean('loans_delete')->default(false);
             // $table->boolean('loans_edit')->default(false);

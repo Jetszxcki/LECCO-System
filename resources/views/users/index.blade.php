@@ -7,7 +7,7 @@
 		
 		@include('partials.search_bar')
 	</div>
-
+	
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			@if ($users->isEmpty())
@@ -17,6 +17,7 @@
 				<th nosearch class="col-md-2">Profile Pic</th>
 				<th nosearch class="col-md-3">Name</th>
 				<th nosearch class="col-md-3">Email</th>
+
 				<th nosearch class="col d-flex flex-row justify-content-center">Actions</th>
 			@endif
 		</tr>
@@ -35,13 +36,18 @@
 				<td class="col-md-3 align-self-center">{{ $user->email }}</td>
 
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
-					<a href="{{ route('users.show_rights', [$user]) }}" class="btn btn-warning mr-1">Edit Privileges</a>
-					<form action="{{ route('users.destroy', [$user]) }}" method="POST">
-						@method('DELETE')
-						@csrf
+					@accessright('invoke_rights')
+						<a href="{{ route('users.show_rights', [$user]) }}" class="btn btn-warning mr-1">Edit Privileges</a>
+					@endaccessright
 
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>
+					@accessright('user_delete')
+						<form action="{{ route('users.destroy', [$user]) }}" method="POST">
+							@method('DELETE')
+							@csrf
+
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					@endaccessright
 				</td>
 			</tr>
 		@endforeach

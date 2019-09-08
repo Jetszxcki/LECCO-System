@@ -2,7 +2,18 @@
 
 <?php $__env->startSection('content'); ?>
 	<div class="form-group">
-		<a href="<?php echo e(route('loan_types.edit', [$loan_type])); ?>" class="btn btn-warning">Edit</a>
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_edit')): ?>
+			<a href="<?php echo e(route('loan_types.edit', [$loan_type])); ?>" class="btn btn-warning">Edit</a>
+		<?php endif; ?>
+
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_delete')): ?>
+			<form action="<?php echo e(route('loan_types.destroy', [$loan_type])); ?>" method="POST">
+				<?php echo method_field('DELETE'); ?>
+				<?php echo csrf_field(); ?>
+
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+		<?php endif; ?>
 	</div>
 
 	<div class="container">

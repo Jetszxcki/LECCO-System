@@ -3,7 +3,10 @@
 <?php $__env->startSection('content'); ?>
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Loan Types</h2>
-		<a href="<?php echo e(route('loan_types.create')); ?>" class="btn btn-primary">Add Loan Type</a>
+
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_create')): ?>
+			<a href="<?php echo e(route('loan_types.create')); ?>" class="btn btn-primary">Add Loan Type</a>
+		<?php endif; ?>
 
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
@@ -24,15 +27,22 @@
 				<td nosearch class="col-md-1"><?php echo e($loan_type->id); ?></td>
 				<td class="col-md-6"><?php echo e($loan_type->name); ?></td>
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
-					<a href="<?php echo e(route('loan_types.show', [$loan_type])); ?>" class="btn btn-success mr-1">View</a>
-					<a href="<?php echo e(route('loan_types.edit', [$loan_type])); ?>" class="btn btn-warning mr-1">Edit</a>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_view')): ?>
+						<a href="<?php echo e(route('loan_types.show', [$loan_type])); ?>" class="btn btn-success mr-1">View</a>
+					<?php endif; ?>
 
-					<form action="<?php echo e(route('loan_types.destroy', [$loan_type])); ?>" method="POST">
-						<?php echo method_field('DELETE'); ?>
-						<?php echo csrf_field(); ?>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_edit')): ?>
+						<a href="<?php echo e(route('loan_types.edit', [$loan_type])); ?>" class="btn btn-warning mr-1">Edit</a>
+					<?php endif; ?>
 
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>
+					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_delete')): ?>
+						<form action="<?php echo e(route('loan_types.destroy', [$loan_type])); ?>" method="POST">
+							<?php echo method_field('DELETE'); ?>
+							<?php echo csrf_field(); ?>
+
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					<?php endif; ?>
 				</td>
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
