@@ -14,7 +14,7 @@ class CreateAccessRightsTable extends Migration
     public function up()
     {
         Schema::create('access_rights', function (Blueprint $table){
-            $table->unsignedInteger('user_id');
+            $table->bigInteger('user_id');
             $table->boolean('user_view')->default(false);
             $table->boolean('user_edit')->default(false);
             $table->boolean('user_delete')->default(false);
