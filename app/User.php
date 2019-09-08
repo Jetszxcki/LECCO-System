@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\AccessRight;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -36,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function access_right()
+    {
+        return $this->hasOne(AccessRight::class);
+    }
+
+    public function getColumnNameForView($column)
+    {
+        return ucwords(str_replace('_', ' ', $column));
+    }
 }

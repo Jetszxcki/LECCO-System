@@ -39,14 +39,33 @@ class SharesController extends Controller
 
     public function show(Share $share)
     {
-        $shares = DB::table('shares')->select(DB::raw('MONTH(shares.created_at) as month, YEAR(shares.created_at) as year, sum(total) as total_no_shares, sum(price) as total_price, sum(amount) as total_amount'))->where('shares.member_id', 1)->orderBy('Month', 'asc', 'Year', 'asc')->groupBy(DB::raw("MONTH(shares.created_at)"), DB::raw("YEAR(shares.created_at)"))->get();
+        // for sqlite testing only
+        // $shares = Share::selectRaw("strftime('%m', shares.created_at) as month,
+        //                             strftime('%Y', shares.created_at) as year,
+        //                             sum(total) as total_no_shares, 
+        //                             sum(price) as total_price, 
+        //                             sum(amount) as total_amount")
+        //         ->where('shares.member_id', $share->member->id)
+        //         ->orderBy('Month', 'asc', 'Year', 'asc')
+        //         ->groupBy(DB::raw("strftime('%m', shares.created_at)"), DB::raw("strftime('%Y', shares.created_at)"))
+        //         ->get();
 
-        $total_ns= $shares->sum('total_no_shares');
-        $total_p= $shares->sum('total_price');
-        $total_a= $shares->sum('total_amount');
+        $shares = Share::selectRaw('MONTH(shares.created_at) as month, 
+                                    YEAR(shares.created_at) as year, 
+                                    sum(total) as total_no_shares, 
+                                    sum(price) as total_price, 
+                                    sum(amount) as total_amount')
+                ->where('shares.member_id', $share->member->id)
+                ->orderBy('Month', 'asc', 'Year', 'asc')
+                ->groupBy(DB::raw("MONTH(shares.created_at)"), DB::raw("YEAR(shares.created_at)"))
+                ->get();
+
+        $total_ns = $shares->sum('total_no_shares');
+        $total_p = $shares->sum('total_price');
+        $total_a = $shares->sum('total_amount');
         $totals = array($total_ns, $total_p, $total_a);
         
-        return view('shares.show', compact('shares', 'totals'));
+        return view('shares.show', compact('shares', 'totals', 'share'));
     }
 
     private function getColumns()

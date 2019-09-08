@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
 	<div class="col-md-8">
 		<div class="card">
-			<div class="card-header text-md-center">New Share</div>
+			<div class="card-header text-md-center">NEW SHARE</div>
 			<div class="card-body">
 				<form action="{{ route('shares.store') }}" method="POST">
 					@include('partials.form', ['columns' => $columns, 'buttonText' => 'Add Share'])

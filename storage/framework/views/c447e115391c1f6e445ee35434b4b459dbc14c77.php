@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
 	<div class="col-md-8">
 		<div class="card">
-			<div class="card-header text-md-center">New Share</div>
+			<div class="card-header text-md-center">NEW SHARE</div>
 			<div class="card-body">
 				<form action="<?php echo e(route('shares.store')); ?>" method="POST">
 					<?php echo $__env->make('partials.form', ['columns' => $columns, 'buttonText' => 'Add Share'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
 	<div class="col-md-8">
 		<div class="card">
-			<div class="card-header text-md-center">Add New Member</div>
+			<div class="card-header text-md-center">NEW MEMBER</div>
 			<div class="card-body">
 				<form action="<?php echo e(route('members.store')); ?>" method="POST">
 					<?php echo $__env->make('partials.form', ['columns' => $columns, 'buttonText' => 'Add Member'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

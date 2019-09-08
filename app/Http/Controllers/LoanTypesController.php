@@ -18,7 +18,6 @@ class LoanTypesController extends Controller
     public function create()
     {
         $columns = $this->getColumns();
-        // dd($columns);
         $model = new LoanType();
         return view('loan_types.create', compact('columns', 'model'));
     }

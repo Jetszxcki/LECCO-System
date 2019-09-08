@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Add Member')
+@section('title', 'Add Signatory')
 
 @section('content')
 <div class="row justify-content-center">
 	<div class="col-md-8">
 		<div class="card">
-			<div class="card-header text-md-center">Add Signatory</div>
+			<div class="card-header text-md-center">NEW SIGNATORY</div>
 			<div class="card-body">
 				<form action="{{ route('signatories.store') }}" method="POST">
 					@csrf

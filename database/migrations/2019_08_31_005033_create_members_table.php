@@ -34,7 +34,7 @@ class CreateMembersTable extends Migration
             $table->string('status_of_employment');
             $table->unsignedInteger('no_of_subscribed_shares');
             $table->unsignedInteger('years_to_fully_pay');
-            $table->string('profile_picture')->nullable();
+            $table->string('profile_picture')->default('user.jpg');
             $table->string('contact_no');
             // $table->string('status');
             // $table->string('remarks');

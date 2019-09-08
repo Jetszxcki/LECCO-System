@@ -2,14 +2,15 @@
 @section('title', 'Members')
 
 @section('content')
-	<div class="form-group d-flex flex-row justify-content-between">
+	<div class="form-group d-flex flex-row justify-content-between align-items-center">
+		<h2>Members</h2>
 		<a href="{{ route('members.create') }}" class="btn btn-primary">Add Member</a>
-
+		
 		@include('partials.search_bar')
 	</div>
 
 	<table class="container" id="main-table">
-		<tr id="theader" class="d-flex p-1 mb-2 text-center">
+		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			@if ($members->isEmpty())
 				<th nosearch class="col text-center py-5">No members added yet.</th>
 			@else

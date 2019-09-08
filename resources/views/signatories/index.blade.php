@@ -2,14 +2,15 @@
 @section('title', 'Signatories')
 
 @section('content')
-	<div class="form-group d-flex flex-row justify-content-between">
+	<div class="form-group d-flex flex-row justify-content-between align-items-center">
+		<h2>Signatories</h2>
 		<a href="{{ route('signatories.create') }}" class="btn btn-primary">Add Signatory</a>
 
 		@include('partials.search_bar')
 	</div>
 
 	<table class="container" id="main-table">
-		<tr id="theader" class="d-flex p-1 mb-2 text-center">
+		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			@if ($signatories->isEmpty())
 				<th nosearch class="col text-center py-5">No signatories added yet.</th>
 			@else

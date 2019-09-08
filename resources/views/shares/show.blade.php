@@ -1,51 +1,41 @@
 @extends('layouts.app')
+@section('title', $share->member->full_name . ' - Shares')
 
 @section('content')
-<div align="center">
-<h1 style='width:90%;text-align:left;' >Shares</h1>
-</div>
-<div class="container">
-	<div align="center">
-	<table class="table table-striped" style="width:50%;">
-		<tr>
-			<th>Member ID</th><td>{{ $share->member->id }}</td>
-		</tr>
-		<tr>
-			<th>Member Name</th><td>{{ $share->member->full_name }}</td>
-		</tr>
-	</table>
+	<div class="form-group text-center">
+		<h3 style="color: white">{{ 'Shares of ' . $share->member->full_name }}</h3>
 	</div>
-	<table class="table table-striped">
-		<tr>
-			@if($shares->first())
-				@foreach($shares->first() as $k => $v)
-					<th>{{ ucwords(str_replace('_', ' ', $k)) }}</th>
-				@endforeach
+
+	<table class="container" id="main-table">
+		<tr id="theader" class="d-flex p-1 mb-3 text-center">
+			@if ($shares->isEmpty())
+				<th nosearch class="col text-center py-5">No shares yet.</th>
 			@else
-				<th> Empty </th>
+				<th nosearch class="col-md-2">Month</th>
+				<th nosearch class="col-md-1">Year</th>
+				<th nosearch class="col-md-3">Total No. of Shares</th>
+				<th nosearch class="col-md-3">Total Price</th>
+				<th nosearch class="col-md-3">Total Amount</th>
 			@endif
 		</tr>
-		@foreach($shares as $share)
-			<tr>
-			@foreach($share as $k => $v)
-				@if($k == 'month')
-					<td> {{ DateTime::createFromFormat('!m', $v)->format('F') }} </td>
-				@else
-					<td> {{ $v }} </td>
-				@endif
-			@endforeach
-			
+
+		@foreach ($shares as $share)
+			<tr class="p-1 mb-2 text-center">
+				<td class="col-md-2">{{ DateTime::createFromFormat('!m', $share->month)->format('F') }}</td>
+				<td class="col-md-1">{{ $share->year }}</td>
+				<td class="col-md-3">{{ $share->total_no_shares }}</td>
+				<td class="col-md-3">{{ $share->total_price }}</td>
+				<td class="col-md-3">{{ $share->total_amount }}</td>
 			</tr>
 		@endforeach
-		<tr>
-		<td><strong>Total:</strong></td><td></td>
-		@for($i=0; $i<3; $i++)
-			
-			<td> {{ $totals[$i] }} </td>
-			
-			
-		@endfor
+
+		<tr id="theader" class="d-flex p-1 text-center" style="background: white;">
+			<th nosearch class="col-md-3 c-black">Total:</th>
+			<th nosearch class="col-md-3 c-black">{{ $totals[0] }}</th>
+			<th nosearch class="col-md-3 c-black">{{ $totals[1] }}</th>
+			<th nosearch class="col-md-3 c-black">{{ $totals[2] }}</th>
 		</tr>
+
+		@include('partials.not_found_alert', ['model' => $shares])
 	</table>
-</div>
 @endsection

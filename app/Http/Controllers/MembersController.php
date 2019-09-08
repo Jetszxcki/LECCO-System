@@ -86,7 +86,6 @@ class MembersController extends Controller
             'status_of_employment' => 'required',
             'no_of_subscribed_shares' => 'required',
             'years_to_fully_pay' => 'required',
-            'profile_picture' => 'nullable',
             'contact_no' => 'required',
             'date_accepted' => 'required',
             'BOD_resolution_number' => 'required',

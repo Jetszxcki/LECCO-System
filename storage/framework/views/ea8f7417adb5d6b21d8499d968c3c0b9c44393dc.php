@@ -1,10 +1,10 @@
-<?php $__env->startSection('title', 'Add Member'); ?>
+<?php $__env->startSection('title', 'Add Signatory'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="row justify-content-center">
 	<div class="col-md-8">
 		<div class="card">
-			<div class="card-header text-md-center">Add Signatory</div>
+			<div class="card-header text-md-center">NEW SIGNATORY</div>
 			<div class="card-body">
 				<form action="<?php echo e(route('signatories.store')); ?>" method="POST">
 					<?php echo csrf_field(); ?>

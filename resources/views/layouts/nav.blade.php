@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top bg-dblue">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top bg-dblue" style="letter-spacing: 2px;">
     <div class="container">
         <a class="navbar-brand nav-logo-text" href="{{ url('/') }}">
             <span>{{ config('app.name', 'Laravel') }}</span>

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Loan;
+
 class LoanType extends Model
 {
     protected $guarded = [];
@@ -15,6 +17,16 @@ class LoanType extends Model
 
     public function scopeColumnNames($query) {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
+
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
     }
 
     public function getColumnNameForView($column)

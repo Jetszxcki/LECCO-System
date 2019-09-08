@@ -1,14 +1,15 @@
 <?php $__env->startSection('title', 'Signatories'); ?>
 
 <?php $__env->startSection('content'); ?>
-	<div class="form-group d-flex flex-row justify-content-between">
+	<div class="form-group d-flex flex-row justify-content-between align-items-center">
+		<h2>Signatories</h2>
 		<a href="<?php echo e(route('signatories.create')); ?>" class="btn btn-primary">Add Signatory</a>
 
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
 
 	<table class="container" id="main-table">
-		<tr id="theader" class="d-flex p-1 mb-2 text-center">
+		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			<?php if($signatories->isEmpty()): ?>
 				<th nosearch class="col text-center py-5">No signatories added yet.</th>
 			<?php else: ?>

@@ -2,14 +2,15 @@
 @section('title', 'Loan Types')
 
 @section('content')
-	<div class="form-group d-flex flex-row justify-content-between">
+	<div class="form-group d-flex flex-row justify-content-between align-items-center">
+		<h2>Loan Types</h2>
 		<a href="{{ route('loan_types.create') }}" class="btn btn-primary">Add Loan Type</a>
 
 		@include('partials.search_bar')
 	</div>
 
 	<table class="container" id="main-table">
-		<tr id="theader" class="d-flex p-1 mb-2 text-center">
+		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			@if ($loan_types->isEmpty())
 				<th nosearch class="col text-center py-5">No loan types added yet.</th>
 			@else

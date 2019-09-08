@@ -13,16 +13,16 @@
         <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height" style="color:white">
             <?php if(Route::has('login')): ?>
                 <div class="top-right links">
                     <?php if(auth()->guard()->check()): ?>
-                        <a href="<?php echo e(url('/home')); ?>">Home</a>
+                        <a href="<?php echo e(url('/home')); ?>" style="color:white">Home</a>
                     <?php else: ?>
-                        <a href="<?php echo e(route('login')); ?>">Login</a>
+                        <a href="<?php echo e(route('login')); ?>" style="color:white">Login</a>
 
                         <?php if(Route::has('register')): ?>
-                            <a href="<?php echo e(route('register')); ?>">Register</a>
+                            <a href="<?php echo e(route('register')); ?>" style="color:white">Register</a>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
