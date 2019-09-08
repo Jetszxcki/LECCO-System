@@ -9,7 +9,7 @@
 			<div class="card-body">
 				<form action="{{ route('members.update', [$model]) }}" method="POST">
 					@method('PATCH')
-					@include('partials.form', ['columns' => $columns, 'buttonText' => 'Save Changes'])
+					@include('partials.form', ['columns' => $columns, 'route' => 'previous', 'buttonText' => 'Save Changes'])
 				</form>	
 			</div>
 		</div>

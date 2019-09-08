@@ -3,7 +3,10 @@
 <?php $__env->startSection('content'); ?>
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Shares</h2>
-		<a href="<?php echo e(route('shares.create')); ?>" class="btn btn-primary">Add Share</a>
+
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'shares_create')): ?>
+			<a href="<?php echo e(route('shares.create')); ?>" class="btn btn-primary">Add Share</a>
+		<?php endif; ?>
 
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>

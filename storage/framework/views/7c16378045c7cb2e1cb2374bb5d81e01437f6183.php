@@ -3,7 +3,10 @@
 <?php $__env->startSection('content'); ?>
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Signatories</h2>
-		<a href="<?php echo e(route('signatories.create')); ?>" class="btn btn-primary">Add Signatory</a>
+
+		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'signatories_create')): ?>
+			<a href="<?php echo e(route('signatories.create')); ?>" class="btn btn-primary">Add Signatory</a>
+		<?php endif; ?>
 
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
@@ -26,13 +29,20 @@
 				<td class="col-md-4"><?php echo e($signatory->name); ?></td>
 				<td class="col-md-4"><?php echo e($signatory->designation); ?></td>
 				<td nosearch class="col-md-3 d-flex flex-row align-items-center justify-content-center">
+
+				<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'signatories_edit')): ?>
 					<a href="<?php echo e(route('signatories.edit', [$signatory])); ?>" class="btn btn-warning mr-1">Edit</a>
+				<?php endif; ?>
+
+				<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'signatories_delete')): ?>
 					<form action="<?php echo e(route('signatories.destroy', [$signatory])); ?>" method="POST">
 						<?php echo method_field('DELETE'); ?>
 						<?php echo csrf_field(); ?>
 
 						<button type="submit" class="btn btn-danger">Delete</button>
 					</form>
+				<?php endif; ?>
+
 				</td>
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -7,7 +7,7 @@
 			<div class="card-header text-md-center">NEW LOAN TYPE</div>
 			<div class="card-body">
 				<form action="<?php echo e(route('loan_types.store')); ?>" method="POST">
-					<?php echo $__env->make('partials.form', ['columns' => $columns, 'buttonText' => 'Add Loan Type'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+					<?php echo $__env->make('partials.form', ['columns' => $columns, 'route' => 'loan_types.index', 'buttonText' => 'Add Loan Type'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</form>	
 			</div>
 		</div>

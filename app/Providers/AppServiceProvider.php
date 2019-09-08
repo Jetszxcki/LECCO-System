@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
-use Auth;
+use App\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +27,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if('accessright', function ($right) {
-            return Auth::user()->access_right->$right;
+            return User::hasAccessRight($right);
+        });
+
+        Blade::if('accessrights', function ($rights) {
+            foreach ($rights as $right) {
+                if (User::hasAccessRight($right)) {
+                    return true;
+                }
+            }
+            return false;
         });
 
         // Blade::if('actions', function ($right_model) {

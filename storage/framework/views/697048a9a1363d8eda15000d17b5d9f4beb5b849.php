@@ -8,7 +8,7 @@
 			<div class="card-body">
 				<form action="<?php echo e(route('members.update', [$model])); ?>" method="POST">
 					<?php echo method_field('PATCH'); ?>
-					<?php echo $__env->make('partials.form', ['columns' => $columns, 'buttonText' => 'Save Changes'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+					<?php echo $__env->make('partials.form', ['columns' => $columns, 'route' => 'previous', 'buttonText' => 'Save Changes'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</form>	
 			</div>
 		</div>

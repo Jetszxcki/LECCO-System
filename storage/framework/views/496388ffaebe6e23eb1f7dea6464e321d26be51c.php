@@ -89,5 +89,11 @@ endif; ?>
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
 		<button type="submit" class="btn btn-primary"><?php echo e($buttonText); ?></button>
+		<?php if($route == 'previous'): ?>
+			<a href="<?php echo e(url()->previous()); ?>" class="btn btn-danger">Cancel</a>
+		<?php else: ?>
+			<a href="<?php echo e(route($route)); ?>" class="btn btn-danger">Cancel</a>
+		<?php endif; ?>
 	</div>
-</div><?php /**PATH C:\xampp\htdocs\projs\LLS\resources\views/partials/form.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\xampp\htdocs\projs\LLS\resources\views/partials/form.blade.php ENDPATH**/ ?>

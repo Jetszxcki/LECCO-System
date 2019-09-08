@@ -53,5 +53,10 @@
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
 		<button type="submit" class="btn btn-primary">{{ $buttonText }}</button>
+		@if ($route == 'previous')
+			<a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
+		@else
+			<a href="{{ route($route) }}" class="btn btn-danger">Cancel</a>
+		@endif
 	</div>
 </div>

@@ -8,7 +8,7 @@
 			<div class="card-header text-md-center">NEW SHARE</div>
 			<div class="card-body">
 				<form action="{{ route('shares.store') }}" method="POST">
-					@include('partials.form', ['columns' => $columns, 'buttonText' => 'Add Share'])
+					@include('partials.form', ['columns' => $columns, 'route' => 'shares.index', 'buttonText' => 'Add Share'])
 				</form>	
 			</div>
 		</div>

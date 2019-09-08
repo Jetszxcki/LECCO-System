@@ -9,7 +9,7 @@ use App\Signatory;
 class SignatoriesController extends Controller
 {
     public function index()
-    {
+    {   
     	$signatories = Signatory::all();
     	return view('signatories.index', compact('signatories'));
     }

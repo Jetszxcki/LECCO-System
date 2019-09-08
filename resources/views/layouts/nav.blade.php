@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top bg-dblue" style="letter-spacing: 2px;">
     <div class="container">
-        <a class="navbar-brand nav-logo-text" href="{{ url('/') }}">
-            <span>{{ config('app.name', 'Laravel') }}</span>
+        <a class="navbar-brand nav-logo-text" href="{{ route('home') }}">
+            <span>{{ config('app.name') }}</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -33,6 +33,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: white">
+                            <img class="rounded-circle mr-2" src="{{ asset('img/user.jpg') }}" style="min-height:25px;min-width:25px;max-width:25px;max-height:25px;"/>
                             <span>{{ Auth::user()->name }}</span> <span class="caret"></span>
                         </a>
 

@@ -15,27 +15,27 @@
             @include('partials.panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user.jpg'])
         @endaccessright
 
-        @accessright('member_view')
+        @accessrights(['member_view', 'member_create'])
             @include('partials.panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
-        @endaccessright
+        @endaccessrights
 
         {{-- @accessright('loans_view')
             @include('partials.panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
         @endaccessright --}}
 
-        @accessright('loan_types_view')
+        @accessrights(['loan_types_view', 'loan_types_create'])
             @include('partials.panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'])
-        @endaccessright
+        @endaccessrights
 
-        @accessright('shares_view')
+        @accessrights(['shares_view', 'shares_create'])
             @include('partials.panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'user.jpg'])
-        @endaccessright
+        @endaccessrights
 
         {{-- @include('partials.panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg']) --}}
 
-        @accessright('signatories_view')
+        @accessrights(['signatories_view', 'signatories_create'])
             @include('partials.panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'user.jpg'])
-        @endaccessright
+        @endaccessrights
         
         {{-- @include('partials.panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg']) --}}
 

@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Auth;
 use App\AccessRight;
 
 class User extends Authenticatable
@@ -47,6 +48,11 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'name';
+    }
+
+    public static function hasAccessRight($right)
+    {
+        return Auth::user()->access_right->$right;
     }
 
     public function getColumnNameForView($column)

@@ -28,6 +28,7 @@
 				<button type="submit" class="btn btn-danger">Delete</button>
 			</form>
 		<?php endif; ?>
+
 		<?php $__currentLoopData = $member->getAttributes(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="row">
 				<label><?php echo e($member->getColumnNameForView($column)); ?></label>
@@ -35,7 +36,9 @@
 			</div>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		<div class="row">
-			<a href="<?php echo e(route('shares.show', [$member])); ?>">Shares</a>
+			<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'shares_view')): ?>
+				<a href="<?php echo e(route('shares.show', [$member])); ?>" class="btn btn-primary">Shares</a>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php $__env->stopSection(); ?>

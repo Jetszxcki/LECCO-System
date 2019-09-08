@@ -42,6 +42,7 @@
 					<div class="form-group row mb-0">
 					    <div class="col-md-6 offset-md-4">
 							<button type="submit" class="btn btn-primary">Save Changes</button>
+							<a href="{{ route('signatories.index') }}" class="btn btn-danger">Cancel</a>
 						</div>
 					</div>
 				</form>	
