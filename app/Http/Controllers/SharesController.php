@@ -30,7 +30,7 @@ class SharesController extends Controller
             'member_id' => 'required',
     		'total' => 'required',
     		'price' => 'required',
-    		'amount' => 'required'
+            'amount' => ''
     	]);
         
     	Share::create($data);
@@ -64,7 +64,7 @@ class SharesController extends Controller
         $total_p = $shares->sum('total_price');
         $total_a = $shares->sum('total_amount');
         $totals = array($total_ns, $total_p, $total_a);
-        
+        dd($shares);
         return view('shares.show', compact('shares', 'totals', 'share'));
     }
 

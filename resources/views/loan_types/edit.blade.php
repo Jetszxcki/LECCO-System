@@ -11,7 +11,7 @@
 					@method('PATCH')
 					@csrf
 
-					@include('partials.form', ['columns' => $columns, 'route' => 'previous', 'buttonText' => 'Save Changes'])
+					@include('partials.form', [compact('columns'), 'route' => 'previous', 'buttonText' => 'Save Changes'])
 				</form>	
 			</div>
 		</div>

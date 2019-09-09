@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Whoops!'); ?>;
+<?php $__env->startSection('title', 'Restricted Access'); ?>;
 
 <style>
 	.unauthorized-text {
@@ -18,7 +18,12 @@
 <div class="d-flex flex-column justify-content-center unauthorized-div">
 	<div class="alert alert-warning py-5 text-center unauthorized-text">
 		Operation unavailable for this user. <br>
-		Contact ADMIN to enable privilege "<i><?php echo e($function->getColumnNameForView($operation)); ?></i>".
+		Contact ADMIN to enable all of the privileges below: 
+		<div>
+			<?php $__currentLoopData = $access_rights; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $access_right): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+				<div><i><?php echo e($user->getColumnNameForView($access_right)); ?></i></div>
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+		</div>
 	</div>
 </div>
 <?php $__env->stopSection(); ?>

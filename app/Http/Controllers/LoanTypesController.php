@@ -43,7 +43,7 @@ class LoanTypesController extends Controller
     public function update(Request $request, LoanType $loan_type)
     {
         $loan_type->update($this->validateRequest($request));
-        return redirect('loan_types/' . $loan_type->id);
+        return redirect('loan_types/' . $loan_type->name);
     }
 
     public function destroy(LoanType $loan_type)
@@ -65,7 +65,7 @@ class LoanTypesController extends Controller
     private function validateRequest($request)
     {
         return $request->validate([
-            'name' => 'required|unique:loan_types',
+            'name' => 'required',
             'interest_per_annum' => 'required',
             'amount_minimum' => 'required',
             'amount_maximum' => 'required',

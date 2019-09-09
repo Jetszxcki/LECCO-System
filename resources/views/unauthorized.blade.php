@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Whoops!');
+@section('title', 'Restricted Access');
 
 <style>
 	.unauthorized-text {
@@ -19,7 +19,12 @@
 <div class="d-flex flex-column justify-content-center unauthorized-div">
 	<div class="alert alert-warning py-5 text-center unauthorized-text">
 		Operation unavailable for this user. <br>
-		Contact ADMIN to enable privilege "<i>{{ $function->getColumnNameForView($operation) }}</i>".
+		Contact ADMIN to enable all of the privileges below: 
+		<div>
+			@foreach ($access_rights as $access_right)
+				<div><i>{{ $user->getColumnNameForView($access_right) }}</i></div>
+			@endforeach
+		</div>
 	</div>
 </div>
 @endsection

@@ -10,7 +10,7 @@
 					<?php echo method_field('PATCH'); ?>
 					<?php echo csrf_field(); ?>
 
-					<?php echo $__env->make('partials.form', ['columns' => $columns, 'route' => 'previous', 'buttonText' => 'Save Changes'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+					<?php echo $__env->make('partials.form', [compact('columns'), 'route' => 'previous', 'buttonText' => 'Save Changes'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</form>	
 			</div>
 		</div>

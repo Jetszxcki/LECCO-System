@@ -19,9 +19,8 @@ class UsersController extends Controller
 
 	public function show_rights(User $user)
 	{		
-		$model = $user;
-		$columns = $this->getColumns();
-		return view('users.show_rights', compact('columns', 'model'));
+		$columns = AccessRight::columnNames();
+		return view('users.show_rights', compact('columns', 'user'));
 	}
 
 	public function update_rights(Request $request, User $user)
@@ -76,15 +75,5 @@ class UsersController extends Controller
         return back()
             ->with('success','You have successfully upload image.');
  
-    }
-	
- 	private function getColumns()
-    {
-    	$column_names = AccessRight::columnNames();
-        $column_types = array_map(function($name) {
-            return DB::getSchemaBuilder()->getColumnType('access_rights', $name);
-        }, $column_names);
-
-        return array_combine($column_names, $column_types);
     }
 }

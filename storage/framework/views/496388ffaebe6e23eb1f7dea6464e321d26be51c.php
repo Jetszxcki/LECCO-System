@@ -5,8 +5,7 @@
 		<div class="form-group row">	
 			<?php if($column_name == 'member_id'): ?>
 				<label for="member_id" class="col-md-4 col-form-label text-md-right">Member</label>
-			<?php elseif($column_name == 'user_id'): ?>
-				<label for="user_id" class="col-md-4 col-form-label text-md-right">User ID</label>
+			
 			<?php else: ?>
 	 			<label for="<?php echo e($cname = $model->getColumnNameForView($column_name)); ?>" class="col-md-4 col-form-label text-md-right"><?php echo e($cname); ?></label>
 	 		<?php endif; ?>
@@ -19,12 +18,7 @@
 								<option value="<?php echo e($member->id); ?>"><?php echo e($member->full_name); ?></option>
 							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</select>
-					<?php elseif($column_name == 'user_id'): ?>
-						<input type="text" name="<?php echo e($column_name); ?>" class="form-control text-center <?php if ($errors->has($column_name)) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first($column_name); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e($model->id); ?>" disabled>
+					
 					<?php else: ?>
 						<input type="number" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
@@ -64,12 +58,7 @@ if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" step="any">
-				<?php elseif($column_type == 'boolean'): ?>
-					<input type="checkbox" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first($column_name); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e($model->access_right[$column_name]); ?>" <?php echo e($model->access_right[$column_name] ? 'checked' : ''); ?>>
+				
 				<?php endif; ?>
 
 				<?php if ($errors->has($column_name)) :

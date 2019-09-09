@@ -7,7 +7,7 @@
 			<div class="card-header text-md-center">NEW SHARE</div>
 			<div class="card-body">
 				<form action="<?php echo e(route('shares.store')); ?>" method="POST">
-					<?php echo $__env->make('partials.form', ['columns' => $columns, 'route' => 'shares.index', 'buttonText' => 'Add Share'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+					<?php echo $__env->make('partials.form', [compact('columns'), 'route' => 'shares.index', 'buttonText' => 'Add Share'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</form>	
 			</div>
 		</div>

@@ -48,6 +48,6 @@
 			</tr>
 		@endforeach
 
-		@include('partials.not_found_alert', ['model' => $loan_types])
+		@include('partials.search_not_found', ['model' => $loan_types])
 	</table>
 @endsection

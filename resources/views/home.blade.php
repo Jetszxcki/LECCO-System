@@ -11,33 +11,33 @@
             <span>></span>
         </a> --}}
 
-        @accessright('user_view')
-            @include('partials.panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user.jpg'])
+        @accessright('user_view_list')
+            @include('partials.home_panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user.jpg'])
         @endaccessright
 
-        @accessrights(['member_view', 'member_create'])
-            @include('partials.panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
-        @endaccessrights
+        @accessright('member_view_list')
+            @include('partials.home_panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
+        @endaccessright
 
         {{-- @accessright('loans_view')
-            @include('partials.panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
         @endaccessright --}}
 
-        @accessrights(['loan_types_view', 'loan_types_create'])
-            @include('partials.panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'])
-        @endaccessrights
+        @accessright('loan_types_view_list')
+            @include('partials.home_panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'])
+        @endaccessright
 
-        @accessrights(['shares_view', 'shares_create'])
-            @include('partials.panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'user.jpg'])
-        @endaccessrights
+        @accessright('shares_view_list')
+            @include('partials.home_panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'user.jpg'])
+        @endaccessright
 
-        {{-- @include('partials.panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg']) --}}
+        {{-- @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg']) --}}
 
-        @accessrights(['signatories_view', 'signatories_create'])
-            @include('partials.panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'user.jpg'])
-        @endaccessrights
+        @accessright('signatories_view_list')
+            @include('partials.home_panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'user.jpg'])
+        @endaccessright
         
-        {{-- @include('partials.panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg']) --}}
+        {{-- @include('partials.home_panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg']) --}}
 
 
 

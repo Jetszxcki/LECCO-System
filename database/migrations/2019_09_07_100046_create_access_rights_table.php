@@ -15,34 +15,39 @@ class CreateAccessRightsTable extends Migration
     {
         Schema::create('access_rights', function (Blueprint $table){
             $table->bigInteger('user_id');
-            $table->boolean('user_view')->default(false);
+            $table->boolean('user_view_list')->default(false);
             $table->boolean('user_edit')->default(false);
             $table->boolean('user_delete')->default(false);
             $table->boolean('invoke_rights')->default(false);
+
+            $table->boolean('member_view_list')->default(true);
             $table->boolean('member_view')->default(true);
-            $table->boolean('member_delete')->default(false);
-            $table->boolean('member_edit')->default(false);
             $table->boolean('member_create')->default(false);
+            $table->boolean('member_edit')->default(false);
+            $table->boolean('member_delete')->default(false);
+
+            $table->boolean('loan_types_view_list')->default(true);
             $table->boolean('loan_types_view')->default(true);
+            $table->boolean('loan_types_create')->default(false);
             $table->boolean('loan_types_edit')->default(false);
             $table->boolean('loan_types_delete')->default(false);
-            $table->boolean('loan_types_create')->default(false);
             // $table->boolean('loans_view')->default(true);
             // $table->boolean('loans_delete')->default(false);
             // $table->boolean('loans_edit')->default(false);
             // $table->boolean('loans_create')->default(false);
+            $table->boolean('shares_view_list')->default(true);
             $table->boolean('shares_view')->default(true);
-            $table->boolean('shares_delete')->default(false);
             $table->boolean('shares_create')->default(false);
             $table->boolean('shares_edit')->default(false);
+            $table->boolean('shares_delete')->default(false);
             // $table->boolean('coa_view')->default(true);
             // $table->boolean('coa_delete')->default(false);
             // $table->boolean('coa_create')->default(false);
             // $table->boolean('coa_edit')->default(false);
-            $table->boolean('signatories_view')->default(true);
-            $table->boolean('signatories_delete')->default(false);
+            $table->boolean('signatories_view_list')->default(true);
             $table->boolean('signatories_create')->default(false);
             $table->boolean('signatories_edit')->default(false);
+            $table->boolean('signatories_delete')->default(false);
             // $table->boolean('check_voucher_view')->default(true);
             // $table->boolean('check_voucher_delete')->default(false);
             // $table->boolean('check_voucher_create')->default(false);

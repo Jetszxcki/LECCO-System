@@ -1,6 +1,13 @@
 <?php $__env->startSection('title',  $member->full_name); ?>
 
 <?php $__env->startSection('content'); ?>
+	<?php if(session('empty_shares')): ?>
+		<div class="alert alert-danger ls-2 text-center">
+			<?php echo e($member->full_name . ' ' . session('empty_shares')); ?>
+
+		</div>
+	<?php endif; ?>
+
 	<div class="d-flex flex-row justify-content-between">
 		<div class="card" style="width: 25%">
 			<div class="card-header">

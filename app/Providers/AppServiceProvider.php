@@ -29,23 +29,5 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('accessright', function ($right) {
             return User::hasAccessRight($right);
         });
-
-        Blade::if('accessrights', function ($rights) {
-            foreach ($rights as $right) {
-                if (User::hasAccessRight($right)) {
-                    return true;
-                }
-            }
-            return false;
-        });
-
-        // Blade::if('actions', function ($right_model) {
-        //     if ($right_model == 'user') {
-        //         return (
-        //             Auth::user()->access_right->user_delete || 
-        //             Auth::user()->access_right->invoke_rights 
-        //         );
-        //     }
-        // });
     }
 }

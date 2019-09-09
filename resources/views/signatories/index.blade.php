@@ -48,6 +48,6 @@
 			</tr>
 		@endforeach
 
-		@include('partials.not_found_alert', ['model' => $signatories])
+		@include('partials.search_not_found', ['model' => $signatories])
 	</table>
 @endsection

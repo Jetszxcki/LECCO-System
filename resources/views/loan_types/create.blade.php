@@ -8,7 +8,7 @@
 			<div class="card-header text-md-center">NEW LOAN TYPE</div>
 			<div class="card-body">
 				<form action="{{ route('loan_types.store') }}" method="POST">
-					@include('partials.form', ['columns' => $columns, 'route' => 'loan_types.index', 'buttonText' => 'Add Loan Type'])
+					@include('partials.form', [compact('columns'), 'route' => 'loan_types.index', 'buttonText' => 'Add Loan Type'])
 				</form>	
 			</div>
 		</div>
