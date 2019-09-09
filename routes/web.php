@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('user/profile/{user}', 'UsersController@profile')->name('users.profile')->middleware('auth');
 Route::patch('user/update_avatar/{user}', 'UsersController@update_avatar')->name('users.update_avatar')->middleware('auth');
 Route::get('users', 'UsersController@index')->name('users.index')->middleware(['auth', 'accessRight:user_view_list']);
-Route::get('users/show_rights/{user}', 'UsersController@show_rights')->name('users.show_rights')->middleware(['auth', 'accessRight:user_view_list']);
+Route::get('users/show_rights/{user}', 'UsersController@show_rights')->name('users.show_rights')->middleware(['auth', 'accessRight:invoke_rights']);
 Route::patch('users/update_rights/{user}', 'UsersController@update_rights')->name('users.update_rights')->middleware(['auth', 'accessRight:invoke_rights']);
 Route::delete('users/{user}', 'UsersController@destroy')->name('users.destroy')->middleware(['auth', 'accessRight:user_delete']);
 
