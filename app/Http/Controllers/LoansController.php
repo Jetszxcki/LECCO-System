@@ -39,8 +39,6 @@ class LoansController extends Controller
 			$columns[$column_name] = [
 				'type' => $column_type,
 				'choices' => null,
-				'initial_value' => null,
-				'error_message' => null,
 			];
 		}
 		

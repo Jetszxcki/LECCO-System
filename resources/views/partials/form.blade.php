@@ -14,7 +14,7 @@
 			<div class="col-md-6">
 				@if ($column_data['type'] == 'integer')
 					@if ($column_name == 'member_id')
-						<select name="member_id" id="member_id" class="form-control">
+						<select name="member_id" id="member_id" class="form-control @error($column_name) is-invalid @enderror">
 							@foreach ($members as $member)
 								<option value="{{ $member->id }}">{{ $member->full_name }}</option>
 							@endforeach
