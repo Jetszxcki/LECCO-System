@@ -13,7 +13,13 @@
 
 			<div class="col-md-6">
 				@if ($column_data['type'] == 'integer')
-					@if ($column_name == 'member_id')
+					@if ($column_data['choices'])
+						<select name="member_id" id="member_id" class="form-control @error($column_name) is-invalid @enderror">
+							@foreach ($column_data['choices'] as $key => $value)
+								<option value="{{ $key }}">{{ $value }}</option>
+							@endforeach
+						</select>
+					@elseif ($column_name == 'member_id')
 						<select name="member_id" id="member_id" class="form-control @error($column_name) is-invalid @enderror">
 							@foreach ($members as $member)
 								<option value="{{ $member->id }}">{{ $member->full_name }}</option>
@@ -25,7 +31,15 @@
 						<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" id="{{ $column_name }}" {{ $column_name == 'total' ? 'oninput=calculateAmount()' : '' }}>
 					@endif
 				@elseif ($column_data['type'] == 'string')
-					@if ($column_name == 'profile_picture')
+					@if ($column_data['choices'])
+						<div class="row">
+						@foreach ($column_data['choices'] as $choice)
+							<div class="col">
+							<input type="radio" name="{{ $column_name }}" class="@error($column_name) is-invalid @enderror" value="{{ $choice }}" @if (old($column_name) == $choice) checked @endif>{{$choice}}
+							</div>
+						@endforeach
+						</div>
+					@elseif ($column_name == 'profile_picture')
 						<input type="file" name="{{ $column_name }}" class="form-control-file @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">
 					@else
 						<input type="text" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">

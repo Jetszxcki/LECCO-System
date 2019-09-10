@@ -75,6 +75,7 @@ class MembersController extends Controller
 			];
 		}
 		
+		$columns['gender']['choices'] = ['Male', 'Female', 'X-Men'];
 		return $columns;
 	}
 

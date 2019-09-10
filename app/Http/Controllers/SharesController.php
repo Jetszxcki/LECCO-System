@@ -89,6 +89,7 @@ class SharesController extends Controller
 			];
 		}
 		
+		$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
 		return $columns;
 	}
 }
