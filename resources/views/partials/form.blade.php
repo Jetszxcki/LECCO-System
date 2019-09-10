@@ -1,6 +1,6 @@
 @csrf
 
-@foreach ($columns as $column_name => $column_type)
+@foreach ($columns as $column_name => $column_data)
 	@if ($column_name != 'id' && $column_name !='created_at' && $column_name != 'updated_at')
 		<div class="form-group row">	
 			@if ($column_name == 'member_id')
@@ -12,7 +12,7 @@
 	 		@endif
 
 			<div class="col-md-6">
-				@if ($column_type == 'integer')
+				@if ($column_data['type'] == 'integer')
 					@if ($column_name == 'member_id')
 						<select name="member_id" id="member_id" class="form-control">
 							@foreach ($members as $member)
@@ -24,19 +24,19 @@
 					@else
 						<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" id="{{ $column_name }}" {{ $column_name == 'total' ? 'oninput=calculateAmount()' : '' }}>
 					@endif
-				@elseif ($column_type == 'string')
+				@elseif ($column_data['type'] == 'string')
 					@if ($column_name == 'profile_picture')
 						<input type="file" name="{{ $column_name }}" class="form-control-file @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">
 					@else
 						<input type="text" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">
 					@endif
-				@elseif ($column_type == 'date')
+				@elseif ($column_data['type'] == 'date')
 					<input type="date" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">
-				@elseif ($column_type == 'decimal')
+				@elseif ($column_data['type'] == 'decimal')
 					<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" step="0.01" id="{{ $column_name }}" {{ $column_name == 'amount' ? 'readonly' : '' }} {{ $column_name == 'price' ? 'oninput=calculateAmount()' : '' }}>
-				@elseif ($column_type == 'float')
+				@elseif ($column_data['type'] == 'float')
 					<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" step="any">
-				{{-- @elseif ($column_type == 'boolean')
+				{{-- @elseif ($column_data['type'] == 'boolean')
 					<input type="checkbox" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ $model->access_right[$column_name] }}" {{ $model->access_right[$column_name] ? 'checked' : ''}}> --}}
 				@endif
 
