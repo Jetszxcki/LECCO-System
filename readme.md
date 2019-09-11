@@ -108,6 +108,7 @@ The Laravel framework is open-source software licensed under the [MIT license](h
 - SSH : git@github.com:Jetszxcki/LECCO-System.git
 
 #### Run Laravel server:
+- Install table column dependency by typing the following command: `composer require doctrine/dbal`.
 - Run: `php artisan serve`
     - If it runs but localhost:8000 keeps loading, run `php artisan config:cache` then restart server.
 - Alternative command: `php -S localhost:8000 -t public/`
