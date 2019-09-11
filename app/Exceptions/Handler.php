@@ -46,19 +46,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {   
-        // dd($exception);
-        if (strpos($exception->getMessage(), 'No query results for model [App\Share]') !== false) 
-        {
-            $splitPath = explode('/', $request->getPathInfo());
-            $id = $splitPath[count($splitPath) - 1];
-            $member = \App\Member::find($id);
-
-            return redirect()->route('members.show', ['id' => $id])->with([
-                'message' => "{$member->full_name} has no shares yet.",
-                'styles' => 'alert-danger'
-            ]);
-        }
-
         return parent::render($request, $exception);
     }
 }

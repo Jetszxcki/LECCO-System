@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header text-md-center">NEW MEMBER</div>
 			<div class="card-body">
-				<form action="{{ route('members.store') }}" method="POST">
+				<form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data">
 					@include('partials.form', [compact('columns'), 'route' => 'members.index', 'buttonText' => 'Add Member'])
 				</form>	
 			</div>

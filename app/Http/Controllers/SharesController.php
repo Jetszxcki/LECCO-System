@@ -58,7 +58,7 @@ class SharesController extends Controller
                                     sum(total) as total_no_shares, 
                                     sum(price) as total_price, 
                                     sum(amount) as total_amount')
-                ->where('shares.member_id', $share->member->id)
+                ->where('shares.member_id', $member->id)
                 ->orderBy('Month', 'asc', 'Year', 'asc')
                 ->groupBy(DB::raw("MONTH(shares.created_at)"), DB::raw("YEAR(shares.created_at)"))
                 ->get();

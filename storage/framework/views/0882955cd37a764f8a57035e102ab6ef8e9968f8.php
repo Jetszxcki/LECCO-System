@@ -1,53 +1,42 @@
 <?php $__env->startSection('title', $user->name . ' - User Profile'); ?>
  
 <?php $__env->startSection('content'); ?>
-    <div class="container">
-        <div class="row">
-            <?php if($message = Session::get('success')): ?>
- 
-                <div class="alert alert-success alert-block">
- 
-                    <button type="button" class="close" data-dismiss="alert">×</button>
- 
-                    <strong><?php echo e($message); ?></strong>
- 
-                </div>
- 
-            <?php endif; ?>
- 
-            <?php if(count($errors) > 0): ?>
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li><?php echo e($error); ?></li>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-        </div>
-        <div class="justify-content-center">
-            <div class="profile-header-container">
-                <div class="profile-header-img">
-                    <img class="img-rounded" src="<?php echo e(asset('img/' . $user->avatar)); ?>" />
-                    <!-- badge -->
-                    <div class="rank-label-container">
-                        <span class="label label-default rank-label"><?php echo e($user->name); ?></span>
-                    </div>
-                </div>
-            </div>
- 
-        </div>
-        <div class="justify-content-center">
-            <form action="/profile" method="post" enctype="multipart/form-data">
-                <?php echo e(csrf_field()); ?>
+    <div class="d-flex flex-column align-items-center">
 
-                <div class="form-group">
-                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+        <?php echo $__env->make('partials.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+        <div class="card">
+            <div class="card-header">
+                <img class="static-img" src="<?php echo e(asset('images/' . $user->avatar)); ?>" />
+            </div>
+
+            <div class="card-body">
+                <span class="font-weight-bold ls-1" style="font-size: 20px"><?php echo e($user->name); ?></span>
+
+                <form action="<?php echo e(route('users.update_avatar', [$user])); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo method_field('PATCH'); ?>
+                    <?php echo csrf_field(); ?>
+
+                    <div class="form-group">
+                        <input type="file" class="form-control-file <?php if ($errors->has('avatar')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('avatar'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Size of image should not be more than 2MB.</small>
+
+                        <?php if ($errors->has('avatar')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('avatar'); ?>
+                            <span class="invalid-feedback" role="alert"><?php echo e($message); ?></span>
+                        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 <?php $__env->stopSection(); ?>

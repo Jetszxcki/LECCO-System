@@ -38,7 +38,7 @@
                 <?php else: ?>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: white">
-                            <img class="rounded-circle mr-2" src="<?php echo e(asset('img/user.jpg')); ?>" style="min-height:25px;min-width:25px;max-width:25px;max-height:25px;"/>
+                            <img class="rounded-circle mr-2" src="<?php echo e(asset('images/' . Auth::user()->avatar)); ?>" style="min-height:25px;min-width:25px;max-width:25px;max-height:25px;"/>
                             <span><?php echo e(Auth::user()->name); ?></span> <span class="caret"></span>
                         </a>
 

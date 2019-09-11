@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header text-md-center">{{ $model->full_name }}</div>
 			<div class="card-body">
-				<form action="{{ route('members.update', [$model]) }}" method="POST">
+				<form action="{{ route('members.update', [$model]) }}" method="POST" enctype="multipart/form-data">
 					@method('PATCH')
 					@include('partials.form', [compact('columns'), 'route' => 'previous', 'buttonText' => 'Save Changes'])
 				</form>	

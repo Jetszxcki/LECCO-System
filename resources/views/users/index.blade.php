@@ -31,7 +31,7 @@
 
 				<td nosearch class="col-md-2">
 					<center>
-						<img src="{{ asset('img/user.jpg') }}" style="display: block; height: auto; width: 100px;" />
+						<img src="{{ asset('images/' . $user->avatar) }}" style="display: block; height: 100px; width: 100px;" />
 					</center>
 				</td>
 

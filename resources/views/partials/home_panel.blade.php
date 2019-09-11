@@ -5,7 +5,7 @@
         <div class="card-body p-0">
 
             <a href="{{ route($href) }}" class="d-flex flex-column align-items-stretch">
-                <img src="{{ asset('img/' . $image) }}" alt="Error fetching image">
+                <img src="{{ asset('images/' . $image) }}" alt="Error fetching image">
             </a>
         </div>
 

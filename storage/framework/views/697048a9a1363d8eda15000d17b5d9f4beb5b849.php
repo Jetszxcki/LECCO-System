@@ -6,7 +6,7 @@
 		<div class="card">
 			<div class="card-header text-md-center"><?php echo e($model->full_name); ?></div>
 			<div class="card-body">
-				<form action="<?php echo e(route('members.update', [$model])); ?>" method="POST">
+				<form action="<?php echo e(route('members.update', [$model])); ?>" method="POST" enctype="multipart/form-data">
 					<?php echo method_field('PATCH'); ?>
 					<?php echo $__env->make('partials.form', [compact('columns'), 'route' => 'previous', 'buttonText' => 'Save Changes'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</form>	

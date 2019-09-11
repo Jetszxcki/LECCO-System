@@ -47,10 +47,23 @@ class MembersController extends Controller
 
     public function update(Member $member, Request $request)
     {
-    	$member->update($this->validateRequest($request));
+        $data = $this->validateRequest($request);
+
+        if ($request->profile_picture) 
+        {
+            $request->validate([
+                'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
+            
+            $prof_pic = $member->id . 'member.' . $request->profile_picture->getClientOriginalExtension();
+            $request->profile_picture->move(public_path('images'), $prof_pic);
+            $data['profile_picture'] = $prof_pic;
+        }
+
+        $member->update($data);
 
     	return redirect('members/' . $member->id)->with([
-            'message' => "{$member->full_name} successfully updated.",
+            'message' => "{$member->full_name}'s profile successfully updated.",
             'styles' => 'alert-success'
         ]);;
     }

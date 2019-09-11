@@ -57,7 +57,8 @@ endif; ?>" value="<?php echo e($choice); ?>" <?php if(old($column_name) == $choi
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>">
+endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" aria-describedby="fileHelp">
+						<small id="fileHelp" class="form-text text-muted">Size of image should not be more than 2MB.</small>
 					<?php else: ?>
 						<input type="text" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }

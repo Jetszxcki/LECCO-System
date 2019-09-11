@@ -58,28 +58,25 @@ class UsersController extends Controller
 		]);
 	}
 
-	public function profile()
+	public function profile(User $user)
     {
-        $user = Auth::user();
         return view('users.profile', compact('user'));
     }
 
-    // FIX: refactor
     public function update_avatar(Request $request, User $user)
-    { 
+    {    	
         $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
- 
-        $user = Auth::user();
-		$avatarName = $user->id.'user.'.$request->avatar->getClientOriginalExtension();
-        $request->avatar->storeAs('avatars', $avatarName);
- 
+
+		$avatarName = $user->id . 'user.' . $request->avatar->getClientOriginalExtension();
+        $request->avatar->move(public_path('images'), $avatarName);
         $user->avatar = $avatarName;
         $user->save();
  
-        return back()
-            ->with('success','You have successfully upload image.');
- 
+        return redirect()->route('users.profile', [$user])->with([
+        	'message' => 'Profile picture successfully changed.',
+        	'styles' => 'alert-success px-4'
+        ]);
     }
 }

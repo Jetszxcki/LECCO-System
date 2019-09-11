@@ -7,7 +7,7 @@
 	<div class="d-flex flex-row justify-content-between">
 		<div class="card" style="width: 25%">
 			<div class="card-header">
-				<img src="{{ asset('img/' . $member->profile_picture) }}" alt="Problem fetching image" />
+				<img class="static-img" src="{{ asset('images/' . $member->profile_picture) }}" />
 			</div>
 		</div>
 

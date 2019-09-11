@@ -5,7 +5,7 @@
         <div class="card-body p-0">
 
             <a href="<?php echo e(route($href)); ?>" class="d-flex flex-column align-items-stretch">
-                <img src="<?php echo e(asset('img/' . $image)); ?>" alt="Error fetching image">
+                <img src="<?php echo e(asset('images/' . $image)); ?>" alt="Error fetching image">
             </a>
         </div>
 

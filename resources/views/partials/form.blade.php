@@ -36,7 +36,8 @@
 						@endforeach
 						</div>
 					@elseif ($column_name == 'profile_picture')
-						<input type="file" name="{{ $column_name }}" class="form-control-file @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">
+						<input type="file" name="{{ $column_name }}" class="form-control-file @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" aria-describedby="fileHelp">
+						<small id="fileHelp" class="form-text text-muted">Size of image should not be more than 2MB.</small>
 					@else
 						<input type="text" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}">
 					@endif

@@ -2,52 +2,34 @@
 @section('title', $user->name . ' - User Profile')
  
 @section('content')
-    <div class="container">
-        <div class="row">
-            @if ($message = Session::get('success'))
- 
-                <div class="alert alert-success alert-block">
- 
-                    <button type="button" class="close" data-dismiss="alert">×</button>
- 
-                    <strong>{{ $message }}</strong>
- 
-                </div>
- 
-            @endif
- 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-        <div class="justify-content-center">
-            <div class="profile-header-container">
-                <div class="profile-header-img">
-                    <img class="img-rounded" src="{{ asset('img/' . $user->avatar) }}" />
-                    <!-- badge -->
-                    <div class="rank-label-container">
-                        <span class="label label-default rank-label">{{ $user->name }}</span>
-                    </div>
-                </div>
+    <div class="d-flex flex-column align-items-center">
+
+        @include('partials.flash')
+
+        <div class="card">
+            <div class="card-header">
+                <img class="static-img" src="{{ asset('images/' . $user->avatar) }}" />
             </div>
- 
-        </div>
-        <div class="justify-content-center">
-            <form action="/profile" method="post" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+
+            <div class="card-body">
+                <span class="font-weight-bold ls-1" style="font-size: 20px">{{ $user->name }}</span>
+
+                <form action="{{ route('users.update_avatar', [$user]) }}" method="POST" enctype="multipart/form-data">
+                    @method('PATCH')
+                    @csrf
+
+                    <div class="form-group">
+                        <input type="file" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Size of image should not be more than 2MB.</small>
+
+                        @error('avatar')
+                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 @endsection
