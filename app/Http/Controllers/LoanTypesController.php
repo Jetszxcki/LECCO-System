@@ -91,10 +91,10 @@ class LoanTypesController extends Controller
         return $request->validate([
             'name' => 'required',
             'interest_per_annum' => 'required',
-            'amount_minimum' => 'required',
-            'amount_maximum' => 'required',
-            'payment_period_minimum' => 'required',
-            'payment_period_maximum' => 'required'
+            'amount_minimum' => 'required|lte:amount_maximum',
+            'amount_maximum' => 'required|gte:amount_minimum',
+            'payment_period_minimum' => 'required|lte:payment_period_maximum',
+            'payment_period_maximum' => 'required|gte:payment_period_minimum'
         ]);
     }
 }
