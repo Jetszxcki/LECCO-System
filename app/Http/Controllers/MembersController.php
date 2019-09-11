@@ -41,7 +41,7 @@ class MembersController extends Controller
     public function edit(Member $member)
     {	 
         $model = $member;
-		$columns = $this->getColumns();
+		$columns = $this->getFormData();
     	return view('members.edit', compact('model', 'columns'));
     }
 

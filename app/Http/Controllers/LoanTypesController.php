@@ -40,7 +40,7 @@ class LoanTypesController extends Controller
     public function edit(LoanType $loan_type)
     {
         $model = $loan_type;
-        $columns = $this->getColumns();
+        $columns = $this->getFormData();
         return view('loan_types.edit', compact('model', 'columns'));
     }
 
