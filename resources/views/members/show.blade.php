@@ -34,8 +34,10 @@
 
 		@foreach ($member->getAttributes() as $column => $value)
 			<div class="row">
-				<label>{{ $member->getColumnNameForView($column) }}</label>
-				<label>{{ $value }}</label>
+				@if($column != 'profile_picture')
+					<label>{{ $member->getColumnNameForView($column) }}</label>
+					<label>{{ $value }}</label>
+				@endif
 			</div>
 		@endforeach
 		<div class="row">
