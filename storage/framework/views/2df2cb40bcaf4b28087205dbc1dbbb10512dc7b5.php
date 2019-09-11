@@ -1,12 +1,15 @@
 <?php $__env->startSection('title', 'Users'); ?>
 
 <?php $__env->startSection('content'); ?>
+
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Users</h2>
 		
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
-	
+
+	<?php echo $__env->make('partials.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			<?php if($users->isEmpty()): ?>

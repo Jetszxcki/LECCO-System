@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use Auth;
 use App\User;
@@ -44,13 +43,19 @@ class UsersController extends Controller
 
 		AccessRight::where('user_id', $user->id)->update($access_rights_values);
 
-		return redirect('users');
+		return redirect('users')->with([
+				'message' => "{$user->name}'s privileges successfully updated.",
+				'styles' => 'alert-success'
+		]);
 	}
 
 	public function destroy(User $user)
 	{
 		$user->delete();
-		return redirect('users');
+		return redirect('users')->with([
+			'message' => "{$user->name} has been deleted.",
+			'styles' => 'alert-danger',
+		]);
 	}
 
 	public function profile()
@@ -59,6 +64,7 @@ class UsersController extends Controller
         return view('users.profile', compact('user'));
     }
 
+    // FIX: refactor
     public function update_avatar(Request $request, User $user)
     { 
         $request->validate([

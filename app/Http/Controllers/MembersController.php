@@ -26,7 +26,11 @@ class MembersController extends Controller
     public function store(Request $request)
     {
         Member::create($this->validateRequest($request));
-        return redirect('members');
+
+        return redirect('members')->with([
+            'message' => "{$request->first_name} {$request->last_name} successfully added.",
+            'styles' => 'alert-success'
+        ]);
     }
 
     public function show(Member $member)
@@ -44,13 +48,20 @@ class MembersController extends Controller
     public function update(Member $member, Request $request)
     {
     	$member->update($this->validateRequest($request));
-    	return redirect('members/' . $member->id);
+
+    	return redirect('members/' . $member->id)->with([
+            'message' => "{$member->full_name} successfully updated.",
+            'styles' => 'alert-success'
+        ]);;
     }
 
     public function destroy(Member $member)
     {	
     	$member->delete();
-    	return redirect('members');
+    	return redirect('members')->with([
+            'message' => "{$member->full_name} has been deleted.",
+            'styles' => 'alert-danger'
+        ]);;
     }
 
     // other functions

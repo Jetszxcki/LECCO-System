@@ -34,7 +34,10 @@ class SharesController extends Controller
     	]);
         
     	Share::create($data);
-    	return redirect('shares');
+    	return redirect('shares')->with([
+            'message' => 'New share successfully added.',
+            'styles' => 'alert-success'
+        ]);
     }
 
     public function show(Share $share)
@@ -90,6 +93,7 @@ class SharesController extends Controller
 		}
 		
 		$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
+        dd($columns);
 		return $columns;
 	}
 }

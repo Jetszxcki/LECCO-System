@@ -23,7 +23,11 @@ class SignatoriesController extends Controller
     public function store(Request $request)
     {
     	Signatory::create($this->validateRequest($request));
-    	return redirect('signatories');
+
+    	return redirect('signatories')->with([
+            'message' => "Signatory of {$request->name} successfully added.",
+            'styles' => 'alert-success'
+        ]);
     }
 
     public function edit(Signatory $signatory)
@@ -34,13 +38,19 @@ class SignatoriesController extends Controller
     public function update(Request $request, Signatory $signatory)
     {   
         $signatory->update($this->validateRequest($request));
-        return redirect('signatories');
+        return redirect('signatories')->with([
+            'message' => "Signatory of {$signatory->name} successfully updated.",
+            'styles' => 'alert-success'
+        ]);
     }
 
     public function destroy(Signatory $signatory)
     {   
         $signatory->delete();
-        return redirect('signatories');
+        return redirect('signatories')->with([
+            'message' => "Signatory of {$signatory->name} has been deleted.",
+            'styles' => 'alert-danger'
+        ]);
     }
 
     // other functions

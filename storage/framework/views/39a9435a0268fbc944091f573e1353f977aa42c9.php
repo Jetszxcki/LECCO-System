@@ -1,12 +1,7 @@
 <?php $__env->startSection('title',  $member->full_name); ?>
 
 <?php $__env->startSection('content'); ?>
-	<?php if(session('empty_shares')): ?>
-		<div class="alert alert-danger ls-2 text-center">
-			<?php echo e($member->full_name . ' ' . session('empty_shares')); ?>
-
-		</div>
-	<?php endif; ?>
+	<?php echo $__env->make('partials.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 	<div class="d-flex flex-row justify-content-between">
 		<div class="card" style="width: 25%">

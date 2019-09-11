@@ -2,12 +2,15 @@
 @section('title', 'Users')
 
 @section('content')
+
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Users</h2>
 		
 		@include('partials.search_bar')
 	</div>
-	
+
+	@include('partials.flash')
+
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			@if ($users->isEmpty())

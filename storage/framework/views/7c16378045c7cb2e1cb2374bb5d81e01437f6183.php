@@ -11,6 +11,8 @@
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
 
+	<?php echo $__env->make('partials.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">
 			<?php if($signatories->isEmpty()): ?>
@@ -47,7 +49,7 @@
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-		<?php echo $__env->make('partials.not_found_alert', ['model' => $signatories], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+		<?php echo $__env->make('partials.search_not_found', ['model' => $signatories], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</table>
 <?php $__env->stopSection(); ?>
 

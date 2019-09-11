@@ -11,6 +11,8 @@
 
 		@include('partials.search_bar')
 	</div>
+	
+	@include('partials.flash')
 
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">

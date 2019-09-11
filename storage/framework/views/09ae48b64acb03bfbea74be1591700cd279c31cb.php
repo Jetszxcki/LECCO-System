@@ -1,6 +1,8 @@
 <?php $__env->startSection('title',  $loan_type->name); ?>
 
 <?php $__env->startSection('content'); ?>
+	<?php echo $__env->make('partials.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 	<div class="form-group">
 		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_edit')): ?>
 			<a href="<?php echo e(route('loan_types.edit', [$loan_type])); ?>" class="btn btn-warning">Edit</a>

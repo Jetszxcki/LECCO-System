@@ -2,6 +2,8 @@
 @section('title',  $loan_type->name)
 
 @section('content')
+	@include('partials.flash')
+
 	<div class="form-group">
 		@accessright('loan_types_edit')
 			<a href="{{ route('loan_types.edit', [$loan_type]) }}" class="btn btn-warning">Edit</a>

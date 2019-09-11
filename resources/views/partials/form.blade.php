@@ -5,8 +5,6 @@
 		<div class="form-group row">	
 			@if ($column_name == 'member_id')
 				<label for="member_id" class="col-md-4 col-form-label text-md-right">Member</label>
-			{{-- @elseif ($column_name == 'user_id')
-				<label for="user_id" class="col-md-4 col-form-label text-md-right">User ID</label> --}}
 			@else
 	 			<label for="{{ $cname = $model->getColumnNameForView($column_name) }}" class="col-md-4 col-form-label text-md-right">{{ $cname }}</label>
 	 		@endif
@@ -25,8 +23,6 @@
 								<option value="{{ $member->id }}">{{ $member->full_name }}</option>
 							@endforeach
 						</select>
-					{{-- @elseif ($column_name == 'user_id')
-						<input type="text" name="{{ $column_name }}" class="form-control text-center @error($column_name) is-invalid @enderror" value="{{ $model->id }}" disabled> --}}
 					@else
 						<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" id="{{ $column_name }}" {{ $column_name == 'total' ? 'oninput=calculateAmount()' : '' }}>
 					@endif
@@ -50,8 +46,6 @@
 					<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" step="0.01" id="{{ $column_name }}" {{ $column_name == 'amount' ? 'readonly' : '' }} {{ $column_name == 'price' ? 'oninput=calculateAmount()' : '' }}>
 				@elseif ($column_data['type'] == 'float')
 					<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" step="any">
-				{{-- @elseif ($column_data['type'] == 'boolean')
-					<input type="checkbox" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ $model->access_right[$column_name] }}" {{ $model->access_right[$column_name] ? 'checked' : ''}}> --}}
 				@endif
 
 				@error($column_name)

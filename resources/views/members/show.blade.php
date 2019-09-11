@@ -2,11 +2,7 @@
 @section('title',  $member->full_name)
 
 @section('content')
-	@if (session('empty_shares'))
-		<div class="alert alert-danger ls-2 text-center">
-			{{  $member->full_name . ' ' . session('empty_shares') }}
-		</div>
-	@endif
+	@include('partials.flash')
 
 	<div class="d-flex flex-row justify-content-between">
 		<div class="card" style="width: 25%">

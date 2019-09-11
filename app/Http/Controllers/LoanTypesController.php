@@ -25,7 +25,11 @@ class LoanTypesController extends Controller
     public function store(Request $request)
     {
         LoanType::create($this->validateRequest($request));
-        return redirect('loan_types');
+
+        return redirect('loan_types')->with([
+            'message' => "{$request->name} successfully added.",
+            'styles' => 'alert-success'
+        ]);
     }
 
     public function show(LoanType $loan_type)
@@ -43,13 +47,19 @@ class LoanTypesController extends Controller
     public function update(Request $request, LoanType $loan_type)
     {
         $loan_type->update($this->validateRequest($request));
-        return redirect('loan_types/' . $loan_type->name);
+        return redirect('loan_types/' . $loan_type->name)->with([
+            'message' => "{$loan_type->name} successfully updated.",
+            'styles' => 'alert-success'
+        ]);
     }
 
     public function destroy(LoanType $loan_type)
     {
         $loan_type->delete();
-        return redirect('loan_types');
+        return redirect('loan_types')->with([
+            'message' => "{$loan_type->name} has been deleted.",
+            'styles' => 'alert-danger'
+        ]);
     }
 
     private function getColumns()

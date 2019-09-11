@@ -7,9 +7,11 @@
 		<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_create')): ?>
 			<a href="<?php echo e(route('members.create')); ?>" class="btn btn-primary">Add Member</a>
 		<?php endif; ?>
-		
+	
 		<?php echo $__env->make('partials.search_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</div>
+
+	<?php echo $__env->make('partials.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 	<table class="container" id="main-table">
 		<tr id="theader" class="d-flex p-1 mb-3 text-center">
@@ -47,7 +49,7 @@
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-		<?php echo $__env->make('partials.not_found_alert', ['model' => $members], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+		<?php echo $__env->make('partials.search_not_found', ['model' => $members], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</table>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\projs\LLS\resources\views/members/index.blade.php ENDPATH**/ ?>
