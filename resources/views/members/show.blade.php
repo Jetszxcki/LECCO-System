@@ -40,7 +40,7 @@
 		@endforeach
 		<div class="row">
 			@accessright('shares_view')
-				<a href="{{ route('shares.show', [$member]) }}" class="btn btn-primary">Shares</a>
+				<a href="{{ route('shares.show', ['member' => $member]) }}" class="btn btn-primary">Shares</a>
 			@endaccessright
 		</div>
 	</div>

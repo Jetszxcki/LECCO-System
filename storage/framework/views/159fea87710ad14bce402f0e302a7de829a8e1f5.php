@@ -21,8 +21,8 @@
 				<th nosearch class="col-md-1">ID</th>
 				<th nosearch class="col-md-5">Member</th>
 				<th nosearch class="col-md-2">Total</th>
-				<th nosearch class="col-md-2">Amount</th>
 				<th nosearch class="col-md-2">Price</th>
+				<th nosearch class="col-md-2">Amount</th>
 			<?php endif; ?>
 		</tr>
 
@@ -31,8 +31,8 @@
 				<td nosearch class="col-md-1"><?php echo e($share->id); ?></td>
 				<td class="col-md-5"><?php echo e($share->member->full_name); ?></td>
 				<td class="col-md-2"><?php echo e($share->total); ?></td>
-				<td class="col-md-2"><?php echo e($share->amount); ?></td>
 				<td class="col-md-2"><?php echo e($share->price); ?></td>
+				<td class="col-md-2"><?php echo e($share->amount); ?></td>
 			</tr>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

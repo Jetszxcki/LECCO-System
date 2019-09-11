@@ -40,7 +40,7 @@ class SharesController extends Controller
         ]);
     }
 
-    public function show(Share $share)
+    public function show(Member $member)
     {
         // for sqlite testing only
         // $shares = Share::selectRaw("strftime('%m', shares.created_at) as month,
@@ -48,7 +48,7 @@ class SharesController extends Controller
         //                             sum(total) as total_no_shares, 
         //                             sum(price) as total_price, 
         //                             sum(amount) as total_amount")
-        //         ->where('shares.member_id', $share->member->id)
+        //         ->where('shares.member_id', $member->id)
         //         ->orderBy('Month', 'asc', 'Year', 'asc')
         //         ->groupBy(DB::raw("strftime('%m', shares.created_at)"), DB::raw("strftime('%Y', shares.created_at)"))
         //         ->get();
@@ -67,8 +67,8 @@ class SharesController extends Controller
         $total_p = $shares->sum('total_price');
         $total_a = $shares->sum('total_amount');
         $totals = array($total_ns, $total_p, $total_a);
-        
-        return view('shares.show', compact('shares', 'totals', 'share'));
+
+        return view('shares.show', compact('shares', 'totals', 'member'));
     }
 
     private function getColumns()
@@ -93,7 +93,6 @@ class SharesController extends Controller
 		}
 		
 		$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
-        dd($columns);
 		return $columns;
 	}
 }

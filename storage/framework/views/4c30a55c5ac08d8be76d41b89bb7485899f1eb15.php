@@ -1,8 +1,8 @@
-<?php $__env->startSection('title', $share->member->full_name . ' - Shares'); ?>
+<?php $__env->startSection('title', $member->full_name . ' - Shares'); ?>
 
 <?php $__env->startSection('content'); ?>
 	<div class="form-group text-center">
-		<h3 style="color: white"><?php echo e('Shares of ' . $share->member->full_name); ?></h3>
+		<h3 style="color: white"><?php echo e('Shares of ' . $member->full_name); ?></h3>
 	</div>
 
 	<table class="container" id="main-table">
@@ -35,7 +35,7 @@
 			<th nosearch class="col-md-3 c-black"><?php echo e($totals[2]); ?></th>
 		</tr>
 
-		<?php echo $__env->make('partials.not_found_alert', ['model' => $shares], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+		<?php echo $__env->make('partials.search_not_found', ['model' => $shares], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	</table>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\projs\LLS\resources\views/shares/show.blade.php ENDPATH**/ ?>

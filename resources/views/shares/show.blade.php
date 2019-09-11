@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', $share->member->full_name . ' - Shares')
+@section('title', $member->full_name . ' - Shares')
 
 @section('content')
 	<div class="form-group text-center">
-		<h3 style="color: white">{{ 'Shares of ' . $share->member->full_name }}</h3>
+		<h3 style="color: white">{{ 'Shares of ' . $member->full_name }}</h3>
 	</div>
 
 	<table class="container" id="main-table">
@@ -36,6 +36,6 @@
 			<th nosearch class="col-md-3 c-black">{{ $totals[2] }}</th>
 		</tr>
 
-		@include('partials.not_found_alert', ['model' => $shares])
+		@include('partials.search_not_found', ['model' => $shares])
 	</table>
 @endsection

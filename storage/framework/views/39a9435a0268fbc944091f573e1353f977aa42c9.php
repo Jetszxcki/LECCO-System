@@ -39,7 +39,7 @@
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		<div class="row">
 			<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'shares_view')): ?>
-				<a href="<?php echo e(route('shares.show', [$member])); ?>" class="btn btn-primary">Shares</a>
+				<a href="<?php echo e(route('shares.show', ['member' => $member])); ?>" class="btn btn-primary">Shares</a>
 			<?php endif; ?>
 		</div>
 	</div>

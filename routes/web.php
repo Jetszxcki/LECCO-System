@@ -53,7 +53,7 @@ Route::delete('loan_types/{loan_type}', 'LoanTypesController@destroy')->name('lo
 Route::get('shares', 'SharesController@index')->name('shares.index')->middleware(['auth', 'accessRight:shares_view_list']);
 Route::get('shares/create', 'SharesController@create')->name('shares.create')->middleware(['auth', 'accessRight:shares_create']);
 Route::post('shares', 'SharesController@store')->name('shares.store')->middleware(['auth', 'accessRight:shares_create']);
-Route::get('shares/{share}', 'SharesController@show')->name('shares.show')->middleware(['auth', 'accessRight:shares_view']);
+Route::get('shares/{member}', 'SharesController@show')->name('shares.show')->middleware(['auth', 'accessRight:shares_view']);
 
 Route::get('loans', 'LoansController@index')->name('loans.index')->middleware('auth');
 Route::get('loans/create', 'LoansController@create')->name('loans.create')->middleware('auth');

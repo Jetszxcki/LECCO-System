@@ -22,8 +22,8 @@
 				<th nosearch class="col-md-1">ID</th>
 				<th nosearch class="col-md-5">Member</th>
 				<th nosearch class="col-md-2">Total</th>
-				<th nosearch class="col-md-2">Amount</th>
 				<th nosearch class="col-md-2">Price</th>
+				<th nosearch class="col-md-2">Amount</th>
 			@endif
 		</tr>
 
@@ -32,8 +32,8 @@
 				<td nosearch class="col-md-1">{{ $share->id }}</td>
 				<td class="col-md-5">{{ $share->member->full_name }}</td>
 				<td class="col-md-2">{{ $share->total }}</td>
-				<td class="col-md-2">{{ $share->amount }}</td>
 				<td class="col-md-2">{{ $share->price }}</td>
+				<td class="col-md-2">{{ $share->amount }}</td>
 			</tr>
 		@endforeach
 

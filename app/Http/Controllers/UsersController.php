@@ -44,8 +44,8 @@ class UsersController extends Controller
 		AccessRight::where('user_id', $user->id)->update($access_rights_values);
 
 		return redirect('users')->with([
-				'message' => "{$user->name}'s privileges successfully updated.",
-				'styles' => 'alert-success'
+			'message' => "{$user->name}'s privileges successfully updated.",
+			'styles' => 'alert-success'
 		]);
 	}
 
