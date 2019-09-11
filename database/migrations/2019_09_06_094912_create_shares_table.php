@@ -15,11 +15,12 @@ class CreateSharesTable extends Migration
     {
         Schema::create('shares', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('member_id');
+            $table->bigInteger('member_id');
             $table->unsignedInteger('total');
             $table->decimal('price');
             $table->decimal('amount');
             $table->timestamps();
+			$table->foreign('member_id')->references('id')->on('members');
         });
     }
 

@@ -15,6 +15,7 @@
 
 					@include('partials.access_right_checkboxes', ['header' => 'USER'])
 					@include('partials.access_right_checkboxes', ['header' => 'MEMBER'])
+					@include('partials.access_right_checkboxes', ['header' => 'LOANS'])
 					@include('partials.access_right_checkboxes', ['header' => 'LOAN TYPES'])
 					@include('partials.access_right_checkboxes', ['header' => 'SHARES'])
 					@include('partials.access_right_checkboxes', ['header' => 'SIGNATORIES'])

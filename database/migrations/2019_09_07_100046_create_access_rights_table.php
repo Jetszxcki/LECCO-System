@@ -31,10 +31,13 @@ class CreateAccessRightsTable extends Migration
             $table->boolean('loan_types_create')->default(false);
             $table->boolean('loan_types_edit')->default(false);
             $table->boolean('loan_types_delete')->default(false);
-            // $table->boolean('loans_view')->default(true);
-            // $table->boolean('loans_delete')->default(false);
-            // $table->boolean('loans_edit')->default(false);
-            // $table->boolean('loans_create')->default(false);
+			
+			$table->boolean('loan_view_list')->default(true);
+            $table->boolean('loans_view')->default(true);
+            $table->boolean('loans_delete')->default(false);
+            $table->boolean('loans_edit')->default(false);
+            $table->boolean('loans_create')->default(false);
+			
             $table->boolean('shares_view_list')->default(true);
             $table->boolean('shares_view')->default(true);
             $table->boolean('shares_create')->default(false);

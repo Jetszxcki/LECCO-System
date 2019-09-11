@@ -58,3 +58,4 @@ Route::get('shares/{member}', 'SharesController@show')->name('shares.show')->mid
 Route::get('loans', 'LoansController@index')->name('loans.index')->middleware('auth');
 Route::get('loans/create', 'LoansController@create')->name('loans.create')->middleware('auth');
 Route::post('loans', 'LoansController@store')->name('loans.store')->middleware('auth');
+Route::get('loans/{member}', 'LoansController@show')->name('loans.show')->middleware(['auth', 'accessRight:loans_view']);
