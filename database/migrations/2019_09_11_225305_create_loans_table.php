@@ -13,21 +13,19 @@ class CreateLoansTable extends Migration
      */
     public function up()
     {
-        Schema::create('loans', function (Blueprint $table){
+        Schema::create('loans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('member_id');
+            $table->bigInteger('member_id');
             $table->string('loan_type');
             $table->decimal('amount');
-            $table->decimal('total_interest');
-            $table->decimal('total_loan_receivable');
-            $table->unsignedInteger('term');
+			$table->unsignedInteger('term');
+			$table->date('start_of_payment');
             $table->float('interest_per_annum');
-            $table->date('start_of_payment');
             //$table->string('status');
-            $table->string('remarks');
+            $table->string('remarks')->nullable(true);
             $table->timestamps();
-            //$table->foreign('member_id')->references('id')->on('members');
-            // $table->foreign('loan_type')->references('name')->on('loan_types')->onUpdate('cascade');
+            $table->foreign('member_id')->references('id')->on('members');
+            $table->foreign('loan_type')->references('name')->on('loan_types')->onUpdate('cascade');
         });
     }
 
