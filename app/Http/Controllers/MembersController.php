@@ -18,7 +18,7 @@ class MembersController extends Controller
     // REMIND: install dependency via composer require doctrine/dbal
     public function create()
     {
-        $columns = $this->getColumns();
+        $columns = $this->getFormData();
         $model = new Member();
     	return view('members.create', compact('columns', 'model'));
     }
@@ -63,6 +63,21 @@ class MembersController extends Controller
 
         return array_combine($column_names, $column_types);
     }
+	
+	#transforms_column data for more user defined arguments
+	private function getFormData()
+	{
+		$columns = $this->getColumns();
+		foreach ($columns as $column_name => $column_type){
+			$columns[$column_name] = [
+				'type' => $column_type,
+				'choices' => null,
+			];
+		}
+		
+		$columns['gender']['choices'] = ['Male', 'Female', 'X-Men'];
+		return $columns;
+	}
 
     private function validateRequest($request)
     {
@@ -70,22 +85,22 @@ class MembersController extends Controller
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
             'birthday' => 'required',
-            'age' => 'required',
+            'age' => 'required|gte:0',
             'gender' => 'required',
             'civil_status' => 'required',
             'religion' =>'required',
             'highest_educational_attainment' => 'required',
-            'no_of_dependents' => 'required',
+            'no_of_dependents' => 'required|gte:0',
             'residential_address' => 'required',
             'TIN' => 'required',
             'employer' => 'required',
             'department' => 'required',
             'position' => 'required',
             'annual_income' => 'required',
-            'length_of_service(years)' => 'required',
+            'length_of_service(years)' => 'required|gte:0',
             'status_of_employment' => 'required',
             'no_of_subscribed_shares' => 'required',
-            'years_to_fully_pay' => 'required',
+            'years_to_fully_pay' => 'required|gte:0',
             'contact_no' => 'required',
             'date_accepted' => 'required',
             'BOD_resolution_number' => 'required',

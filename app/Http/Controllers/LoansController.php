@@ -17,7 +17,7 @@ class LoansController extends Controller
 
     public function create()
     {
-    	$columns = $this->getColumns();
+    	$columns = $this->getFormData();
     	$members = Member::names()->get();
     }
 
@@ -30,4 +30,18 @@ class LoansController extends Controller
 
         return array_combine($column_names, $column_types);
     }
+	
+	#transforms_column data for more user defined arguments
+	private function getFormData()
+	{
+		$columns = $this->getColumns();
+		foreach ($columns as $column_name => $column_type){
+			$columns[$column_name] = [
+				'type' => $column_type,
+				'choices' => null,
+			];
+		}
+		
+		return $columns;
+	}
 }
