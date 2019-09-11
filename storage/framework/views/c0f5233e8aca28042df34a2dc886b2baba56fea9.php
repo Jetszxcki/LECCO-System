@@ -4,6 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <?php if(session('auth-msg')): ?>
+                <div class="alert alert-info ls-2">
+                    <?php echo e(session('auth-msg')); ?>        
+                </div>
+            <?php endif; ?>
+
             <div class="card">
                 <div class="card-header text-center"><?php echo e(__('LOGIN')); ?></div>
 

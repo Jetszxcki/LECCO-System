@@ -1,8 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top bg-dblue" style="letter-spacing: 2px;">
     <div class="container">
-        <a class="navbar-brand nav-logo-text" href="<?php echo e(route('home')); ?>">
-            <span><?php echo e(config('app.name')); ?></span>
-        </a>
+        <?php if(auth()->guard()->guest()): ?>
+            <a class="navbar-brand nav-logo-text" href="<?php echo e(url('/')); ?>"> 
+        <?php else: ?>
+            <a class="navbar-brand nav-logo-text" href="<?php echo e(route('home')); ?>">
+        <?php endif; ?>
+                <span><?php echo e(config('app.name')); ?></span>
+            </a>
+            
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
             <span class="navbar-toggler-icon"></span>
         </button>

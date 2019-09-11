@@ -52,6 +52,6 @@
 			</tr>
 		@endforeach
 
-		@include('partials.not_found_alert', ['model' => $users])
+		@include('partials.search_not_found', ['model' => $users])
 	</table>
 @endsection

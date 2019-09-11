@@ -5,6 +5,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            @if (session('auth-msg'))
+                <div class="alert alert-info ls-2">
+                    {{ session('auth-msg') }}        
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-header text-center">{{ __('LOGIN') }}</div>
 

@@ -1,8 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top bg-dblue" style="letter-spacing: 2px;">
     <div class="container">
-        <a class="navbar-brand nav-logo-text" href="{{ route('home') }}">
-            <span>{{ config('app.name') }}</span>
-        </a>
+        @guest
+            <a class="navbar-brand nav-logo-text" href="{{ url('/') }}"> 
+        @else
+            <a class="navbar-brand nav-logo-text" href="{{ route('home') }}">
+        @endguest
+                <span>{{ config('app.name') }}</span>
+            </a>
+            
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>

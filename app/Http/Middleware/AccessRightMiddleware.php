@@ -25,10 +25,7 @@ class AccessRightMiddleware
                 return new Response(view('unauthorized', ['access_rights' => $access_rights, 'user' => Auth::user()]));
             }
         }
-
-        // if (! User::hasAccessRight($access_right)) {
-        //     return new Response(view('unauthorized')->with(['access_right' => $access_right, 'user' => Auth::user()]));
-        // }
+        
         return $next($request);
     }
 }
