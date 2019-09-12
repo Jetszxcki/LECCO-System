@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use App\LoanType;
 
 class LoanTypesTableSeeder extends Seeder
@@ -13,7 +14,7 @@ class LoanTypesTableSeeder extends Seeder
     public function run()
     {
         $loan_type = LoanType::create([
-			'Name' => 'Multi-purpose Loan',
+			'name' => 'Multi-purpose Loan',
 			'amount_minimum' => 20000.00,
 			'amount_maximum' => 150000.00,
 			'payment_period_minimum' => 24,
@@ -23,7 +24,7 @@ class LoanTypesTableSeeder extends Seeder
 		
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Calamity Loan',
+			'name' => 'Calamity Loan',
 			'amount_minimum' => 0.00,
 			'amount_maximum' => 35000.00,
 			'payment_period_minimum' => 12,
@@ -32,7 +33,7 @@ class LoanTypesTableSeeder extends Seeder
 		]);
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Medical Loan',
+			'name' => 'Medical Loan',
 			'amount_minimum' => 0.00,
 			'amount_maximum' => 30000.00,
 			'payment_period_minimum' => 12,
@@ -41,7 +42,7 @@ class LoanTypesTableSeeder extends Seeder
 		]);
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Motorcycle Loan',
+			'name' => 'Motorcycle Loan',
 			'amount_minimum' => 0.00,
 			'amount_maximum' => 0.00,
 			'payment_period_minimum' => 36,
@@ -50,7 +51,7 @@ class LoanTypesTableSeeder extends Seeder
 		]);
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Vehicle Loan',
+			'name' => 'Vehicle Loan',
 			'amount_minimum' => 200000.00,
 			'amount_maximum' => 250000.00,
 			'payment_period_minimum' => 60,
@@ -60,7 +61,7 @@ class LoanTypesTableSeeder extends Seeder
 		
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Business Loan',
+			'name' => 'Business Loan',
 			'amount_minimum' => 0.00,
 			'amount_maximum' => 250000.00,
 			'payment_period_minimum' => 60,
@@ -69,7 +70,7 @@ class LoanTypesTableSeeder extends Seeder
 		]);
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Housing Loan',
+			'name' => 'Housing Loan',
 			'amount_minimum' => 10000.00,
 			'amount_maximum' => 150000.00,
 			'payment_period_minimum' => 36,
@@ -78,7 +79,7 @@ class LoanTypesTableSeeder extends Seeder
 		]);
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Educational Loan',
+			'name' => 'Educational Loan',
 			'amount_minimum' => 5000.00,
 			'amount_maximum' => 35000.00,
 			'payment_period_minimum' => 12,
@@ -87,7 +88,7 @@ class LoanTypesTableSeeder extends Seeder
 		]);
 		
 		$loan_type = LoanType::create([
-			'Name' => 'Electronic and Applience Loan',
+			'name' => 'Electronic and Appliance Loan',
 			'amount_minimum' => 0,
 			'amount_maximum' => 50000.00,
 			'payment_period_minimum' => 5,

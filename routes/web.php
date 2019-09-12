@@ -55,7 +55,8 @@ Route::get('shares/create', 'SharesController@create')->name('shares.create')->m
 Route::post('shares', 'SharesController@store')->name('shares.store')->middleware(['auth', 'accessRight:shares_create']);
 Route::get('shares/{member}', 'SharesController@show')->name('shares.show')->middleware(['auth', 'accessRight:shares_view']);
 
-Route::get('loans', 'LoansController@index')->name('loans.index')->middleware('auth');
-Route::get('loans/create', 'LoansController@create')->name('loans.create')->middleware('auth');
-Route::post('loans', 'LoansController@store')->name('loans.store')->middleware('auth');
+Route::get('loans', 'LoansController@index')->name('loans.index')->middleware(['auth', 'accessRight:loans_view_list']);
+Route::get('loans/create', 'LoansController@create')->name('loans.create')->middleware(['auth', 'accessRight:loans_create']);
+Route::post('loans', 'LoansController@store')->name('loans.store')->middleware(['auth', 'accessRight:loans_create']);
+// Route::get('loans/{member}', 'LoansController@create')->name('loans.create')->middleware(['auth', 'accessRight:loans_create']);
 Route::get('loans/{member}', 'LoansController@show')->name('loans.show')->middleware(['auth', 'accessRight:loans_view']);

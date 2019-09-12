@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Loan Types')
+@section('title', 'Loans')
 
 @section('content')
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Loans</h2>
 
-		@accessright('loans.create')
+		@accessright('loans_create')
 			<a href="{{ route('loans.create') }}" class="btn btn-primary">Add Loan</a>
 		@endaccessright
 
@@ -37,17 +37,18 @@
 				<td class="col-md">{{ $loan->amount }}</td>
 				<td class="col-md">{{ $loan->start_of_payment }}</td>
 				<td class="col-md">{{ $loan->term }}</td>
+				
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
 					@accessright('loans_view')
 						<a href="{{ route('loans.show', [$loan]) }}" class="btn btn-success mr-1">View</a>
 					@endaccessright
 
 					@accessright('loans_edit')
-						<a href="{{ route('loans.edit', [$loan]) }}" class="btn btn-warning mr-1">Edit</a>
+						<a href="{{-- {{ route('loans.edit', [$loan]) }} --}}" class="btn btn-warning mr-1">Edit</a>
 					@endaccessright
 
 					@accessright('loans_delete')
-						<form action="{{ route('loans.destroy', [$loan]) }}" method="POST">
+						<form action="{{-- {{ route('loans.destroy', [$loan]) }} --}}" method="POST">
 							@method('DELETE')
 							@csrf
 

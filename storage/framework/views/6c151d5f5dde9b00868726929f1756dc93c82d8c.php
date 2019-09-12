@@ -20,7 +20,9 @@
             <?php echo $__env->make('partials.home_panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
-        
+        <?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loans_view_list')): ?>
+            <?php echo $__env->make('partials.home_panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loan_types_view_list')): ?>
             <?php echo $__env->make('partials.home_panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

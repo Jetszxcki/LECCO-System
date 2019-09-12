@@ -25,7 +25,7 @@
             @include('partials.home_panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
         @endaccessright
 
-        @accessright('loans_view')
+        @accessright('loans_view_list')
             @include('partials.home_panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
         @endaccessright
 

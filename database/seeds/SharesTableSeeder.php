@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use App\Share;
 
 class SharesTableSeeder extends Seeder
@@ -12,7 +13,7 @@ class SharesTableSeeder extends Seeder
      */
     public function run()
     {
-		[$total, $price] = [5, 10];
+        [$total, $price] = [5, 10];
         $loan_type = Share::create([
 			'member_id' => '1',
 			'total' => $total,
@@ -43,7 +44,5 @@ class SharesTableSeeder extends Seeder
 			'price' => $price,
 			'amount' => $total*$price,
 		]);
-		
-		
     }
 }

@@ -24,8 +24,8 @@ class CreateLoansTable extends Migration
             //$table->string('status');
             $table->string('remarks')->nullable(true);
             $table->timestamps();
-            $table->foreign('member_id')->references('id')->on('members');
-            $table->foreign('loan_type')->references('name')->on('loan_types')->onUpdate('cascade');
+            // $table->foreign('member_id')->references('id')->on('members');
+            // $table->foreign('loan_type')->references('name')->on('loan_types')->onUpdate('cascade');
         });
     }
 

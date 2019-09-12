@@ -14,6 +14,7 @@
 
 					<?php echo $__env->make('partials.access_right_checkboxes', ['header' => 'USER'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 					<?php echo $__env->make('partials.access_right_checkboxes', ['header' => 'MEMBER'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+					<?php echo $__env->make('partials.access_right_checkboxes', ['header' => 'LOANS'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 					<?php echo $__env->make('partials.access_right_checkboxes', ['header' => 'LOAN TYPES'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 					<?php echo $__env->make('partials.access_right_checkboxes', ['header' => 'SHARES'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 					<?php echo $__env->make('partials.access_right_checkboxes', ['header' => 'SIGNATORIES'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
