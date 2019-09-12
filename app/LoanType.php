@@ -15,10 +15,6 @@ class LoanType extends Model
     	return $query->select('id', 'name');
     }
 
-    public function scopeColumnNames($query) {
-        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
-    }
-
     public function loan()
     {
         return $this->belongsTo(Loan::class);

@@ -19,11 +19,11 @@
 				<th nosearch class="col text-center py-5">No loans added yet.</th>
 			<?php else: ?>
 				<th nosearch class="col-md-1">ID</th>
-				<th nosearch class="col-md">Member</th>
-				<th nosearch class="col-md">Loan Type</th>
-				<th nosearch class="col-md">Amount</th>
-				<th nosearch class="col-md">Start of Payment</th>
-				<th nosearch class="col-md">Terms</th>
+				<th nosearch class="col-md-2">Member</th>
+				<th nosearch class="col-md-2">Loan Type</th>
+				<th nosearch class="col-md-1">Amount</th>
+				<th nosearch class="col-md-2">Start of Payment</th>
+				<th nosearch class="col-md-1">Terms</th>
 				<th nosearch class="col d-flex flex-row justify-content-center">Actions</th>
 			<?php endif; ?>
 		</tr>
@@ -31,12 +31,12 @@
 		<?php $__currentLoopData = $loans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $loan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<tr class="p-1 mb-2 text-center">
 				<td nosearch class="col-md-1"><?php echo e($loan->id); ?></td>
-				<td class="col-md"><?php echo e($loan->member->full_name); ?></td>
-				<td class="col-md"><?php echo e($loan->loan_type); ?></td>
-				<td class="col-md"><?php echo e($loan->amount); ?></td>
-				<td class="col-md"><?php echo e($loan->start_of_payment); ?></td>
-				<td class="col-md"><?php echo e($loan->term); ?></td>
-				
+				<td class="col-md-2"><?php echo e($loan->member->full_name); ?></td>
+				<td class="col-md-2"><?php echo e($loan->loan_type); ?></td>
+				<td class="col-md-1"><?php echo e($loan->amount); ?></td>
+				<td class="col-md-2"><?php echo e($loan->start_of_payment); ?></td>
+				<td class="col-md-1"><?php echo e($loan->term); ?></td>
+
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
 					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'loans_view')): ?>
 						<a href="<?php echo e(route('loans.show', [$loan])); ?>" class="btn btn-success mr-1">View</a>

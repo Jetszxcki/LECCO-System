@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Add Member'); ?>
+<?php $__env->startSection('title', 'Add Loan'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="row justify-content-center">

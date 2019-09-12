@@ -33,12 +33,7 @@ class Member extends Model
 	{
 		return $query->select('id', 'first_name', 'last_name');
 	}
-
-	public function scopeColumnNames($query) 
-	{
-        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
-    }
-
+	
     // relationships
     public function shares()
     {

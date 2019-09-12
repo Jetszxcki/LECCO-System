@@ -33,8 +33,10 @@
 
 		<?php $__currentLoopData = $member->getAttributes(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="row">
-				<label><?php echo e($member->getColumnNameForView($column)); ?></label>
-				<label><?php echo e($value); ?></label>
+				<?php if($column != 'profile_picture'): ?>
+					<label><?php echo e($member->getColumnNameForView($column)); ?></label>
+					<label><?php echo e($value); ?></label>
+				<?php endif; ?>
 			</div>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		<div class="row">

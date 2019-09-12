@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\LoanType;
+use App\ColumnUtil;
 
 class LoanTypesController extends Controller
 {
@@ -62,20 +63,10 @@ class LoanTypesController extends Controller
         ]);
     }
 
-    private function getColumns()
-    {
-        $column_names = LoanType::columnNames();
-        $column_types = array_map(function($name) {
-            return DB::getSchemaBuilder()->getColumnType('loan_types', $name);
-        }, $column_names);
-
-        return array_combine($column_names, $column_types);
-    }
-
 	#transforms_column data for more user defined arguments
 	private function getFormData()
 	{
-		$columns = $this->getColumns();
+		$columns = ColumnUtil::getColNamesAndTypes('loan_types');
 		foreach ($columns as $column_name => $column_type){
 			$columns[$column_name] = [
 				'type' => $column_type,

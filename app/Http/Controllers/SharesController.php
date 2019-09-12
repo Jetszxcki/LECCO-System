@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Member;
 use App\Share;
+use App\ColumnUtil;
 
 class SharesController extends Controller
 {
@@ -70,21 +71,11 @@ class SharesController extends Controller
 
         return view('shares.show', compact('shares', 'totals', 'member'));
     }
-
-    private function getColumns()
-    {
-    	$column_names = Share::columnNames();
-        $column_types = array_map(function($name) {
-            return DB::getSchemaBuilder()->getColumnType('shares', $name);
-        }, $column_names);
-
-        return array_combine($column_names, $column_types);
-    }
 	
 	#transforms_column data for more user defined arguments
 	private function getFormData()
 	{
-		$columns = $this->getColumns();
+		$columns = ColumnUtil::getColNamesAndTypes('shares');
 		foreach ($columns as $column_name => $column_type){
 			$columns[$column_name] = [
 				'type' => $column_type,

@@ -10,10 +10,6 @@ class Share extends Model
 {
     protected $guarded = [];
 
-    public function scopeColumnNames($query) {
-        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
-    }
-
     public function member()
     {
         return $this->belongsTo(Member::class);

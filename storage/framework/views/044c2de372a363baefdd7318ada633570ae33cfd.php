@@ -6,7 +6,7 @@
 		<div class="card">
 			<div class="card-header text-md-center">NEW MEMBER</div>
 			<div class="card-body">
-				<form action="<?php echo e(route('members.store')); ?>" method="POST">
+				<form action="<?php echo e(route('members.store')); ?>" method="POST" enctype="multipart/form-data">
 					<?php echo $__env->make('partials.form', [compact('columns'), 'route' => 'members.index', 'buttonText' => 'Add Member'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</form>	
 			</div>
