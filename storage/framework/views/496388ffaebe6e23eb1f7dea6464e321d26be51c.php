@@ -1,6 +1,6 @@
 <?php echo csrf_field(); ?>
 
-<?php $__currentLoopData = $columns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column_name => $column_data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $columns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column_name => $column_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	<?php if($column_name != 'id' && $column_name !='created_at' && $column_name != 'updated_at'): ?>
 		<div class="form-group row">	
 			<?php if($column_name == 'member_id'): ?>
@@ -10,50 +10,31 @@
 	 		<?php endif; ?>
 
 			<div class="col-md-6">
-				<?php if($column_data['type'] == 'integer' || $column_data['type'] == 'bigint'): ?>
-					<?php if($column_data['choices']): ?>
-						<select name="<?php echo e($column_name); ?>" id="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
+
+				
+
+				<?php if (strpos($column_type, 'choices') !== false) { ?>
+					<select name="<?php echo e($column_name); ?>" id="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>">
-							<?php $__currentLoopData = $column_data['choices']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-								<option value="<?php echo e($key); ?>"><?php echo e($value); ?></option>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-						</select>
-					<?php else: ?>
-						<input type="number" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
+						<?php $__currentLoopData = $withChoices[$withChoices[0]++]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<option value="<?php echo e($key); ?>"><?php echo e($value); ?></option>
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					</select>
+
+				<?php } else if (strpos($column_type, 'integer') !== false || strpos($column_type, 'bigint')) { ?>
+					
+					<input type="number" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" id="<?php echo e($column_name); ?>" <?php echo e($column_name == 'total' ? 'oninput=calculateAmount()' : ''); ?>>
-					<?php endif; ?>
-				<?php elseif($column_data['type'] == 'string'): ?>
-					<?php if($column_data['choices']): ?>
-						<?php if(array_key_exists('select_box', $column_data)): ?>
-							<select name="<?php echo e($column_name); ?>" id="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first($column_name); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>">
-								<?php $__currentLoopData = $column_data['choices']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-									<option value="<?php echo e($key); ?>"><?php echo e($value); ?></option>
-								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-							</select>
-						<?php else: ?>
-							<div class="table">
-							<?php $__currentLoopData = $column_data['choices']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $choice): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-								<div class="row">
-								<label><input type="radio" name="<?php echo e($column_name); ?>" class="<?php if ($errors->has($column_name)) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first($column_name); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e($choice); ?>" <?php if(old($column_name) == $choice): ?> checked <?php endif; ?>><?php echo e($choice); ?></label>
-								</div>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-							</div>
-						<?php endif; ?>
-					<?php elseif($column_name == 'profile_picture'): ?>
+endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" id="<?php echo e($column_name); ?>" <?php echo e($column_name == 'total' ? 'oninput=calculateAmount()' : ''); ?> <?php if (\Illuminate\Support\Facades\Blade::check('disabled', $column_type)): ?> readonly <?php endif; ?>>
+					
+				<?php } else if (strpos($column_type, 'string') !== false) { ?>
+					
+					<?php if($column_name == 'profile_picture'): ?>
 						<input type="file" name="<?php echo e($column_name); ?>" class="form-control-file <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
@@ -65,15 +46,17 @@ endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" a
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>">
+endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" <?php if (\Illuminate\Support\Facades\Blade::check('disabled', $column_type)): ?> readonly <?php endif; ?>>
 					<?php endif; ?>
-				<?php elseif($column_data['type'] == 'date'): ?>
+
+				<?php } else if (strpos($column_type, 'date') !== false) { ?>
 					<input type="date" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>">
-				<?php elseif($column_data['type'] == 'decimal'): ?>
+endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" <?php if (\Illuminate\Support\Facades\Blade::check('disabled', $column_type)): ?> readonly <?php endif; ?>>
+
+				<?php } else if (strpos($column_type, 'decimal') !== false) { ?>
 					<input 
 						type="number" 
 						name="<?php echo e($column_name); ?>" 
@@ -85,27 +68,25 @@ endif; ?>"
 						value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" 
 						step="0.01" 
 						id="<?php echo e($column_name); ?>" 
-						<?php if(array_key_exists('disabled', $column_data)): ?>
-							<?php echo e($column_data['disabled'] ? 'readonly' : ''); ?>
-
-						<?php endif; ?>
+						<?php if (\Illuminate\Support\Facades\Blade::check('disabled', $column_type)): ?> readonly <?php endif; ?>
 						<?php echo e($column_name == 'price' ? 'oninput=calculateAmount()' : ''); ?>
 
 						>
-				<?php elseif($column_data['type'] == 'float'): ?>
+				<?php } else if (strpos($column_type, 'float') !== false) { ?>
 					<input type="number" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" step="any">
-				<?php else: ?>
+endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" step="any" <?php if (\Illuminate\Support\Facades\Blade::check('disabled', $column_type)): ?> readonly <?php endif; ?>>
+
+				<?php } else { ?>
 					<input type="text" name="<?php echo e($column_name); ?>" class="form-control <?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first($column_name); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>">
+endif; ?>" value="<?php echo e(old($column_name) ?? $model[$column_name]); ?>" <?php if (\Illuminate\Support\Facades\Blade::check('disabled', $column_type)): ?> readonly <?php endif; ?>>
 					<small id="fileHelp" class="form-text text-muted">Can't process field type, this is the default inputfield</small>
-				<?php endif; ?>
+				<?php } ?>
 
 				<?php if ($errors->has($column_name)) :
 if (isset($message)) { $messageCache = $message; }

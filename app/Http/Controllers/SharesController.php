@@ -19,10 +19,13 @@ class SharesController extends Controller
 
     public function create()
     {
-    	$columns = $this->getFormData();
-    	$members = Member::names()->get();
+        $fieldsWithChoices = ['member_id'];
+    	$columns = ColumnUtil::getColNamesAndTypes('shares', ['amount'], $fieldsWithChoices);
+        $withChoices = $this->attributesWithChoices();
     	$model = new Share();
-    	return view('shares.create', compact('columns', 'members', 'model'));
+    	// $members = Member::names()->get();
+        
+    	return view('shares.create', compact('columns', 'model', 'withChoices'));
     }
 
     public function store(Request $request)
@@ -72,18 +75,26 @@ class SharesController extends Controller
         return view('shares.show', compact('shares', 'totals', 'member'));
     }
 	
+    private function attributesWithChoices()
+    {
+        return [
+            1,
+            Member::names()->get()->pluck('full_name', 'id')
+        ];
+    }
+
 	#transforms_column data for more user defined arguments
-	private function getFormData()
-	{
-		$columns = ColumnUtil::getColNamesAndTypes('shares');
-		foreach ($columns as $column_name => $column_type){
-			$columns[$column_name] = [
-				'type' => $column_type,
-				'choices' => null,
-			];
-		}
+	// private function getFormData()
+	// {
+	// 	$columns = ColumnUtil::getColNamesAndTypes('shares');
+	// 	foreach ($columns as $column_name => $column_type){
+	// 		$columns[$column_name] = [
+	// 			'type' => $column_type,
+	// 			'choices' => null,
+	// 		];
+	// 	}
 		
-		$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
-		return $columns;
-	}
+	// 	$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
+	// 	return $columns;
+	// }
 }

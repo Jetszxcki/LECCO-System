@@ -19,9 +19,11 @@ class MembersController extends Controller
     // REMIND: install dependency via composer require doctrine/dbal
     public function create()
     {
-        $columns = $this->getFormData();
+        $fieldsWithChoices = ['gender'];
+        $columns = ColumnUtil::getColNamesAndTypes('members', [], $fieldsWithChoices);
+        $withChoices = $this->attributesWithChoices();
         $model = new Member();
-    	return view('members.create', compact('columns', 'model'));
+    	return view('members.create', compact('columns', 'model', 'withChoices'));
     }
 
     public function store(Request $request)
@@ -41,9 +43,12 @@ class MembersController extends Controller
 
     public function edit(Member $member)
     {	 
+        $fieldsWithChoices = ['gender'];
+        $columns = ColumnUtil::getColNamesAndTypes('members', [], $fieldsWithChoices);
+        $withChoices = $this->attributesWithChoices();
         $model = $member;
-		$columns = $this->getFormData();
-    	return view('members.edit', compact('model', 'columns'));
+
+        return view('members.edit', compact('columns', 'model', 'withChoices'));
     }
 
     public function update(Member $member, Request $request)
@@ -77,21 +82,29 @@ class MembersController extends Controller
             'styles' => 'alert-danger'
         ]);;
     }
+
+    private function attributesWithChoices()
+    {
+        return [
+            1,
+            ['Male', 'Female', 'X-Men']
+        ];
+    }
 	
 	#transforms_column data for more user defined arguments
-	private function getFormData()
-	{
-		$columns = ColumnUtil::getColNamesAndTypes('members');
-		foreach ($columns as $column_name => $column_type){
-			$columns[$column_name] = [
-				'type' => $column_type,
-				'choices' => null,
-			];
-		}
+	// private function getFormData()
+	// {
+	// 	$columns = ColumnUtil::getColNamesAndTypes('members');
+	// 	foreach ($columns as $column_name => $column_type){
+	// 		$columns[$column_name] = [
+	// 			'type' => $column_type,
+	// 			'choices' => null,
+	// 		];
+	// 	}
 		
-		$columns['gender']['choices'] = ['Male', 'Female', 'X-Men'];
-		return $columns;
-	}
+	// 	$columns['gender']['choices'] = ['Male', 'Female', 'X-Men'];
+	// 	return $columns;
+	// }
 
     private function validateRequest($request)
     {

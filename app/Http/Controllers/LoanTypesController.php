@@ -18,7 +18,7 @@ class LoanTypesController extends Controller
 
     public function create()
     {
-        $columns = $this->getFormData();
+        $columns = ColumnUtil::getColNamesAndTypes('loan_types');
         $model = new LoanType();
         return view('loan_types.create', compact('columns', 'model'));
     }
@@ -41,7 +41,7 @@ class LoanTypesController extends Controller
     public function edit(LoanType $loan_type)
     {
         $model = $loan_type;
-        $columns = $this->getFormData();
+        $columns = ColumnUtil::getColNamesAndTypes('loan_types');
         return view('loan_types.edit', compact('model', 'columns'));
     }
 
@@ -64,18 +64,18 @@ class LoanTypesController extends Controller
     }
 
 	#transforms_column data for more user defined arguments
-	private function getFormData()
-	{
-		$columns = ColumnUtil::getColNamesAndTypes('loan_types');
-		foreach ($columns as $column_name => $column_type){
-			$columns[$column_name] = [
-				'type' => $column_type,
-				'choices' => null,
-			];
-		}
+	// private function getFormData()
+	// {
+	// 	$columns = ColumnUtil::getColNamesAndTypes('loan_types');
+	// 	foreach ($columns as $column_name => $column_type){
+	// 		$columns[$column_name] = [
+	// 			'type' => $column_type,
+	// 			'choices' => null,
+	// 		];
+	// 	}
 		
-		return $columns;
-	}
+	// 	return $columns;
+	// }
 	
     private function validateRequest($request)
     {

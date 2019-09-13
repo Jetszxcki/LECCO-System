@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class ColumnUtil extends Model
 {
-    public static function getColNamesAndTypes($model)
+    /*
+        Steps on how to use found at LoansController
+    */
+
+    public static function getColNamesAndTypes($model, $disabledFields = null, $fieldsWithChoices = null)
     {
     	$column_names = Schema::getColumnListing($model);
         $column_types = array_map(
@@ -17,6 +21,20 @@ class ColumnUtil extends Model
         	}
         , $column_names);
 
-        return array_combine($column_names, $column_types);
+        $columns = array_combine($column_names, $column_types);
+
+        if ($fieldsWithChoices) {
+            foreach ($fieldsWithChoices as $field) {
+                $columns[$field] = 'choices';
+            }
+        }
+
+        if ($disabledFields) {
+            foreach ($disabledFields as $field) {
+                $columns[$field] = "{$columns[$field]}|disabled";
+            }
+        }
+
+        return $columns;
     }
 }
