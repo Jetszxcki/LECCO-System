@@ -15,7 +15,7 @@
 
 				@isChoices($column_type)
 					<select name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror">
-						@foreach ($withChoices[$withChoices[0]++] as $key => $value)
+						@foreach ($choices[$choices[0]++] as $key => $value)
 							<option value="{{ $key }}">{{ $value }}</option>
 						@endforeach
 					</select>

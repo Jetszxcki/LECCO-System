@@ -19,11 +19,12 @@ class MembersController extends Controller
     // REMIND: install dependency via composer require doctrine/dbal
     public function create()
     {
-        $fieldsWithChoices = ['gender'];
+        $fieldsWithChoices = $this->attributesWithChoices()[0];
+        $choices = $this->attributesWithChoices()[1];
         $columns = ColumnUtil::getColNamesAndTypes('members', [], $fieldsWithChoices);
-        $withChoices = $this->attributesWithChoices();
         $model = new Member();
-    	return view('members.create', compact('columns', 'model', 'withChoices'));
+
+    	return view('members.create', compact('columns', 'model', 'choices'));
     }
 
     public function store(Request $request)
@@ -43,12 +44,12 @@ class MembersController extends Controller
 
     public function edit(Member $member)
     {	 
-        $fieldsWithChoices = ['gender'];
+        $fieldsWithChoices = $this->attributesWithChoices()[0];
+        $choices = $this->attributesWithChoices()[1];
         $columns = ColumnUtil::getColNamesAndTypes('members', [], $fieldsWithChoices);
-        $withChoices = $this->attributesWithChoices();
         $model = $member;
 
-        return view('members.edit', compact('columns', 'model', 'withChoices'));
+        return view('members.edit', compact('columns', 'model', 'choices'));
     }
 
     public function update(Member $member, Request $request)
@@ -86,8 +87,14 @@ class MembersController extends Controller
     private function attributesWithChoices()
     {
         return [
-            1,
-            ['Male', 'Female', 'X-Men']
+        	[
+        		'gender'
+        	],
+        	
+        	[
+	            1,
+	            ['Male', 'Female', 'X-Men']
+	        ]
         ];
     }
 	

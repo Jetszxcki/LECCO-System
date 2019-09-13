@@ -22,12 +22,12 @@ class LoansController extends Controller
     {
         // $columns = $this->getFormData();
 
-        /* 
-            - declare array of column names with choices
+        // array of column names with choices (see function below)
+        $fieldsWithChoices = $this->attributesWithChoices()[0]; 
 
-            NOTE: First element of array will become the first input field on form view.
-        */
-        $fieldsWithChoices = ['member_id', 'loan_type']; 
+        // array of choices for the corresponding column names above
+        // NOTE: ALWAYS NAME THIS VARIABLE $choices
+        $choices = $this->attributesWithChoices()[1];
 
         /* 
             - getColNamesAndTypes function has 3 params:
@@ -37,14 +37,8 @@ class LoansController extends Controller
         */
     	$columns = ColumnUtil::getColNamesAndTypes('loans', [], $fieldsWithChoices); 
 
-        /*
-            - create function attributesWithChoices(found below), which holds an array of 
-            the choices that needs to be passed on the form @here
-        */
-        $withChoices = $this->attributesWithChoices();
-
     	$model = new Loan();
-		return view('loans.create', compact('columns', 'model', 'withChoices')); //  @here
+		return view('loans.create', compact('columns', 'model', 'choices')); //  apss choices here
     }
 
 	public function store(Request $request)
@@ -59,15 +53,22 @@ class LoansController extends Controller
 
     private function attributesWithChoices()
     {
-        /*
-            - declare every query of choices that needs to be passed on to the form
-            NOTE: always make 1 as the first element, as it is needed for iteration on form.blade.php
-            NOTE: also, the sequence of declaration must be equal to the $fieldWithChoices declared above
-        */
         return [
-            1,
-            Member::names()->get()->pluck('full_name', 'id'),    
-            LoanType::names()->get()->pluck('name')
+            // column names that has choices
+            [
+                'member_id',
+                'loan_type'
+            ],
+            // there corresponding choices
+            /* 
+                NOTE: always make 1 as the first element for this array, because
+                it is used as the iterator on form.blade.php
+            */
+            [
+                1,
+                Member::names()->get()->pluck('full_name', 'id'),    
+                LoanType::names()->get()->pluck('name')
+            ]
         ];
     }
 	

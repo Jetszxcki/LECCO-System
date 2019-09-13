@@ -19,13 +19,13 @@ class SharesController extends Controller
 
     public function create()
     {
-        $fieldsWithChoices = ['member_id'];
+        $fieldsWithChoices = $this->attributesWithChoices()[0];
+        $choices = $this->attributesWithChoices()[1];
     	$columns = ColumnUtil::getColNamesAndTypes('shares', ['amount'], $fieldsWithChoices);
-        $withChoices = $this->attributesWithChoices();
     	$model = new Share();
     	// $members = Member::names()->get();
         
-    	return view('shares.create', compact('columns', 'model', 'withChoices'));
+    	return view('shares.create', compact('columns', 'model', 'choices'));
     }
 
     public function store(Request $request)
@@ -78,8 +78,14 @@ class SharesController extends Controller
     private function attributesWithChoices()
     {
         return [
-            1,
-            Member::names()->get()->pluck('full_name', 'id')
+            [
+                'member_id'
+            ],
+
+            [
+                1,
+                Member::names()->get()->pluck('full_name', 'id')
+            ]
         ];
     }
 
