@@ -30,6 +30,16 @@ class AppServiceProvider extends ServiceProvider
             return User::hasAccessRight($right);
         });
 
+        Blade::if('hasAccessRights', function($rights) {
+            foreach ($rights as $right) {
+                if (! User::hasAccessRight($right)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
         Blade::if('disabled', function ($column_name) {
             return strpos($column_name, 'disabled') !== false;
         });

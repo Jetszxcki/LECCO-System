@@ -34,9 +34,9 @@
 						<a href="{{ route('members.show', [$member]) }}" class="btn btn-success mr-1">View</a>
 					@endaccessright
 
-					@accessright('member_edit')
+					@hasAccessRights(['member_edit','member_view'])
 						<a href="{{ route('members.edit', [$member]) }}" class="btn btn-warning mr-1">Edit</a>
-					@endaccessright
+					@endhasAccessRights
 
 					@accessright('member_delete')
 						<form action="{{ route('members.destroy', [$member]) }}" method="POST">

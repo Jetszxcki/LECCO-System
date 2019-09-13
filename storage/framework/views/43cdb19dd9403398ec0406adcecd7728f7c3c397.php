@@ -2,7 +2,7 @@
 
 <style>
 	.unauthorized-text {
-		font-weight: bold; 
+		/*font-weight: bold; */
 		font-size: 20px;
 		letter-spacing: 2px;
 		line-height: 40px;
@@ -18,12 +18,18 @@
 <div class="d-flex flex-column justify-content-center unauthorized-div">
 	<div class="alert alert-warning py-5 text-center unauthorized-text">
 		Operation unavailable for this user. <br>
-		Contact ADMIN to enable all of the privileges below: 
+		You may not have the following privileges:
 		<div>
 			<?php $__currentLoopData = $access_rights; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $access_right): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				<div><i><?php echo e($user->getColumnNameForView($access_right)); ?></i></div>
+				<div>
+					<i><?php echo e($user->getColumnNameForView($access_right)); ?></i>
+				</div>
 			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</div>
+		<br> 
+		<small>
+			<b>Contact ADMIN if you are authorized to do such operations.</b>
+		</small>
 	</div>
 </div>
 <?php $__env->stopSection(); ?>

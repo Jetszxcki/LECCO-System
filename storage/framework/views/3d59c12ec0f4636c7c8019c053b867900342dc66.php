@@ -33,7 +33,7 @@
 						<a href="<?php echo e(route('members.show', [$member])); ?>" class="btn btn-success mr-1">View</a>
 					<?php endif; ?>
 
-					<?php if (\Illuminate\Support\Facades\Blade::check('accessright', 'member_edit')): ?>
+					<?php if (\Illuminate\Support\Facades\Blade::check('hasAccessRights', ['member_edit','member_view'])): ?>
 						<a href="<?php echo e(route('members.edit', [$member])); ?>" class="btn btn-warning mr-1">Edit</a>
 					<?php endif; ?>
 
