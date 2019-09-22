@@ -71,10 +71,10 @@
 				@elseifFloat($column_type)
 					<input type="number" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" step="any" @disabled($column_type) readonly @enddisabled>
 
-				@elseis
+				@elseif
 					<input type="text" name="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" @disabled($column_type) readonly @enddisabled>
 					<small id="fileHelp" class="form-text text-muted">Can't process field type, this is the default inputfield</small>
-				@endis
+				@end
 
 				@error($column_name)
 					<span class="invalid-feedback" role="alert">

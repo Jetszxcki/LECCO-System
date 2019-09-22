@@ -88,10 +88,10 @@ class AppServiceProvider extends ServiceProvider
             return "<?php } else if (strpos($arg, 'choices') !== false) { ?>";
         });
 
-        Blade::directive('elseis', function () {
+        Blade::directive('elseif', function () {
             return "<?php } else { ?>";
         });
-        Blade::directive('endis', function () {
+        Blade::directive('end', function () {
             return "<?php } ?>";
         });
     }
