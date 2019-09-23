@@ -86,6 +86,7 @@ class MembersController extends Controller
 
     private function attributesWithChoices()
     {
+		$genders = ['Male', 'Female', 'X-Men'];
         return [
         	[
         		'gender'
@@ -93,7 +94,7 @@ class MembersController extends Controller
         	
         	[
 	            1,
-	            ['Male', 'Female', 'X-Men']
+	            array_combine($genders, $genders)
 	        ]
         ];
     }
