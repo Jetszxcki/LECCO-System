@@ -33,7 +33,7 @@
 			<tr class="p-1 mb-2 text-center">
 				<td nosearch class="col-md-1">{{ $loan->id }}</td>
 				<td class="col-md-2">{{ $loan->member->full_name }}</td>
-				<td class="col-md-2">{{ $loan->loan_type }}</td>
+				<td class="col-md-2">{{ $loan->loan_type_object->name}}</td>
 				<td class="col-md-1">{{ $loan->amount }}</td>
 				<td class="col-md-2">{{ $loan->start_of_payment }}</td>
 				<td class="col-md-1">{{ $loan->term }}</td>
@@ -44,11 +44,11 @@
 					@endaccessright
 
 					@accessright('loans_edit')
-						<a href="{{-- {{ route('loans.edit', [$loan]) }} --}}" class="btn btn-warning mr-1">Edit</a>
+						<a href="{{--{{ route('loans.edit', [$loan]) }}--}}" class="btn btn-warning mr-1">Edit</a>
 					@endaccessright
 
 					@accessright('loans_delete')
-						<form action="{{-- {{ route('loans.destroy', [$loan]) }} --}}" method="POST">
+						<form action="{{ route('loans.destroy', [$loan]) }}" method="POST">
 							@method('DELETE')
 							@csrf
 

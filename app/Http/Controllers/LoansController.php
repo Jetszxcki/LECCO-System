@@ -50,6 +50,15 @@ class LoansController extends Controller
             'styles' => 'alert-success'
         ]);
     }
+	
+	public function destroy(Loan $loan)
+    {
+        $loan->delete();
+        return redirect('loans')->with([
+            'message' => "Loan has been deleted.",
+            'styles' => 'alert-danger'
+        ]);
+    }
 
     private function attributesWithChoices()
     {
@@ -67,7 +76,7 @@ class LoansController extends Controller
             [
                 1,
                 Member::names()->get()->pluck('full_name', 'id'),    
-                LoanType::names()->get()->pluck('name')
+                LoanType::names()->get()->pluck('name', 'id')
             ]
         ];
     }

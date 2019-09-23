@@ -4,9 +4,9 @@
 	@if ($column_name != 'id' && $column_name !='created_at' && $column_name != 'updated_at')
 		<div class="form-group row">	
 			@if ($column_name == 'member_id')
-				<label for="member_id" class="col-md-4 col-form-label text-md-right">Member</label>
+				<label for="{{ $column_name }}" class="col-md-4 col-form-label text-md-right">Member</label>
 			@else
-	 			<label for="{{ $cname = $model->getColumnNameForView($column_name) }}" class="col-md-4 col-form-label text-md-right">{{ $cname }}</label>
+	 			<label for="{{ $column_name }}" class="col-md-4 col-form-label text-md-right">{{ $model->getColumnNameForView($column_name) }}</label>
 	 		@endif
 
 			<div class="col-md-6">

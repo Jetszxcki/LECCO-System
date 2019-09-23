@@ -15,9 +15,9 @@ class LoanType extends Model
     	return $query->select('id', 'name');
     }
 
-    public function loan()
+    public function loans()
     {
-        return $this->belongsTo(Loan::class);
+        return $this->hasMany(Loan::class);
     }
 
     public function getRouteKeyName()

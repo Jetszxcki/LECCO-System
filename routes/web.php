@@ -60,3 +60,4 @@ Route::get('loans/create', 'LoansController@create')->name('loans.create')->midd
 Route::post('loans', 'LoansController@store')->name('loans.store')->middleware(['auth', 'accessRight:loans_create']);
 // Route::get('loans/{member}', 'LoansController@create')->name('loans.create')->middleware(['auth', 'accessRight:loans_create']);
 Route::get('loans/{member}', 'LoansController@show')->name('loans.show')->middleware(['auth', 'accessRight:loans_view']);
+Route::delete('loans/{loan}', 'LoansController@destroy')->name('loans.destroy')->middleware(['auth', 'accessRight:loans_delete,loans_view_list']);
