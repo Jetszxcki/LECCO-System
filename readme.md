@@ -1,3 +1,5 @@
+# NOTE: Please test changes and check errors in changes before committing. Thanks!
+
 # System Setup
 
 ## System Requirements:
