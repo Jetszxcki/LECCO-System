@@ -9,7 +9,10 @@
 			<div class="card-body">
 				<form action="{{ route('loans.store') }}" method="POST" enctype="multipart/form-data">
 					@include('partials.form', [compact('columns'), 'route' => 'loans.index', 'buttonText' => 'Add Loan'])
-				</form>	
+				</form>
+				<br>
+				<div id="loan-details" class="card-footer">Loan detail here</div>
+				<script src="{{ URL::asset('/js/loan_create.js') }}"></script>
 			</div>
 		</div>
 	</div>	

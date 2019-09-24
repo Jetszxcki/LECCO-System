@@ -396,6 +396,7 @@ class ComposerStaticInit9f5d5afb55a9581bcf4e38c173602cc3
 
     public static $classMap = array (
         'App\\AccessRight' => __DIR__ . '/../..' . '/app/AccessRight.php',
+        'App\\ColumnUtil' => __DIR__ . '/../..' . '/app/ColumnUtil.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -423,6 +424,7 @@ class ComposerStaticInit9f5d5afb55a9581bcf4e38c173602cc3
         'App\\Loan' => __DIR__ . '/../..' . '/app/Loan.php',
         'App\\LoanType' => __DIR__ . '/../..' . '/app/LoanType.php',
         'App\\Member' => __DIR__ . '/../..' . '/app/Member.php',
+        'App\\Payrolls' => __DIR__ . '/../..' . '/app/Payrolls.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
