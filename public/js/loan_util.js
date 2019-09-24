@@ -12,8 +12,14 @@ loan_utils = function(){
 	function get_total_interest(amount, ipa, term){
 		return (term/12)*amount*ipa;
 	}
+	
+	function get_payment_schedule(details){
+		//TODO: create object for payment schedule here;
+		return (term/12)*amount*ipa;
+	}
   return{
-    get_total_interest:get_total_interest
+    get_total_interest:get_total_interest,
+	get_payment_schedule:get_payment_schedule
   }
 }();
 

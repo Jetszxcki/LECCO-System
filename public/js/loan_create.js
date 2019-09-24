@@ -1,4 +1,5 @@
 /* 
+	This code is still shit. need to refactor if may time.
 	References:
 		createElement : https://www.w3schools.com/jsref/met_document_createelement.asp
 		import javascript file : https://tutorials.technology/tutorials/How-to-include-a-JavaScript-file-in-another-JavaScript-file.html
@@ -22,9 +23,10 @@ function update_loan_detail(){
 	var term_field = document.getElementById("term");
 	var interest_per_annum_field = document.getElementById("interest_per_annum");
 	var start_of_payment_field = document.getElementById("start_of_payment");
+	var payrolls_field = document.getElementById("payrolls");
 	
 	// Just checking if all fields needed exists
-	if( !(amount_field && term_field && interest_per_annum_field && start_of_payment_field) ){
+	if( !(amount_field && term_field && interest_per_annum_field && start_of_payment_field && payrolls_field) ){
 		loan_details_div.innerHTML = "Cannot find all fields necessary..";
 		return;
 	}
@@ -37,10 +39,20 @@ function update_loan_detail(){
 	details.term = term_field.value;
 	details.ipa = interest_per_annum_field.value;
 	details.sop = start_of_payment_field.value;
+	details.payrolls = ($('#'+payrolls_field.id).val()+"").split(",");
+	var buffer = {};
+	for(var i = 0; i < details.payrolls.length; i++){
+		var option_field = payrolls_field.querySelector('option[value="'+details.payrolls[i]+'"]');
+		if(option_field){
+			buffer[details.payrolls[i]] = option_field.innerHTML;
+		}
+	}
+	details.payrolls = buffer;
+	
 	details.total_interest = loan_utils.get_total_interest(amount = details.amount, ipa = details.ipa, term = details.term)
 	details.monthly_payment = details.total_interest/term;
 	
-	
+	//rendering starts here
 	loan_details_header(loan_details_div, details);
 	loan_payments_table(loan_details_div, details);
 }
@@ -48,7 +60,6 @@ function update_loan_detail(){
 
 function loan_details_header(parent, details){
 	var header_div = document.createElement("DIV");
-	
 	var title_elem = document.createElement("H4");
 	
 	var amount_elem = document.createElement("P");
@@ -57,6 +68,7 @@ function loan_details_header(parent, details){
 	var monthly_payment_elem = document.createElement("P");
 	var ipa_elem = document.createElement("P");
 	var sop_elem = document.createElement("P");
+	var payrolls_elem = document.createElement("P");
 	
 	
 	title_elem.innerHTML = "Loan Details";
@@ -66,28 +78,29 @@ function loan_details_header(parent, details){
 	total_interest_elem.innerHTML = "Total Interest: " + details.total_interest;
 	monthly_payment_elem.innerHTML = "Monthly Payment: " + details.monthly_payment;
 	sop_elem.innerHTML = "Start of Payment: " + details.sop;
+	payrolls_elem.innerHTML = "Payrolls: " + Object.values(details.payrolls);
 	
 	
 	parent.appendChild(header_div);
-	
 	header_div.appendChild(title_elem);
+	
 	header_div.appendChild(amount_elem);
 	header_div.appendChild(term_elem);
 	header_div.appendChild(ipa_elem);
 	header_div.appendChild(total_interest_elem);
 	header_div.appendChild(monthly_payment_elem);
 	header_div.appendChild(sop_elem);
+	header_div.appendChild(payrolls_elem);
 	
 }
 
 function loan_payments_table(parent, details){
 	var loan_payments_div = document.createElement("DIV");
-	
 	var title_elem = document.createElement("H4");
 	title_elem.innerHTML = "Loan Schedule";
 	
-	parent.appendChild(loan_payments_div);
 	
+	parent.appendChild(loan_payments_div);
 	loan_payments_div.appendChild(title_elem);
 }
 
@@ -99,11 +112,14 @@ $(document).ready(function() {
 	var term_field = document.getElementById("term");
 	var interest_per_annum_field = document.getElementById("interest_per_annum");
 	var start_of_payment_field = document.getElementById("start_of_payment");
+	var payrolls_field = document.getElementById("payrolls");
+	payrolls_field.setAttribute("multiple", "");
 	
 	amount_field.addEventListener("keyup", update_loan_detail );
 	term_field.addEventListener("keyup", update_loan_detail );
 	interest_per_annum_field.addEventListener("keyup", update_loan_detail );
 	start_of_payment_field.addEventListener("change", update_loan_detail );
+	payrolls_field.addEventListener("change", update_loan_detail );
 	
 	if( !(amount_field && term_field && interest_per_annum_field && start_of_payment_field) ){
 		loan_details.innerHTML = "Cannot find all fields necessary..";
