@@ -37,7 +37,7 @@ class LoansController extends Controller
             3. optional: array of column names that has choices in form
         */
     	$columns = ColumnUtil::getColNamesAndTypes('loans', [], $fieldsWithChoices); 
-		$columns['payrolls'] = 'choices'
+		$columns['payrolls'] = 'choices';
 		
     	$model = new Loan();
 		return view('loans.create', compact('columns', 'model', 'choices')); //  apss choices here
