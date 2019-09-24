@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Loan;
 use App\Member;
 use App\LoanType;
+use App\Payroll;
 use App\ColumnUtil;
 
 class LoansController extends Controller
@@ -36,7 +37,8 @@ class LoansController extends Controller
             3. optional: array of column names that has choices in form
         */
     	$columns = ColumnUtil::getColNamesAndTypes('loans', [], $fieldsWithChoices); 
-
+		$columns['payrolls'] = 'choices'
+		
     	$model = new Loan();
 		return view('loans.create', compact('columns', 'model', 'choices')); //  apss choices here
     }
@@ -59,6 +61,11 @@ class LoansController extends Controller
             'styles' => 'alert-danger'
         ]);
     }
+	
+	public function show(Loan $loan)
+    {	
+    	return view('loans.show', compact('loan'));
+    }
 
     private function attributesWithChoices()
     {
@@ -66,7 +73,8 @@ class LoansController extends Controller
             // column names that has choices
             [
                 'member_id',
-                'loan_type'
+                'loan_type',
+				'payrolls'
             ],
             // there corresponding choices
             /* 
@@ -76,7 +84,8 @@ class LoansController extends Controller
             [
                 1,
                 Member::names()->get()->pluck('full_name', 'id'),    
-                LoanType::names()->get()->pluck('name', 'id')
+                LoanType::names()->get()->pluck('name', 'id'),
+				Payroll::names()->get()->pluck('name', 'id')
             ]
         ];
     }
