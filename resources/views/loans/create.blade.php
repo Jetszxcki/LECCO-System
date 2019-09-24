@@ -12,7 +12,7 @@
 				</form>
 				<br>
 				<div id="loan-details" class="card-footer">Loan detail here</div>
-				<script src="{{ URL::asset('/js/loan_create.js') }}"></script>
+				<script src="{{ asset('/js/loan_create.js') }}"></script>
 			</div>
 		</div>
 	</div>	
