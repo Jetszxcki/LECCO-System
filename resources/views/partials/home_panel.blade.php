@@ -1,11 +1,10 @@
- <div class="col-md-4 mb-5">
+ <div class="col-md-4 mb-4">
     <div class="card">
         <div class="card-header text-center">{{ $header }}</div>
 
         <div class="card-body p-0">
-
-            <a href="{{ route($href) }}" class="d-flex flex-column align-items-stretch">
-                <img src="{{ asset('images/' . $image) }}" alt="Error fetching image">
+            <a href="{{ route($href) }}" class="d-flex flex-column align-items-stretch" style="height: 270px">
+                <img src="{{ asset('images/' . $image) }}" alt="Error fetching image" style="height: 270px">
             </a>
         </div>
 

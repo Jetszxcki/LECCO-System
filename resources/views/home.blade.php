@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'LECCO - Home')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    <div class="d-flex flex-wrap scrolling-wrapper"{{--  id="draggable-div" --}}>
+    <div class="d-flex flex-wrap"{{--  id="draggable-div" --}}>
         {{-- <a href="" class="btn btn-primary rounded-circle px-3 py-2" id="left-scroll-btn">
             <span><</span>
         </a>
@@ -18,29 +18,29 @@
         </a> --}}
 
         @accessright('user_view_list')
-            @include('partials.home_panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user_btn_img.jpg'])
         @endaccessright
 
         @accessright('member_view_list')
-            @include('partials.home_panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'MEMBERS', 'href' => 'members.index', 'image' => 'member_btn_img.jpg'])
         @endaccessright
 
         @accessright('loans_view_list')
-            @include('partials.home_panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'LOANS', 'href' => 'loans.index', 'image' => 'loan_btn_img.jpg'])
         @endaccessright
 
         @accessright('loan_types_view_list')
-            @include('partials.home_panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'loan_types_btn_img.jpg'])
         @endaccessright
 
         @accessright('shares_view_list')
-            @include('partials.home_panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'shares_btn_img.jpg'])
         @endaccessright
 
         {{-- @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg']) --}}
 
         @accessright('signatories_view_list')
-            @include('partials.home_panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'signatory_btn_img.jpg'])
         @endaccessright
         
         {{-- @include('partials.home_panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg']) --}}
