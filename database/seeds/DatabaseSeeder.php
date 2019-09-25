@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 		# Note: Don't forget to arrange seeders based on dependencies
+		# Error: ReflectionException  : Class ExampleTableSeeder does not exist (fix: run composer dumpautoload)
         $this->call(UsersTableSeeder::class);
 		$this->call(MembersTableSeeder::class);
 		$this->call(LoanTypesTableSeeder::class);
