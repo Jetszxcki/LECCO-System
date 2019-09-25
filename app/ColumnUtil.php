@@ -39,6 +39,7 @@ class ColumnUtil extends Model
                 $columns[$name] = [
                     'type' => 'choices',
                     'choices' => $choices,
+					'multiple' => False,
                     'args' => [],
                 ];
             }
