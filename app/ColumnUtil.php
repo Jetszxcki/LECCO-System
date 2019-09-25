@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ColumnUtil extends Model
 {
-    /*
-        Steps on how to use found at LoansController
-    */
-
-    public static function getColNamesAndTypes($model, $disabledFields = null, $fieldsWithChoices = null)
+    public static function getColNamesAndTypes($model, $fieldsWithChoices = null)
     {
     	$column_names = Schema::getColumnListing($model);
         $column_types = array_map(
@@ -23,15 +19,28 @@ class ColumnUtil extends Model
 
         $columns = array_combine($column_names, $column_types);
 
-        if ($fieldsWithChoices) {
-            foreach ($fieldsWithChoices as $field) {
-                $columns[$field] = 'choices';
-            }
+        /*
+            add args in controller by adding a string version of the arg
+            e.g. $columns['amount']['args'] = ['disabled', 'radio/checkbox', ...];
+
+            then in form, create a custom if-blade for each args (e.g. <input type={{ @radio "" @endradio }})
+        */
+
+        foreach ($columns as $name => $type) {
+            $columns[$name] = [
+                'type' => $type,
+                'choices' => null,
+                'args' => [],
+            ];
         }
 
-        if ($disabledFields) {
-            foreach ($disabledFields as $field) {
-                $columns[$field] = "{$columns[$field]}|disabled";
+        if ($fieldsWithChoices != null) {
+            foreach ($fieldsWithChoices as $name => $choices) {
+                $columns[$name] = [
+                    'type' => 'choices',
+                    'choices' => $choices,
+                    'args' => [],
+                ];
             }
         }
 
