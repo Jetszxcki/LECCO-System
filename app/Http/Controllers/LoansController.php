@@ -23,6 +23,7 @@ class LoansController extends Controller
     {
     	$attrWithChoices = $this->attributesWithChoices();
     	$columns = ColumnUtil::getColNamesAndTypes('loans', $attrWithChoices);
+		$columns['payrolls']['multiple'] = True;
     	$model = new Loan();
     	// dd($columns);
     	return view('loans.create', compact('columns', 'model'));
@@ -61,7 +62,7 @@ class LoansController extends Controller
         return [
           'member_id' => Member::names()->get()->pluck('full_name', 'id'),
           'loan_type' => LoanType::names()->get()->pluck('name', 'id'),
-					'payrolls' => Payroll::names()->get()->pluck('name', 'id')
+		  'payrolls' => Payroll::names()->get()->pluck('name', 'id')
         ];
     }
 		
