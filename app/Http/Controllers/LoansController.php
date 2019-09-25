@@ -45,7 +45,11 @@ class LoansController extends Controller
 
 	public function store(Request $request)
     {
-    	Loan::create($this->validateRequest($request));
+		[$validated_loan_data, $validated_payrolls_data] = $this->validateRequest($request);
+    	$loan = Loan::create($validated_loan_data);
+		
+		#sync is safer than attach : https://stackoverflow.com/a/24706638
+		$loan->payrolls()->sync($validated_payrolls_data['payrolls']);
 
         return redirect('loans')->with([
             'message' => "Loan successfully added.",
@@ -109,7 +113,7 @@ class LoansController extends Controller
 	
 	private function validateRequest($request)
     {
-        return $request->validate([
+		$validated_loan_data = $request->validate([
             'member_id' => 'required',
             'loan_type' => 'required',
             'amount' => 'required|gte:0',
@@ -117,5 +121,10 @@ class LoansController extends Controller
             'start_of_payment' => 'required',
             'interest_per_annum' => 'required|gte:0',
         ]);
+		
+		$validated_payroll_data = $request->validate([
+            'payrolls' => 'required',
+        ]);
+        return [$validated_loan_data, $validated_payroll_data];
     }
 }
