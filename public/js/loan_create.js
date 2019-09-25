@@ -113,8 +113,8 @@ $(document).ready(function() {
 	var interest_per_annum_field = document.getElementById("interest_per_annum");
 	var start_of_payment_field = document.getElementById("start_of_payment");
 	var payrolls_field = document.getElementById("payrolls");
-	payrolls_field.setAttribute("multiple", "");
-	payrolls_field.setAttribute("name", payrolls.name+"[]");
+	//payrolls_field.setAttribute("multiple", "");
+	//payrolls_field.setAttribute("name", payrolls.name+"[]");
 	
 	amount_field.addEventListener("keyup", update_loan_detail );
 	term_field.addEventListener("keyup", update_loan_detail );
