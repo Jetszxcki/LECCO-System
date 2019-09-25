@@ -15,10 +15,15 @@
 
 				@if($column_data['type'] == 'choices')
 					{{-- for multiple select, add "[]" in column name (EX. name="{{ $column_name+"[]" }}") -https://stackoverflow.com/a/14431457 --}}
-					<select name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror">
-						@foreach ($column_data['choices'] as $key => $value)
-							<option value="{{ $key }}">{{ $value }}</option>
-						@endforeach
+					<select
+						name="{{ $column_name }}{{ $column_data['multiple']?'[]':'' }}"
+						id="{{ $column_name }}"
+						class="form-control @error($column_name) is-invalid @enderror"
+						{{ $column_data['multiple']?'multiple':'' }}
+					>
+							@foreach ($column_data['choices'] as $key => $value)
+								<option value="{{ $key }}">{{ $value }}</option>
+							@endforeach
 					</select>
 
 				@elseif($column_data['type'] == 'integer' || $column_data['type'] == 'bigint')
