@@ -19,31 +19,16 @@ class LoansController extends Controller
     	return view('loans.index', compact('loans'));
     }
 
-    public function create()
+    public function create() 
     {
-        // $columns = $this->getFormData();
-
-        // array of column names with choices (see function below)
-        $fieldsWithChoices = $this->attributesWithChoices()[0]; 
-
-        // array of choices for the corresponding column names above
-        // NOTE: ALWAYS NAME THIS VARIABLE $choices
-        $choices = $this->attributesWithChoices()[1];
-
-        /* 
-            - getColNamesAndTypes function has 3 params:
-            1. required: main table/model to be displayed
-            2. optional: array of column names that needs to be disabled
-            3. optional: array of column names that has choices in form
-        */
-    	$columns = ColumnUtil::getColNamesAndTypes('loans', [], $fieldsWithChoices); 
-		$columns['payrolls'] = 'choices';
-		
+    	$attrWithChoices = $this->attributesWithChoices();
+    	$columns = ColumnUtil::getColNamesAndTypes('loans', $attrWithChoices);
     	$model = new Loan();
-		return view('loans.create', compact('columns', 'model', 'choices')); //  apss choices here
+    	// dd($columns);
+    	return view('loans.create', compact('columns', 'model'));
     }
 
-	public function store(Request $request)
+		public function store(Request $request)
     {
 		[$validated_loan_data, $validated_payrolls_data] = $this->validateRequest($request);
     	$loan = Loan::create($validated_loan_data);
@@ -56,8 +41,8 @@ class LoansController extends Controller
             'styles' => 'alert-success'
         ]);
     }
-	
-	public function destroy(Loan $loan)
+		
+		public function destroy(Loan $loan)
     {
         $loan->delete();
         return redirect('loans')->with([
@@ -65,8 +50,8 @@ class LoansController extends Controller
             'styles' => 'alert-danger'
         ]);
     }
-	
-	public function show(Loan $loan)
+		
+		public function show(Loan $loan)
     {	
     	return view('loans.show', compact('loan'));
     }
@@ -74,44 +59,13 @@ class LoansController extends Controller
     private function attributesWithChoices()
     {
         return [
-            // column names that has choices
-            [
-                'member_id',
-                'loan_type',
-				'payrolls'
-            ],
-            // there corresponding choices
-            /* 
-                NOTE: always make 1 as the first element for this array, because
-                it is used as the iterator on form.blade.php
-            */
-            [
-                1,
-                Member::names()->get()->pluck('full_name', 'id'),    
-                LoanType::names()->get()->pluck('name', 'id'),
-				Payroll::names()->get()->pluck('name', 'id')
-            ]
+          'member_id' => Member::names()->get()->pluck('full_name', 'id'),
+          'loan_type' => LoanType::names()->get()->pluck('name', 'id'),
+					'payrolls' => Payroll::names()->get()->pluck('name', 'id')
         ];
     }
-	
-	#transforms_column data for more user defined arguments
-	// private function getFormData()
-	// {
-	// 	$columns = ColumnUtil::getColNamesAndTypes('loans');
-	// 	foreach ($columns as $column_name => $column_type){
-	// 		$columns[$column_name] = [
-	// 			'type' => $column_type,
-	// 			'choices' => null,
-	// 		];
-	// 	}
 		
-	// 	$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
-	// 	$columns['loan_type']['choices'] = LoanType::names()->get()->pluck('name', 'name');
-	// 	$columns['loan_type']['select_box'] = true;
-	// 	return $columns;
-	// }
-	
-	private function validateRequest($request)
+		private function validateRequest($request)
     {
 		$validated_loan_data = $request->validate([
             'member_id' => 'required',

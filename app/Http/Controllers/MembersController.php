@@ -16,15 +16,13 @@ class MembersController extends Controller
     	return view('members.index', compact('members'));
     }
 
-    // REMIND: install dependency via composer require doctrine/dbal
     public function create()
     {
-        $fieldsWithChoices = $this->attributesWithChoices()[0];
-        $choices = $this->attributesWithChoices()[1];
-        $columns = ColumnUtil::getColNamesAndTypes('members', [], $fieldsWithChoices);
+        $attrWithChoices = $this->attributesWithChoices();
+        $columns = ColumnUtil::getColNamesAndTypes('members', $attrWithChoices);
         $model = new Member();
 
-    	return view('members.create', compact('columns', 'model', 'choices'));
+    	return view('members.create', compact('columns', 'model'));
     }
 
     public function store(Request $request)
@@ -44,12 +42,11 @@ class MembersController extends Controller
 
     public function edit(Member $member)
     {	 
-        $fieldsWithChoices = $this->attributesWithChoices()[0];
-        $choices = $this->attributesWithChoices()[1];
-        $columns = ColumnUtil::getColNamesAndTypes('members', [], $fieldsWithChoices);
+        $attrWithChoices = $this->attributesWithChoices();
+        $columns = ColumnUtil::getColNamesAndTypes('members', $attrWithChoices);
         $model = $member;
 
-        return view('members.edit', compact('columns', 'model', 'choices'));
+        return view('members.edit', compact('columns', 'model'));
     }
 
     public function update(Member $member, Request $request)
@@ -88,31 +85,9 @@ class MembersController extends Controller
     {
 		$genders = ['Male', 'Female', 'X-Men'];
         return [
-        	[
-        		'gender'
-        	],
-        	
-        	[
-	            1,
-	            array_combine($genders, $genders)
-	        ]
+            'gender' => array_combine($genders, $genders)
         ];
     }
-	
-	#transforms_column data for more user defined arguments
-	// private function getFormData()
-	// {
-	// 	$columns = ColumnUtil::getColNamesAndTypes('members');
-	// 	foreach ($columns as $column_name => $column_type){
-	// 		$columns[$column_name] = [
-	// 			'type' => $column_type,
-	// 			'choices' => null,
-	// 		];
-	// 	}
-		
-	// 	$columns['gender']['choices'] = ['Male', 'Female', 'X-Men'];
-	// 	return $columns;
-	// }
 
     private function validateRequest($request)
     {

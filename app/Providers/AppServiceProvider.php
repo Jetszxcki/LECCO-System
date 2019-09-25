@@ -40,59 +40,16 @@ class AppServiceProvider extends ServiceProvider
             return true;
         });
 
-        Blade::if('disabled', function ($column_name) {
-            return strpos($column_name, 'disabled') !== false;
+        Blade::if('disabled', function ($column_data) {
+            return in_array('disabled', $column_data['args']);
         });
 
-        // custom if else for form input types
-
-        Blade::directive('isInteger', function ($arg) {
-            return "<?php if (strpos($arg, 'integer') !== false || strpos($arg, 'bigint')) { ?>";
-        });
-        Blade::directive('elseifInteger', function ($arg) {
-            return "<?php } else if (strpos($arg, 'integer') !== false || strpos($arg, 'bigint')) { ?>";
+        Blade::if('radio', function ($column_data) {
+            return in_array('radio', $column_data['args']);
         });
 
-        Blade::directive('isString', function ($arg) {
-            return "<?php if (strpos($arg, 'string') !== false) { ?>";
-        });
-        Blade::directive('elseifString', function ($arg) {
-            return "<?php } else if (strpos($arg, 'string') !== false) { ?>";
-        });
-
-        Blade::directive('isDate', function ($arg) {
-            return "<?php if (strpos($arg, 'date') !== false) { ?>";
-        });
-        Blade::directive('elseifDate', function ($arg) {
-            return "<?php } else if (strpos($arg, 'date') !== false) { ?>";
-        });
-
-        Blade::directive('isDecimal', function ($arg) {
-            return "<?php if (strpos($arg, 'decimal') !== false) { ?>";
-        });
-        Blade::directive('elseifDecimal', function ($arg) {
-            return "<?php } else if (strpos($arg, 'decimal') !== false) { ?>";
-        });
-
-        Blade::directive('isFloat', function ($arg) {
-            return "<?php if (strpos($arg, 'float') !== false) { ?>";
-        });
-        Blade::directive('elseifFloat', function ($arg) {
-            return "<?php } else if (strpos($arg, 'float') !== false) { ?>";
-        });
-
-        Blade::directive('isChoices', function ($arg) {
-            return "<?php if (strpos($arg, 'choices') !== false) { ?>";
-        });
-        Blade::directive('elseifChoices', function ($arg) {
-            return "<?php } else if (strpos($arg, 'choices') !== false) { ?>";
-        });
-
-        Blade::directive('elseif', function () {
-            return "<?php } else { ?>";
-        });
-        Blade::directive('end', function () {
-            return "<?php } ?>";
+        Blade::if('checkbox', function ($column_data) {
+            return in_array('checkbox', $column_data['args']);
         });
     }
 }
