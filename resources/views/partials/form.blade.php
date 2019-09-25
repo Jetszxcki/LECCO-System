@@ -26,22 +26,6 @@
 					<input type="number" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" id="{{ $column_name }}" {{ $column_name == 'total' ? 'oninput=calculateAmount()' : '' }} @disabled($column_data) readonly @enddisabled>
 					
 				@elseif($column_data['type'] == 'string')
-					{{-- @if ($column_data['choices'])
-						@if (array_key_exists('select_box', $column_data))
-							<select name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror">
-								@foreach ($column_data['choices'] as $key => $value)
-									<option value="{{ $key }}">{{ $value }}</option>
-								@endforeach
-							</select>
-						@else
-							<div class="table">
-							@foreach ($column_data['choices'] as $choice)
-								<div class="row">
-								<label><input type="radio" name="{{ $column_name }}" class="@error($column_name) is-invalid @enderror" value="{{ $choice }}" @if (old($column_name) == $choice) checked @endif>{{$choice}}</label>
-								</div>
-							@endforeach
-							</div>
-						@endif --}}
 					@if ($column_name == 'profile_picture')
 						<input type="file" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control-file @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" aria-describedby="fileHelp">
 						<small id="fileHelp" class="form-text text-muted">Size of image should not be more than 2MB.</small>
@@ -51,7 +35,6 @@
 
 				@elseif($column_data['type'] == 'date')
 					<input type="date" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" @disabled($column_data) readonly @enddisabled>
-
 				@elseif($column_data['type'] == 'decimal')
 					<input 
 						type="number" 
@@ -66,12 +49,10 @@
 						>
 				@elseif($column_data['type'] = 'float')
 					<input type="number" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" step="any" @disabled($column_data) readonly @enddisabled>
-
 				@else
 					<input type="text" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" @disabled($column_data) readonly @enddisabled>
 					<small id="fileHelp" class="form-text text-muted">Can't process field type, this is the default inputfield</small>
 				@endif
-
 				@error($column_name)
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
@@ -84,8 +65,7 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
-		<button type="submit" class="btn btn-primary">{{ $buttonText }}</button>
-		
+		<button type="submit" class="btn btn-primary">{{ $buttonText }}</button>	
 		<a href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger">Cancel</a>
 	</div>
 </div>
