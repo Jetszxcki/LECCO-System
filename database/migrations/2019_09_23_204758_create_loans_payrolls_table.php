@@ -15,8 +15,8 @@ class CreateLoansPayrollsTable extends Migration
     {
         Schema::create('loans_payrolls', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('loans_id')->unsigned();
-            $table->integer('payrolls_id')->unsigned();
+            $table->integer('loan_id')->unsigned();
+            $table->integer('payroll_id')->unsigned();
         });
     }
 
