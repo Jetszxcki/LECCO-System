@@ -24,7 +24,7 @@ class Loan extends Model
 	
 	public function payrolls()
 	{
-		return $this->belongsToMany(Payroll::class);
+		return $this->belongsToMany(Payroll::class, 'loans_payrolls');
 	}
 
     public function getColumnNameForView($column)

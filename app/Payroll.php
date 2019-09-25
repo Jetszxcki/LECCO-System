@@ -16,6 +16,6 @@ class Payroll extends Model
 	
 	public function loans()
 	{
-		return $this->belongsToMany(Loan::class);
+		return $this->belongsToMany(Loan::class, 'loans_payrolls');
 	}
 }
