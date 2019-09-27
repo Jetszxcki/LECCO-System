@@ -6,9 +6,12 @@
 */
 
 //import utils 
-var x = document.createElement('script');
-x.src = '/js/loan_util.js';
-document.getElementsByTagName("head")[0].appendChild(x);
+function include_utils(){
+	var x = document.createElement('script');
+	x.src = '/js/loan_util.js';
+	document.getElementsByTagName("head")[0].appendChild(x);
+}
+
 
 //this is main execution for changes in form
 function update_loan_detail(){
@@ -50,7 +53,9 @@ function update_loan_detail(){
 	details.payrolls = buffer;
 	
 	details.total_interest = loan_utils.get_total_interest(amount = details.amount, ipa = details.ipa, term = details.term)
-	details.monthly_payment = details.total_interest/term;
+	details.monthly_payment = details.total_interest/details.term;
+	
+	details.payment_schedule = loan_utils.calculate_payment_schedule(details);
 	
 	//rendering starts here
 	loan_details_header(loan_details_div, details);
@@ -97,11 +102,57 @@ function loan_details_header(parent, details){
 function loan_payments_table(parent, details){
 	var loan_payments_div = document.createElement("DIV");
 	var title_elem = document.createElement("H4");
+	var table_div = document.createElement("DIV");
 	title_elem.innerHTML = "Loan Schedule";
 	
+	var term = details.term;
+	var payrolls = Object.values(details.payrolls);
+	for(j = 0; j < payrolls.length; j++){
+		var payroll_div = document.createElement("DIV");
+		var payroll_header = document.createElement("H4");
+		var payroll_table = document.createElement("TABLE");
+		
+		payroll_header.innerHTML = `${payrolls[j]}`;
+		payroll_div.setAttribute("id", `${payrolls[j]}-schedule`);
+		
+		for(i = 0; i <= term; i++){
+			var row = document.createElement("TR");
+			var payment_num = document.createElement("TD");
+			var expected_payment_date = document.createElement("TD");
+			var total_payment = document.createElement("TD");
+			var interest = document.createElement("TD");
+			var principal_payment = document.createElement("TD");
+			var remaining_principal = document.createElement("TD");
+			
+			var payroll_payment1 = details.payment_schedule[i];
+			var payroll_payment = payroll_payment1[j];
+			
+			payment_num.innerHTML = `${term+1}`;
+			expected_payment_date.innerHTML = `${payroll_payment.expected_payment_date}`;
+			total_payment.innerHTML = `${payroll_payment.total_payment}`;
+			interest.innerHTML = `${payroll_payment.interest}`;
+			principal_payment.innerHTML = `${payroll_payment.principal_payment}`;
+			remaining_principal.innerHTML = `${payroll_payment.remaining_principal}`;
+			
+			payroll_table.appendChild(row);
+			
+			row.appendChild(payment_num);
+			row.appendChild(expected_payment_date);
+			row.appendChild(total_payment);
+			row.appendChild(principal_payment);
+			row.appendChild(remaining_principal);
+			
+		}
+		
+		table_div.appendChild(payroll_div);
+		payroll_div.appendChild(payroll_header);
+		payroll_div.appendChild(payroll_table);
+		table_div.innerHTML = table_div.innerHTML+ "<hr>";
+	}
 	
 	parent.appendChild(loan_payments_div);
 	loan_payments_div.appendChild(title_elem);
+	loan_payments_div.appendChild(table_div);
 }
 
 //add event listeners to specific form inputs
@@ -113,8 +164,6 @@ $(document).ready(function() {
 	var interest_per_annum_field = document.getElementById("interest_per_annum");
 	var start_of_payment_field = document.getElementById("start_of_payment");
 	var payrolls_field = document.getElementById("payrolls");
-	//payrolls_field.setAttribute("multiple", "");
-	//payrolls_field.setAttribute("name", payrolls.name+"[]");
 	
 	amount_field.addEventListener("keyup", update_loan_detail );
 	term_field.addEventListener("keyup", update_loan_detail );
@@ -126,4 +175,5 @@ $(document).ready(function() {
 		loan_details.innerHTML = "Cannot find all fields necessary..";
 		return;
 	}
+	include_utils();
 });
