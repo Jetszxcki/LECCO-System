@@ -9,13 +9,16 @@
 */
 
 loan_utils = function(){
-	function get_total_interest(amount, ipa, term){
-		return (term/12)*amount*ipa;
+	function round_to_percentile(num){
+		num = num*100;
+		num = Math.round(num);
+		num = num/100;
+		return num;
 	}
 	
-	function get_payment_schedule(details){
-		//TODO: create object for payment schedule here;
-		return (term/12)*amount*ipa;
+	function get_total_interest(amount, ipa, term){
+		var interest = (term/12)*amount*ipa
+		return interest;
 	}
 	
 	function nextMonth(date){
@@ -35,7 +38,7 @@ loan_utils = function(){
 		var total_interest = details.total_interest;
 		var ipa = details.ipa;
 		var sop = details.sop;
-		var interest = total_interest/payrolls_count;
+		var interest = total_interest/term;
 		var monthly_payment = details.monthly_payment;
 		var payment_day = new Date(sop);
 		for(i = 0; i < term; i++){
@@ -53,13 +56,12 @@ loan_utils = function(){
 			payment_day = nextMonth(payment_day);
 			ret.push(payments_for_term);
 		}
-		console.log(ret);
 		return ret;
 	}
 	
   return{
+	round_to_percentile:round_to_percentile,
     get_total_interest:get_total_interest,
-	get_payment_schedule:get_payment_schedule,
 	calculate_payment_schedule:calculate_payment_schedule
   }
 }();
@@ -68,8 +70,29 @@ render_utils = function(){
 	function as_percentage(num){
 		return (num*100) + "%";
 	}
+	
+	function formatDate(date) {
+	  var monthNames = [
+		"January", "February", "March",
+		"April", "May", "June", "July",
+		"August", "September", "October",
+		"November", "December"
+	  ];
 
+	  var day = date.getDate();
+	  var monthIndex = date.getMonth();
+	  var year = date.getFullYear();
+
+	  return  monthNames[monthIndex] + ' ' + day + ', ' + year;
+	}
+	
+	function numberWithCommas(n) {
+		var parts=n.toString().split(".");
+		return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+	}
   return{
-    as_percentage:as_percentage
+    as_percentage:as_percentage,
+	formatDate:formatDate,
+	numberWithCommas:numberWithCommas
   }
 }();

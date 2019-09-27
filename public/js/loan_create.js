@@ -38,9 +38,9 @@ function update_loan_detail(){
 	
 	//Compile base loan details to object
 	var details = new Object();
-	details.amount = amount_field.value;
-	details.term = term_field.value;
-	details.ipa = interest_per_annum_field.value;
+	details.amount = parseFloat(amount_field.value);
+	details.term = parseInt(term_field.value);
+	details.ipa = parseFloat(interest_per_annum_field.value);
 	details.sop = start_of_payment_field.value;
 	details.payrolls = ($('#'+payrolls_field.id).val()+"").split(",");
 	var buffer = {};
@@ -53,7 +53,8 @@ function update_loan_detail(){
 	details.payrolls = buffer;
 	
 	details.total_interest = loan_utils.get_total_interest(amount = details.amount, ipa = details.ipa, term = details.term)
-	details.monthly_payment = details.total_interest/details.term;
+	details.total_payable = parseFloat(details.total_interest)+parseFloat(details.amount);
+	details.monthly_payment = details.total_payable/details.term;
 	
 	details.payment_schedule = loan_utils.calculate_payment_schedule(details);
 	
@@ -70,6 +71,7 @@ function loan_details_header(parent, details){
 	var amount_elem = document.createElement("P");
 	var term_elem = document.createElement("P");
 	var total_interest_elem = document.createElement("P");
+	var total_payable_elem = document.createElement("P");
 	var monthly_payment_elem = document.createElement("P");
 	var ipa_elem = document.createElement("P");
 	var sop_elem = document.createElement("P");
@@ -80,8 +82,9 @@ function loan_details_header(parent, details){
 	amount_elem.innerHTML = "Amount: " + details.amount;
 	term_elem.innerHTML = "Term: " + details.term;
 	ipa_elem.innerHTML = "Interest per Annum: " + render_utils.as_percentage(details.ipa);
-	total_interest_elem.innerHTML = "Total Interest: " + details.total_interest;
-	monthly_payment_elem.innerHTML = "Monthly Payment: " + details.monthly_payment;
+	total_interest_elem.innerHTML = "Total Interest: " + render_utils.numberWithCommas(loan_utils.round_to_percentile(details.total_interest));
+	total_payable_elem.innerHTML = "Total Payable: " + render_utils.numberWithCommas(loan_utils.round_to_percentile(details.total_payable));
+	monthly_payment_elem.innerHTML = "Monthly Payment: " + render_utils.numberWithCommas(loan_utils.round_to_percentile(details.monthly_payment));
 	sop_elem.innerHTML = "Start of Payment: " + details.sop;
 	payrolls_elem.innerHTML = "Payrolls: " + Object.values(details.payrolls);
 	
@@ -93,6 +96,7 @@ function loan_details_header(parent, details){
 	header_div.appendChild(term_elem);
 	header_div.appendChild(ipa_elem);
 	header_div.appendChild(total_interest_elem);
+	header_div.appendChild(total_payable_elem);
 	header_div.appendChild(monthly_payment_elem);
 	header_div.appendChild(sop_elem);
 	header_div.appendChild(payrolls_elem);
@@ -107,41 +111,54 @@ function loan_payments_table(parent, details){
 	
 	var term = details.term;
 	var payrolls = Object.values(details.payrolls);
-	for(j = 0; j < payrolls.length; j++){
+	for(var j = 0; j < payrolls.length; j++){
 		var payroll_div = document.createElement("DIV");
-		var payroll_header = document.createElement("H4");
-		var payroll_table = document.createElement("TABLE");
+		var payroll_header = document.createElement("H6");
+		var payroll_table = document.createElement("DIV");
+		payroll_table.setAttribute('class', 'container');
 		
 		payroll_header.innerHTML = `${payrolls[j]}`;
 		payroll_div.setAttribute("id", `${payrolls[j]}-schedule`);
 		
-		for(i = 0; i <= term; i++){
-			var row = document.createElement("TR");
-			var payment_num = document.createElement("TD");
-			var expected_payment_date = document.createElement("TD");
-			var total_payment = document.createElement("TD");
-			var interest = document.createElement("TD");
-			var principal_payment = document.createElement("TD");
-			var remaining_principal = document.createElement("TD");
+		for(var i = 0; i < term; i++){
+			var row = document.createElement("DIV");
+			row.setAttribute('class', 'row');
 			
-			var payroll_payment1 = details.payment_schedule[i];
-			var payroll_payment = payroll_payment1[j];
+			var payment_num = document.createElement("DIV");
+			payment_num.setAttribute('class', 'col-sm-1');
 			
-			payment_num.innerHTML = `${term+1}`;
-			expected_payment_date.innerHTML = `${payroll_payment.expected_payment_date}`;
-			total_payment.innerHTML = `${payroll_payment.total_payment}`;
-			interest.innerHTML = `${payroll_payment.interest}`;
-			principal_payment.innerHTML = `${payroll_payment.principal_payment}`;
-			remaining_principal.innerHTML = `${payroll_payment.remaining_principal}`;
+			var expected_payment_date = document.createElement("DIV");
+			expected_payment_date.setAttribute('class', 'col-sm');
 			
-			payroll_table.appendChild(row);
+			var total_payment = document.createElement("DIV");
+			total_payment.setAttribute('class', 'col-sm');
+			
+			var interest = document.createElement("DIV");
+			interest.setAttribute('class', 'col-sm');
+			
+			var principal_payment = document.createElement("DIV");
+			principal_payment.setAttribute('class', 'col-sm');
+			
+			var remaining_principal = document.createElement("DIV");
+			remaining_principal.setAttribute('class', 'col-sm');
+			
+			var payroll_payment = details.payment_schedule[i][j];
+			
+			payment_num.innerHTML = `${(i+1)}`;
+			expected_payment_date.innerHTML = `${render_utils.formatDate(payroll_payment.expected_payment_date)}`;
+			total_payment.innerHTML = `${render_utils.numberWithCommas(loan_utils.round_to_percentile(payroll_payment.total_payment))}`;
+			interest.innerHTML = `${render_utils.numberWithCommas(loan_utils.round_to_percentile(payroll_payment.interest))}`;
+			principal_payment.innerHTML = `${render_utils.numberWithCommas(loan_utils.round_to_percentile(payroll_payment.principal_payment))}`;
+			remaining_principal.innerHTML = `${render_utils.numberWithCommas(loan_utils.round_to_percentile(payroll_payment.remaining_principal))}`;
 			
 			row.appendChild(payment_num);
 			row.appendChild(expected_payment_date);
 			row.appendChild(total_payment);
+			row.appendChild(interest);
 			row.appendChild(principal_payment);
 			row.appendChild(remaining_principal);
 			
+			payroll_table.appendChild(row);
 		}
 		
 		table_div.appendChild(payroll_div);
@@ -150,9 +167,10 @@ function loan_payments_table(parent, details){
 		table_div.innerHTML = table_div.innerHTML+ "<hr>";
 	}
 	
-	parent.appendChild(loan_payments_div);
 	loan_payments_div.appendChild(title_elem);
 	loan_payments_div.appendChild(table_div);
+	
+	parent.appendChild(loan_payments_div);
 }
 
 //add event listeners to specific form inputs
