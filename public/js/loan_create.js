@@ -16,9 +16,10 @@ function include_utils(){
 //this is main execution for changes in form
 function update_loan_detail(){
 	var loan_details_div = document.getElementById("loan-details");
+	var payment_schedule_hidden_div = document.getElementById("payment-schedule-hidden-form");
 
 	// Just checking if div exists
-	if(!loan_details_div){
+	if(!(loan_details_div && payment_schedule_hidden_div)){
 		alert('Cannot find element to render loan details!');
 		return;
 	}
@@ -73,6 +74,7 @@ function update_loan_detail(){
 
 	loan_details_header(loan_details_div, details);
 	loan_payments_table(loan_details_div, details);
+	fill_hidden_form(payment_schedule_hidden_div, details);
 }
 
 
@@ -187,6 +189,10 @@ function loan_payments_table(parent, details){
 
 function check_field_values(...fields) {
 
+}
+
+function fill_hidden_form(parent, details){
+	// auto fill hidden payment schedule form
 }
 
 //add event listeners to specific form inputs
