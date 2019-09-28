@@ -36,10 +36,10 @@ class LoansController extends Controller
 		
 		Loan::createWithRelationships($validated_loan_data, $validated_payrolls_data, $validated_payment_schedule);
 		
-        #return redirect('loans')->with([
-            #'message' => "Loan successfully added.",
-            #'styles' => 'alert-success'
-        #]);
+        return redirect('loans')->with([
+            'message' => "Loan successfully added.",
+            'styles' => 'alert-success'
+        ]);
     }
 		
 	public function destroy(Loan $loan)
