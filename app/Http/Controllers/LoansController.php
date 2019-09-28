@@ -31,16 +31,15 @@ class LoansController extends Controller
 
 	public function store(Request $request)
     {
-		[$validated_loan_data, $validated_payrolls_data] = $this->validateRequest($request);
-    	$loan = Loan::create($validated_loan_data);
+		[$validated_loan_data, $validated_payrolls_data, $validated_payment_schedule] = $this->validateRequest($request);
+		$validated_payment_schedule = json_decode($validated_payment_schedule['payment_schedule'], true);// 2nd args is to assoc, parse as hash instead of object
 		
-		#sync is safer than attach : https://stackoverflow.com/a/24706638
-		$loan->payrolls()->sync($validated_payrolls_data['payrolls']);
-
-        return redirect('loans')->with([
-            'message' => "Loan successfully added.",
-            'styles' => 'alert-success'
-        ]);
+		Loan::createWithRelationships($validated_loan_data, $validated_payrolls_data, $validated_payment_schedule);
+		
+        #return redirect('loans')->with([
+            #'message' => "Loan successfully added.",
+            #'styles' => 'alert-success'
+        #]);
     }
 		
 	public function destroy(Loan $loan)
@@ -80,6 +79,10 @@ class LoansController extends Controller
 		$validated_payroll_data = $request->validate([
             'payrolls' => 'required',
         ]);
-        return [$validated_loan_data, $validated_payroll_data];
+		
+		$validated_payment_schedule = $request->validate([
+            'payment_schedule' => 'required',
+        ]);
+        return [$validated_loan_data, $validated_payroll_data, $validated_payment_schedule];
     }
 }
