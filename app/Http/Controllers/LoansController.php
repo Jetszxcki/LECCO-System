@@ -25,11 +25,11 @@ class LoansController extends Controller
     	$columns = ColumnUtil::getColNamesAndTypes('loans', $attrWithChoices);
 		$columns['payrolls']['multiple'] = True;
     	$model = new Loan();
-    	// dd($columns);
+        
     	return view('loans.create', compact('columns', 'model'));
     }
 
-		public function store(Request $request)
+	public function store(Request $request)
     {
 		[$validated_loan_data, $validated_payrolls_data] = $this->validateRequest($request);
     	$loan = Loan::create($validated_loan_data);
@@ -43,7 +43,7 @@ class LoansController extends Controller
         ]);
     }
 		
-		public function destroy(Loan $loan)
+	public function destroy(Loan $loan)
     {
         $loan->delete();
         return redirect('loans')->with([
@@ -52,7 +52,7 @@ class LoansController extends Controller
         ]);
     }
 		
-		public function show(Loan $loan)
+	public function show(Loan $loan)
     {	
     	return view('loans.show', compact('loan'));
     }
@@ -66,7 +66,7 @@ class LoansController extends Controller
         ];
     }
 		
-		private function validateRequest($request)
+	private function validateRequest($request)
     {
 		$validated_loan_data = $request->validate([
             'member_id' => 'required',
