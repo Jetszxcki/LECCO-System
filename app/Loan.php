@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 use App\Member;
 use App\LoanType;
 use App\Payroll;
+use App\LoanPayroll;
 
 class Loan extends Model
 {
@@ -24,11 +26,12 @@ class Loan extends Model
 	
 	public function payrolls()
 	{
-		return $this->belongsToMany(Payroll::class, 'loans_payrolls');
+		return $this->belongsToMany(Payroll::class, 'loans_payrolls')->withPivot('id')->using(LoanPayroll::class);
 	}
 
     public function getColumnNameForView($column)
 	{
 		return ucwords(str_replace('_', ' ', $column));
 	}
+	
 }
