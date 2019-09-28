@@ -16,12 +16,6 @@ function include_utils(){
 //this is main execution for changes in form
 function update_loan_detail(){
 	var loan_details_div = document.getElementById("loan-details");
-	var loan_details_holder = document.getElementById("loan-details-holder");
-	var loan_form_holder = document.getElementById("loan-form");
-
-	loan_form_holder.classList.remove("col-md-8");
-	loan_form_holder.classList.add("col-md-6");
-	loan_details_holder.style.display = "";
 
 	// Just checking if div exists
 	if(!loan_details_div){
@@ -35,9 +29,19 @@ function update_loan_detail(){
 	var start_of_payment_field = document.getElementById("start_of_payment");
 	var payrolls_field = document.getElementById("payrolls");
 
+	var loan_details_holder = document.getElementById("loan-details-holder");
+	var loan_form_holder = document.getElementById("loan-form");
+
 	// Just checking if all fields needed exists
-	if( !(amount_field && term_field && interest_per_annum_field && start_of_payment_field && payrolls_field) ){
-		loan_details_div.innerHTML = "Cannot find all fields necessary..";
+	if(amount_field.value && term_field.value && interest_per_annum_field.value && start_of_payment_field.value && payrolls_field.value){
+		// loan_details_div.innerHTML = "Cannot find all fields necessary..";
+		loan_form_holder.classList.remove("col-md-8");
+		loan_form_holder.classList.add("col-md-6");
+		loan_details_holder.style.display = "";
+	} else {
+		loan_form_holder.classList.remove("col-md-6");
+		loan_form_holder.classList.add("col-md-8");
+		loan_details_holder.style.display = "none";
 		return;
 	}
 	
@@ -181,6 +185,10 @@ function loan_payments_table(parent, details){
 	parent.appendChild(loan_payments_div);
 }
 
+function check_field_values(...fields) {
+
+}
+
 //add event listeners to specific form inputs
 $(document).ready(function() {
 	var loan_details = document.getElementById("loan-details");
@@ -197,9 +205,9 @@ $(document).ready(function() {
 	start_of_payment_field.addEventListener("change", update_loan_detail );
 	payrolls_field.addEventListener("change", update_loan_detail );
 	
-	if( !(amount_field && term_field && interest_per_annum_field && start_of_payment_field) ){
-		loan_details.innerHTML = "Cannot find all fields necessary..";
-		return;
-	}
+	// if( !(amount_field.value && term_field.value && interest_per_annum_field.value && start_of_payment_field.value) ){
+	// 	loan_details.innerHTML = "Cannot find all fields necessary..";
+	// 	return;
+	// }
 	include_utils();
 });
