@@ -16,6 +16,13 @@ function include_utils(){
 //this is main execution for changes in form
 function update_loan_detail(){
 	var loan_details_div = document.getElementById("loan-details");
+	var loan_details_holder = document.getElementById("loan-details-holder");
+	var loan_form_holder = document.getElementById("loan-form");
+
+	loan_form_holder.classList.remove("col-md-8");
+	loan_form_holder.classList.add("col-md-6");
+	loan_details_holder.style.display = "";
+
 	// Just checking if div exists
 	if(!loan_details_div){
 		alert('Cannot find element to render loan details!');
@@ -27,7 +34,7 @@ function update_loan_detail(){
 	var interest_per_annum_field = document.getElementById("interest_per_annum");
 	var start_of_payment_field = document.getElementById("start_of_payment");
 	var payrolls_field = document.getElementById("payrolls");
-	
+
 	// Just checking if all fields needed exists
 	if( !(amount_field && term_field && interest_per_annum_field && start_of_payment_field && payrolls_field) ){
 		loan_details_div.innerHTML = "Cannot find all fields necessary..";
@@ -57,8 +64,9 @@ function update_loan_detail(){
 	details.monthly_payment = details.total_payable/details.term;
 	
 	details.payment_schedule = loan_utils.calculate_payment_schedule(details);
-	
+
 	//rendering starts here
+
 	loan_details_header(loan_details_div, details);
 	loan_payments_table(loan_details_div, details);
 }
@@ -66,7 +74,7 @@ function update_loan_detail(){
 
 function loan_details_header(parent, details){
 	var header_div = document.createElement("DIV");
-	var title_elem = document.createElement("H4");
+	// var title_elem = document.createElement("H4");
 	
 	var amount_elem = document.createElement("P");
 	var term_elem = document.createElement("P");
@@ -78,7 +86,7 @@ function loan_details_header(parent, details){
 	var payrolls_elem = document.createElement("P");
 	
 	
-	title_elem.innerHTML = "Loan Details";
+	// title_elem.innerHTML = "Loan Details";
 	amount_elem.innerHTML = "Amount: " + details.amount;
 	term_elem.innerHTML = "Term: " + details.term;
 	ipa_elem.innerHTML = "Interest per Annum: " + render_utils.as_percentage(details.ipa);
@@ -90,7 +98,7 @@ function loan_details_header(parent, details){
 	
 	
 	parent.appendChild(header_div);
-	header_div.appendChild(title_elem);
+	// header_div.appendChild(title_elem);
 	
 	header_div.appendChild(amount_elem);
 	header_div.appendChild(term_elem);
