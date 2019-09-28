@@ -17,7 +17,7 @@ loan_utils = function(){
 	}
 	
 	function get_total_interest(amount, ipa, term){
-		var interest = (term/12)*amount*ipa
+		let interest = (term/12)*amount*ipa
 		return interest;
 	}
 	
@@ -31,20 +31,20 @@ loan_utils = function(){
 	}
 	
 	function calculate_payment_schedule(details){
-		var ret = [];
-		var payrolls_count = Object.values(details.payrolls).length;
-		var term = details.term;
-		var principal = details.amount;
-		var total_interest = details.total_interest;
-		var ipa = details.ipa;
-		var sop = details.sop;
-		var interest = total_interest/term;
-		var monthly_payment = details.monthly_payment;
-		var payment_day = new Date(sop);
+		let ret = [];
+		let payrolls_count = Object.values(details.payrolls).length;
+		let term = details.term;
+		let principal = details.amount;
+		let total_interest = details.total_interest;
+		let ipa = details.ipa;
+		let sop = details.sop;
+		let interest = total_interest/term;
+		let monthly_payment = details.monthly_payment;
+		let payment_day = new Date(sop);
 		for(i = 0; i < term; i++){
-			var payments_for_term = [];
+			let payments_for_term = [];
 			for(j = 0; j < payrolls_count; j++){
-				var payroll_payments = new Object();
+				let payroll_payments = new Object();
 				payroll_payments.expected_payment_date = payment_day;
 				payroll_payments.total_payment = monthly_payment/payrolls_count;
 				payroll_payments.interest = interest/payrolls_count;
@@ -72,22 +72,22 @@ render_utils = function(){
 	}
 	
 	function formatDate(date) {
-	  var monthNames = [
+	  let monthNames = [
 		"January", "February", "March",
 		"April", "May", "June", "July",
 		"August", "September", "October",
 		"November", "December"
 	  ];
 
-	  var day = date.getDate();
-	  var monthIndex = date.getMonth();
-	  var year = date.getFullYear();
+	  let day = date.getDate();
+	  let monthIndex = date.getMonth();
+	  let year = date.getFullYear();
 
 	  return  monthNames[monthIndex] + ' ' + day + ', ' + year;
 	}
 	
 	function numberWithCommas(n) {
-		var parts=n.toString().split(".");
+		let parts=n.toString().split(".");
 		return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
 	}
   return{

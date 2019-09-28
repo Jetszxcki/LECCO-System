@@ -8,7 +8,7 @@ payment_schedule_form_lib = function(){
 	function auto_fill(parent, details){
 		// auto fill hidden payment schedule form
 		
-		var hidden_field = document.getElementsByName("payment_schedule")[0];
+		let hidden_field = document.getElementsByName("payment_schedule")[0];
 		if(!hidden_field){
 			hidden_field = document.createElement("input");
 			hidden_field.setAttribute("type", "hidden");
