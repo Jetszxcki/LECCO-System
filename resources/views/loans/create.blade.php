@@ -14,10 +14,18 @@
 			</div>
 		</div>
 	</div>	
-	<div id="loan-details-holder" class="col-md-6" style="display: none;">
-		<div class="card">
-			<div class="card-header text-md-center">LOAN DETAILS</div>
-			<div id="loan-details" class="card-body"></div>
+	<div id="parent-loan-details-holder" class="col-md-6 p-0" style="display: none;">
+		<div id="loan-details-holder" class="mb-2">
+			<div class="card">
+				<div class="card-header text-md-center">LOAN DETAILS</div>
+				<div id="loan-details" class="card-body" style="height: 175px; overflow-y: auto;"></div>
+			</div>
+		</div>
+		<div id="payment-schedule-holder">
+			<div class="card">
+				<div class="card-header text-md-center">PAYMENT SCHEDULES</div>
+				<div id="payment-schedule-details" class="card-body" style="height: 330px; overflow-y: auto"></div>
+			</div>
 		</div>
 	</div>
 </div>
