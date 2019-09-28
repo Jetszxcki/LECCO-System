@@ -10,6 +10,10 @@ function include_utils(){
 	var x = document.createElement('script');
 	x.src = '/js/loan_util.js';
 	document.getElementsByTagName("head")[0].appendChild(x);
+	
+	x = document.createElement('script');
+	x.src = '/js/payment_schedule_form.js';
+	document.getElementsByTagName("head")[0].appendChild(x);
 }
 
 
@@ -74,7 +78,7 @@ function update_loan_detail(){
 
 	loan_details_header(loan_details_div, details);
 	loan_payments_table(loan_details_div, details);
-	fill_hidden_form(payment_schedule_hidden_div, details);
+	payment_schedule_form_lib.auto_fill(payment_schedule_hidden_div, details);
 }
 
 
@@ -189,10 +193,6 @@ function loan_payments_table(parent, details){
 
 function check_field_values(...fields) {
 
-}
-
-function fill_hidden_form(parent, details){
-	// auto fill hidden payment schedule form
 }
 
 //add event listeners to specific form inputs
