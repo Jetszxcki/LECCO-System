@@ -36,14 +36,15 @@
 			<div class="row">
 				@if($column != 'profile_picture')
 					<label>{{ $member->getColumnNameForView($column) }}</label>
-					<label>{{ $value }}</label>
+					@if($column == 'no_of_subscribed_shares')
+						@accessright('shares_view')
+							<a href="{{ route('shares.show', ['member' => $member]) }}" class="btn btn-primary">View Shares</a>
+						@endaccessright
+					@else
+						<label>{{ $value }}</label>
+					@endif
 				@endif
 			</div>
 		@endforeach
-		<div class="row">
-			@accessright('shares_view')
-				<a href="{{ route('shares.show', ['member' => $member]) }}" class="btn btn-primary">Shares</a>
-			@endaccessright
-		</div>
 	</div>
 @endsection
