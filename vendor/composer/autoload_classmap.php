@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\AccessRight' => $baseDir . '/app/AccessRight.php',
+    'App\\Account' => $baseDir . '/app/Account.php',
+    'App\\CheckVoucher' => $baseDir . '/app/CheckVoucher.php',
     'App\\ColumnUtil' => $baseDir . '/app/ColumnUtil.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -33,8 +35,10 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Loan' => $baseDir . '/app/Loan.php',
+    'App\\LoanPayroll' => $baseDir . '/app/LoanPayroll.php',
     'App\\LoanType' => $baseDir . '/app/LoanType.php',
     'App\\Member' => $baseDir . '/app/Member.php',
+    'App\\PaymentSchedule' => $baseDir . '/app/PaymentSchedule.php',
     'App\\Payroll' => $baseDir . '/app/Payroll.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
@@ -43,6 +47,8 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Share' => $baseDir . '/app/Share.php',
     'App\\Signatory' => $baseDir . '/app/Signatory.php',
+    'App\\Transaction' => $baseDir . '/app/Transaction.php',
+    'App\\TransactionDetail' => $baseDir . '/app/TransactionDetail.php',
     'App\\User' => $baseDir . '/app/User.php',
     'BeyondCode\\DumpServer\\DumpServerCommand' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
     'BeyondCode\\DumpServer\\DumpServerServiceProvider' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',

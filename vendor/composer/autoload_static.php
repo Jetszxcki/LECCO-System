@@ -396,6 +396,8 @@ class ComposerStaticInit9f5d5afb55a9581bcf4e38c173602cc3
 
     public static $classMap = array (
         'App\\AccessRight' => __DIR__ . '/../..' . '/app/AccessRight.php',
+        'App\\Account' => __DIR__ . '/../..' . '/app/Account.php',
+        'App\\CheckVoucher' => __DIR__ . '/../..' . '/app/CheckVoucher.php',
         'App\\ColumnUtil' => __DIR__ . '/../..' . '/app/ColumnUtil.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -422,8 +424,10 @@ class ComposerStaticInit9f5d5afb55a9581bcf4e38c173602cc3
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Loan' => __DIR__ . '/../..' . '/app/Loan.php',
+        'App\\LoanPayroll' => __DIR__ . '/../..' . '/app/LoanPayroll.php',
         'App\\LoanType' => __DIR__ . '/../..' . '/app/LoanType.php',
         'App\\Member' => __DIR__ . '/../..' . '/app/Member.php',
+        'App\\PaymentSchedule' => __DIR__ . '/../..' . '/app/PaymentSchedule.php',
         'App\\Payroll' => __DIR__ . '/../..' . '/app/Payroll.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -432,6 +436,8 @@ class ComposerStaticInit9f5d5afb55a9581bcf4e38c173602cc3
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Share' => __DIR__ . '/../..' . '/app/Share.php',
         'App\\Signatory' => __DIR__ . '/../..' . '/app/Signatory.php',
+        'App\\Transaction' => __DIR__ . '/../..' . '/app/Transaction.php',
+        'App\\TransactionDetail' => __DIR__ . '/../..' . '/app/TransactionDetail.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
