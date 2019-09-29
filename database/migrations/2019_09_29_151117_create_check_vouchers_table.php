@@ -16,11 +16,12 @@ class CreateCheckVouchersTable extends Migration
         Schema::create('check_vouchers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('transaction_id');
+            // just copied the columns below from our past schema
+            // not sure yet if these are placed here
             $table->bigInteger('cv_no');
-            $table->string('payee');
             $table->date('date_disbursed')->nullable();
+            $table->string('disbursed_by');
             $table->string('check_no');
-            $table->string('description');
             $table->string('attachment')->nullable();
             $table->timestamps();
             $table->unique('cv_no');

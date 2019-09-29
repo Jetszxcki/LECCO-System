@@ -15,8 +15,11 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date');
+            $table->string('payee');
+            $table->date('transaction_date');
             $table->string('description');
+            $table->string('created_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }
