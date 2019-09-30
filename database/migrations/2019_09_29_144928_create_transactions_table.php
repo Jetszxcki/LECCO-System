@@ -15,11 +15,15 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('transaction_code');
             $table->string('payee');
             $table->date('transaction_date');
+            $table->date('date_disbursed')->nullable();
+            $table->string('disbursed_by');
             $table->string('description');
+            
             $table->string('created_by');
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
