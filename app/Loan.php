@@ -9,6 +9,7 @@ use App\Member;
 use App\LoanType;
 use App\Payroll;
 use App\LoanPayroll;
+use App\PaymentSchedule;
 
 class Loan extends Model
 {
@@ -26,7 +27,13 @@ class Loan extends Model
 	
 	public function payrolls()
 	{
-		return $this->belongsToMany(Payroll::class, 'loans_payrolls')->withPivot('id')->using(LoanPayroll::class);
+		return $this->belongsToMany(Payroll::class, 'loans_payrolls')->withPivot('id')->using(LoanPayroll::class)->orderBy('payroll_id');
+	}
+	
+	public function getRemainingPrincipalAttribute(){
+		$remaining_principal = $this->amount;
+		//
+		return $remaining_principal;
 	}
 
     public function getColumnNameForView($column)
@@ -45,7 +52,7 @@ class Loan extends Model
 			$payroll_index = 0;
 			foreach($payrolls as $payroll){
 				#https://laracasts.com/discuss/channels/eloquent/get-id-of-row-in-pivot-table
-				$payroll = $payroll->pivot;
+				$payroll = $payroll->pivot; //must use pivot row of loans-payrolls. will give payroll row if not.
 				$payment_schedule[$term-1][$payroll_index]["term"] = $term;
 				$payment_schedule[$term-1][$payroll_index]["total_payment"] = floatval($payment_schedule[$term-1][$payroll_index]["total_payment"]);
 				$payment_schedule[$term-1][$payroll_index]["interest"] = floatval($payment_schedule[$term-1][$payroll_index]["interest"]);

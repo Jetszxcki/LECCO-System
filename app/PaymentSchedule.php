@@ -10,7 +10,7 @@ class PaymentSchedule extends Model
 {
 	protected $guarded = [];
 	
-	public function payment_schedules()
+	public function loan_payroll()
     {
         return $this->belongsTo(LoanPayroll::class, 'loan_payroll_id');
     }

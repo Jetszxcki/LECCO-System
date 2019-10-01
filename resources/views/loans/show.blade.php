@@ -31,11 +31,14 @@
 							
 							<div class="col-sm-3">Start of Payment: </div>
 							<div class="col-sm-3">{{ $loan->start_of_payment }}</div>
+							
+							<div class="col-sm-3">Remaining Principal: </div>
+							<div class="col-sm-3">{{ $loan->remaining_principal }}</div>
 						</div>
 						<hr>
 						<div class="row">
-							<div class="col-sm-1">Remarks: </div>
-							<div class="col-sm-7">{{ $loan->remarks }}</div>
+							<div class="col-sm-2">Remarks: </div>
+							<div class="col-sm-6">{{ $loan->remarks }}</div>
 							
 							<div class="col-sm-1">Payroll: </div>
 							<div class="col-sm-3">
