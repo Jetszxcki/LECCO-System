@@ -10,6 +10,13 @@ use App\User;
 
 class Transaction extends Model
 {
+    protected $guarded = [];
+
+    public function scopeJournal($query, $transaction_code)
+    {
+        return $query->select('transaction_code_id')->where('transaction_code', $transaction_code)->get();
+    }
+
     public function transaction_details()
     {
     	return $this->hasMany(TransactionDetail::class, 'transaction_id');
@@ -28,5 +35,10 @@ class Transaction extends Model
     public function user_updated()
     {
     	return $this->hasOne(User::class, 'updated_by');
+    }
+
+    public function getColumnNameForView($column)
+    {
+        return ucwords(str_replace('_', ' ', $column));
     }
 }

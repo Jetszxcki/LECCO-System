@@ -1,6 +1,11 @@
 @csrf
 
 @foreach ($columns as $column_name => $column_data)
+	{{-- for testing purposes --}}
+	@if($column_data['type'] == 'none')
+			@continue
+	@endif
+	{{-- end --}}
 	@if ($column_name != 'id' && $column_name !='created_at' && $column_name != 'updated_at')
 		<div class="form-group row">	
 			@if ($column_name == 'member_id')

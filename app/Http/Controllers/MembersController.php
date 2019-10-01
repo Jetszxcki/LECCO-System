@@ -78,7 +78,7 @@ class MembersController extends Controller
     	return redirect('members')->with([
             'message' => "{$member->full_name} has been deleted.",
             'styles' => 'alert-danger'
-        ]);;
+        ]);
     }
 
     private function attributesWithChoices()

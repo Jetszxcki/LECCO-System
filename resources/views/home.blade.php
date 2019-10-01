@@ -43,7 +43,7 @@
             @include('partials.home_panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'signatory_btn_img.jpg'])
         @endaccessright
         
-        {{-- @include('partials.home_panel', ['header' => 'CHECK VOUCHERS', 'href' => 'home', 'image' => 'user.jpg']) --}}
+        @include('partials.home_panel', ['header' => 'TRANSACTIONS', 'href' => 'transactions.index', 'image' => 'user.jpg'])
 
 
 
