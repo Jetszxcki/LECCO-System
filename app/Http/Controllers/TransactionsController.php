@@ -29,19 +29,18 @@ class TransactionsController extends Controller
     {
     	// get all transactions with the same journal
     	$transactions = Transaction::journal($request->transaction_code);
-        // dd($this->findFirstMissingID($arr, 0, count($arr)-1));
 
     	if ($transactions->isEmpty()) {
-    		$request['transaction_code_id'] = 0;
+    		$request['transaction_code_id'] = 1;
     	} else {
             $journal_id_arr = $transactions->toArray();
             $journal_id_arr = array_column($journal_id_arr, 'transaction_code_id');
+            array_push($journal_id_arr, "0");
             sort($journal_id_arr);
             $last_id_index = count($journal_id_arr) - 1;
-            
+
             $missing_transaction_id = $this->findFirstMissingID($journal_id_arr, 0, $last_id_index);
             $max_transaction_id = $transactions->max('transaction_code_id');
-            // dd($missing_transaction_id);
 
             // if there is a missing journal id   -->   e.g.(0,1,3,4,5...) 
             if (($missing_transaction_id - 1) != $journal_id_arr[$last_id_index]) {
