@@ -23,7 +23,7 @@ class PaymentSchedulesController extends Controller
 	{
 		$payment_schedule->update(['actual_payment_date'=>null]);
 		return redirect('loans/' . $loan->id)->with([
-            'message' => "Payment Schedule successfully updated.",
+            'message' => "Payment Schedule successfully reverted.",
             'styles' => 'alert-success'
         ]);
 	}
