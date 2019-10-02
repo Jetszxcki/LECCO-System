@@ -62,6 +62,10 @@ Route::post('loans', 'LoansController@store')->name('loans.store')->middleware([
 Route::get('loans/{loan}', 'LoansController@show')->name('loans.show')->middleware(['auth', 'accessRight:loans_view']);
 Route::delete('loans/{loan}', 'LoansController@destroy')->name('loans.destroy')->middleware(['auth', 'accessRight:loans_delete,loans_view_list']);
 
+Route::patch('payment_schedule/up/{loan}/{payment_schedule}', 'PaymentSchedulesController@paymentUp')->name('payment_schedule.up')->middleware(['auth', 'accessRight:loans_edit,loans_view_list']);
+Route::patch('payment_schedule/down/{loan}/{payment_schedule}', 'PaymentSchedulesController@paymentDown')->name('payment_schedule.down')->middleware(['auth', 'accessRight:loans_edit,loans_view_list']);
+
+
 Route::get('transactions', 'TransactionsController@index')->name('transactions.index');
 Route::get('transactions/create', 'TransactionsController@create')->name('transactions.create');
 Route::post('transactions', 'TransactionsController@store')->name('transactions.store');
