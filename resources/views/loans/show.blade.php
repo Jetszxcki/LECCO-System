@@ -67,7 +67,6 @@
 								</div>
 							@endaccessright
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -97,7 +96,40 @@
 										<div class="row">
 										<div class="col-sm-1">{{ $payment_schedule->term }}</div>
 										<div class="col-sm">{{ $payment_schedule->expected_payment_date }}</div>
-										<div class="col-sm">{{ $payment_schedule->actual_payment_date }}</div>
+										<div class="col-sm-2">
+										@if($loan->next_payment_schedule)
+											@if($loan->next_payment_schedule->id == $payment_schedule->id)
+												<form action="{{ route('payment_schedule.up', [$loan, $payment_schedule]) }}" method="POST">
+													@method('PATCH')
+													@csrf
+													<input
+														type="date"
+														name="actual_payment_date"
+														class="form-control"
+														value="{{ $payment_schedule->expected_payment_date }}"
+													/>
+													<input type="submit" class="btn btn-warning" value="Update"/>
+												</form>
+											@else
+												{{ $payment_schedule->actual_payment_date }}
+												@if($loan->last_payment_schedule)
+													@if($loan->last_payment_schedule->id == $payment_schedule->id)
+														<form action="{{ route('payment_schedule.down', [$loan, $payment_schedule]) }}" method="POST">
+															@method('PATCH')
+															@csrf
+															<input
+																type="hidden"
+																name="actual_payment_date"
+																class="form-control"
+																value=""
+															/>
+															<input type="submit" class="btn btn-danger" value="Revert"/>
+														</form>
+													@endif
+												@endif
+											@endif
+										@endif
+										</div>
 										<div class="col-sm">{{ $payment_schedule->total_payment }}</div>
 										<div class="col-sm">{{ $payment_schedule->interest }}</div>
 										<div class="col-sm">{{ $payment_schedule->principal_payment }}</div>
