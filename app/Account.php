@@ -12,4 +12,9 @@ class Account extends Model
     {
     	return $this->hasMany(TransactionDetail::class, 'account_code');
     }
+
+    public function parent_account()
+    {
+    	return $this->hasOne($this, 'account_code');
+    }
 }
