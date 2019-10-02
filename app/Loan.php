@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 use App\Member;
@@ -28,6 +29,58 @@ class Loan extends Model
 	public function payrolls()
 	{
 		return $this->belongsToMany(Payroll::class, 'loans_payrolls')->withPivot('id')->using(LoanPayroll::class)->orderBy('payroll_id');
+	}
+	
+	public function getNextPaymentScheduleAttribute()
+	{
+		$payrolls = $this->payrolls()->get();
+		$next_per_payroll = collect();
+		
+		// gets next term to pay in a payroll then push to $next_per_payroll
+		foreach($payrolls as $payroll){
+			$buff = $payroll->pivot->payment_schedules()->get();
+			$buff = $buff->where('actual_payment_date', null);
+			if(!$buff->isEmpty()){
+				$min_term = $buff->min('term');
+				$next_per_payroll->push($buff->firstWhere('term', $min_term));
+			}
+		}
+		
+		// Note: do not interchange lines
+		if(!$next_per_payroll->isEmpty()){
+			$min_term = $next_per_payroll->min('term');
+			$next_per_payroll = $next_per_payroll->where('term', $min_term);
+			$max_remaining = $next_per_payroll->max('remaining_principal');
+			return $next_per_payroll->firstWhere('remaining_principal', $max_remaining);
+		}
+		
+		return null;
+	}
+	
+	public function getLastPaymentScheduleAttribute()
+	{
+		$payrolls = $this->payrolls()->get();
+		$last_per_payroll = collect();
+		
+		// gets previous term to paid in a payroll then push to $last_per_payroll
+		foreach($payrolls as $payroll){
+			$buff = $payroll->pivot->payment_schedules()->get();
+			$buff = $buff->where('actual_payment_date', !null);
+			if(!$buff->isEmpty()){
+				$max_term = $buff->max('term');
+				$last_per_payroll->push($buff->firstWhere('term', $max_term));
+			}
+		}
+		
+		// Note: do not interchange lines
+		if(!$last_per_payroll->isEmpty()){
+			$max_term = $last_per_payroll->max('term');
+			$last_per_payroll = $last_per_payroll->where('term', $max_term);
+			$min_remaining = $last_per_payroll->min('remaining_principal');
+			return $last_per_payroll->firstWhere('remaining_principal', $min_remaining);
+		}
+		
+		return null;
 	}
 	
 	public function getRemainingPrincipalAttribute(){
