@@ -67,14 +67,47 @@ class LoansController extends Controller
 		
 	private function validateRequest($request)
     {
-		$validated_loan_data = $request->validate([
+		$data_to_validate = [
             'member_id' => 'required',
             'loan_type' => 'required',
             'amount' => 'required|gte:0',
             'term' => 'required|gte:0',
             'start_of_payment' => 'required',
             'interest_per_annum' => 'required|gte:0',
-        ]);
+			'payrolls' => 'required',
+			'payment_schedule' => 'required',
+        ];
+		//base validation
+		$base_validated_data = $request->validate($data_to_validate);
+		
+		//Note: must be after $base_validated_data to validate loan_type exist (less code)
+		$loan_type = LoanType::find($base_validated_data['loan_type']);
+		if($loan_type->amount_minimum < $loan_type->amount_maximum){
+			$amount_minimum = intval($loan_type->amount_minimum);
+			$amount_maximum = intval($loan_type->amount_maximum);
+			$data_to_validate['amount'] = 'required|gte:'.strval($amount_minimum).'|lte:'.strval($amount_maximum);
+		}
+		if($loan_type->payment_period_minimum < $loan_type->payment_period_maximum){
+			$term_minimum = intval($loan_type->payment_period_minimum);
+			$term_maximum = intval($loan_type->payment_period_maximum);
+			$data_to_validate['term'] = 'required|gte:'.strval($term_minimum).'|lte:'.strval($term_maximum);
+		}
+		
+		//need to include other data so other data is maintained in form
+		//this is main validation
+		$request->validate($data_to_validate);
+		
+		
+		//extracting data to respective places (cause i copy pase is easier lol)
+		$validated_loan_data = $request->validate([
+			'member_id' => 'required',
+            'loan_type' => 'required',
+            'amount' => 'required|gte:0',
+            'term' => 'required|gte:0',
+            'start_of_payment' => 'required',
+            'interest_per_annum' => 'required|gte:0',
+		]);
+		
 		
 		$validated_payroll_data = $request->validate([
             'payrolls' => 'required',
