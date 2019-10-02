@@ -34,6 +34,9 @@
 							
 							<div class="col-sm-3">Remaining Principal: </div>
 							<div class="col-sm-3">{{ $loan->remaining_principal }}</div>
+							
+							<div class="col-sm-3">Date Created: </div>
+							<div class="col-sm-3">{{ $loan->created_at }}</div>
 						</div>
 						<hr>
 						<div class="row">
