@@ -14,7 +14,8 @@ class CreatePaymentSchedulesTable extends Migration
     public function up()
     {
         Schema::create('payment_schedules', function (Blueprint $table) {
-            $table->bigInteger('loan_payroll_id');
+            $table->bigIncrements('id');
+			$table->bigInteger('loan_payroll_id');
             $table->bigInteger('term');
             $table->date('expected_payment_date');
             $table->date('actual_payment_date')->nullable();
