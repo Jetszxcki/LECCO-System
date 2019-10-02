@@ -84,9 +84,11 @@ class Loan extends Model
 	}
 	
 	public function getRemainingPrincipalAttribute(){
-		$remaining_principal = $this->amount;
-		//
-		return $remaining_principal;
+		//(no last payment) -> (all payment_schedule.actual_payment_date for the loan is NULL) -> (remaining_principal == amount)
+		if(!$this->getLastPaymentScheduleAttribute()){
+			return $this->amount;
+		}
+		return $this->getLastPaymentScheduleAttribute()->remaining_principal;
 	}
 
     public function getColumnNameForView($column)
