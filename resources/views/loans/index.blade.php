@@ -24,7 +24,7 @@
 				<th nosearch class="col-md-2">Loan Type</th>
 				<th nosearch class="col-md-1">Amount</th>
 				<th nosearch class="col-md-2">Start of Payment</th>
-				<th nosearch class="col-md-1">Terms</th>
+				<th nosearch class="col-md-1">Term</th>
 				<th nosearch class="col d-flex flex-row justify-content-center">Actions</th>
 			@endif
 		</tr>
