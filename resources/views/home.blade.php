@@ -33,20 +33,17 @@
             @include('partials.home_panel', ['header' => 'LOAN TYPES', 'href' => 'loan_types.index', 'image' => 'loan_types_btn_img.jpg'])
         @endaccessright
 
+        @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'accounts.index', 'image' => 'user.jpg'])
+
+        @include('partials.home_panel', ['header' => 'TRANSACTIONS', 'href' => 'transactions.index', 'image' => 'user.jpg'])
+
         @accessright('shares_view_list')
             @include('partials.home_panel', ['header' => 'SHARES', 'href' => 'shares.index', 'image' => 'shares_btn_img.jpg'])
         @endaccessright
 
-        {{-- @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'home', 'image' => 'user.jpg']) --}}
-
         @accessright('signatories_view_list')
             @include('partials.home_panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'signatory_btn_img.jpg'])
         @endaccessright
-        
-        @include('partials.home_panel', ['header' => 'TRANSACTIONS', 'href' => 'transactions.index', 'image' => 'user.jpg'])
-
-
-
 
     <script type="text/javascript">
         // const buttonScroll = function () {
