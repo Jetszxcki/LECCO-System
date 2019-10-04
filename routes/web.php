@@ -70,3 +70,5 @@ Route::get('transactions', 'TransactionsController@index')->name('transactions.i
 Route::get('transactions/create', 'TransactionsController@create')->name('transactions.create');
 Route::post('transactions', 'TransactionsController@store')->name('transactions.store');
 Route::delete('transactions/{transaction}', 'TransactionsController@destroy')->name('transactions.destroy');
+
+Route::get('chart_of_accounts', 'AccountsController@index')->name('accounts.index');
