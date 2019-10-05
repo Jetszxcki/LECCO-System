@@ -2,22 +2,8 @@
 	This code is still shit. need to refactor if may time.
 	References:
 		createElement : https://www.w3schools.com/jsref/met_document_createelement.asp
-		import javascript file : https://tutorials.technology/tutorials/How-to-include-a-JavaScript-file-in-another-JavaScript-file.html
 */
 
-//import utils 
-function include_utils(){
-	let x = document.createElement('script');
-	x.src = '/js/loan_util.js';
-	document.getElementsByTagName("head")[0].appendChild(x);
-	
-	x = document.createElement('script');
-	x.src = '/js/payment_schedule_form.js';
-	document.getElementsByTagName("head")[0].appendChild(x);
-}
-
-
-//this is main execution for changes in form
 function update_loan_detail(){
 	let loan_details_div = document.getElementById("loan-details");
 	let payment_schedule_div = document.getElementById("payment-schedule-details");
@@ -236,5 +222,7 @@ $(document).ready(function() {
 	// 	loan_details.innerHTML = "Cannot find all fields necessary..";
 	// 	return;
 	// }
-	include_utils();
+    
+    // Dispatch/Trigger/Fire the event
+    term_field.dispatchEvent(new Event('keyup'));
 });

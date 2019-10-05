@@ -29,5 +29,7 @@
 		</div>
 	</div>
 </div>
+<script src="{{ asset('/js/payment_schedule_form.js') }}"></script>
+<script src="{{ asset('/js/loan_util.js') }}"></script>
 <script src="{{ asset('/js/loan_create.js') }}"></script>
 @endsection
