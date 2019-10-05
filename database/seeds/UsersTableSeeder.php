@@ -49,16 +49,23 @@ class UsersTableSeeder extends Seeder
             'loans_edit' => true,
             'loans_delete' => true,
 
+            'chart_of_accounts_view_list' => true,
+            'chart_of_accounts_view' => true,
+            'chart_of_accounts_create' => true,
+            'chart_of_accounts_edit' => true,
+            'chart_of_accounts_delete' => true,
+
+            'transactions_view_list' => true,
+            'transactions_view' => true,
+            'transactions_create' => true,
+            'transactions_edit' => true,
+            'transactions_delete' => true,
+
             'shares_view_list' => true,
             'shares_view' => true,
             'shares_create' => true,
             'shares_edit' => true,
             'shares_delete' => true,
-
-            // 'coa_view' => true,
-            // 'coa_create' => true,
-            // 'coa_edit' => true,
-            // 'coa_delete' => true,
 
             'signatories_view_list' => true,
             'signatories_create' => true,

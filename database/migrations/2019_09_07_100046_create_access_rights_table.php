@@ -36,24 +36,35 @@ class CreateAccessRightsTable extends Migration
             $table->boolean('loans_create')->default(false);
             $table->boolean('loans_edit')->default(false);
             $table->boolean('loans_delete')->default(false);
+
+            $table->boolean('chart_of_accounts_view_list')->default(true);
+            $table->boolean('chart_of_accounts_view')->default(true);
+            $table->boolean('chart_of_accounts_create')->default(false);
+            $table->boolean('chart_of_accounts_edit')->default(false);
+            $table->boolean('chart_of_accounts_delete')->default(false);
+
+            $table->boolean('transactions_view_list')->default(true);
+            $table->boolean('transactions_view')->default(true);
+            $table->boolean('transactions_create')->default(false);
+            $table->boolean('transactions_edit')->default(false);
+            $table->boolean('transactions_delete')->default(false);
 			
             $table->boolean('shares_view_list')->default(true);
             $table->boolean('shares_view')->default(true);
             $table->boolean('shares_create')->default(false);
             $table->boolean('shares_edit')->default(false);
             $table->boolean('shares_delete')->default(false);
-            // $table->boolean('coa_view')->default(true);
-            // $table->boolean('coa_delete')->default(false);
-            // $table->boolean('coa_create')->default(false);
-            // $table->boolean('coa_edit')->default(false);
+
             $table->boolean('signatories_view_list')->default(true);
             $table->boolean('signatories_create')->default(false);
             $table->boolean('signatories_edit')->default(false);
             $table->boolean('signatories_delete')->default(false);
+
             // $table->boolean('check_voucher_view')->default(true);
             // $table->boolean('check_voucher_delete')->default(false);
             // $table->boolean('check_voucher_create')->default(false);
             // $table->boolean('check_voucher_edit')->default(false);
+
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

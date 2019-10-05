@@ -2,7 +2,7 @@
 
 <div class="custom-control custom-checkbox d-flex flex-wrap align-items-center alert alert-info mb-4">
 	@foreach ($columns as $column)
-	    <!--<div>{{ $column }}|{{ ($user->access_right->hasPrefix($header, $column) && $column != 'user_id') }}|{{ ($user->access_right->hasPrefix($header, 'user') && $column == 'invoke_rights') }}</div>-->
+	    {{-- <div>{{ $column }}|{{ ($user->access_right->hasPrefix($header, $column) && $column != 'user_id') }}|{{ ($user->access_right->hasPrefix($header, 'user') && $column == 'invoke_rights') }}</div> --}}
 		@if (($user->access_right->hasPrefix($header, $column) && $column != 'user_id')
 			|| ($user->access_right->hasPrefix($header, 'user') && $column == 'invoke_rights'))
 
