@@ -54,7 +54,7 @@
 				</div>
 				<div class="d-flex flex-row justify-content-center">
 					@accessright('loans_edit')
-						<a href="{{--{{ route('loans.edit', [$loan]) }}--}}" class="btn btn-warning mr-2">Edit</a>
+						<a href="{{ route('loans.edit', [$loan]) }}" class="btn btn-warning mr-2">Edit</a>
 					@endaccessright
 					
 					@accessright('loans_delete')

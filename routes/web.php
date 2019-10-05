@@ -61,6 +61,8 @@ Route::get('loans', 'LoansController@index')->name('loans.index')->middleware(['
 Route::get('loans/create', 'LoansController@create')->name('loans.create')->middleware(['auth', 'accessRight:loans_create,loans_view_list']);
 Route::post('loans', 'LoansController@store')->name('loans.store')->middleware(['auth', 'accessRight:loans_create,loans_view_list']);
 Route::get('loans/{loan}', 'LoansController@show')->name('loans.show')->middleware(['auth', 'accessRight:loans_view,loans_view_list']);
+Route::get('loans/{loan}/edit', 'LoansController@edit')->name('loans.edit')->middleware(['auth', 'accessRight:loans_edit,loans_view_list']);
+Route::patch('loans/{loan}', 'LoansController@update')->name('loans.update')->middleware(['auth', 'accessRight:loans_edit,loans_view_list']);
 Route::delete('loans/{loan}', 'LoansController@destroy')->name('loans.destroy')->middleware(['auth', 'accessRight:loans_delete,loans_view_list']);
 
 // PAYMENT SCHEDULES

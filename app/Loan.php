@@ -99,8 +99,30 @@ class Loan extends Model
 	public static function createWithRelationships($loan_data, $payrolls_data, $payment_schedule){
 		DB::beginTransaction();
     	$loan = Loan::create($loan_data);
+        
+		Loan::updateRelationships($loan, $payrolls_data, $payment_schedule);
+		DB::commit();
+	}
+    
+    public static function updateWithRelationships($loan, $loan_data, $payrolls_data, $payment_schedule){
+		DB::beginTransaction();
+        # update main loan
+    	$loan->update($loan_data);
 		
-		#sync is safer than attach : https://stackoverflow.com/a/24706638
+        # delete relationships
+        $payrolls = $loan->payrolls()->get();
+        foreach($payrolls as $payroll){
+            $payroll = $payroll->pivot->payment_schedules()->delete();
+        }
+        $loan->payrolls()->detach();
+        
+        # rebuild relationships
+		Loan::updateRelationships($loan, $payrolls_data, $payment_schedule);
+		DB::commit();
+	}
+    
+    public static function updateRelationships($loan, $payrolls_data, $payment_schedule){
+        #sync is safer than attach : https://stackoverflow.com/a/24706638
 		$loan->payrolls()->sync($payrolls_data['payrolls']);
 		$payrolls = $loan->payrolls()->get();
 		for($term = 1; $term <= $loan->term; $term++){
@@ -120,8 +142,7 @@ class Loan extends Model
 				$payroll_index = $payroll_index+1;
 			}
 		}
-		DB::commit();
-	}
+    }
 	
 	// this is a recommended way to declare event handlers
 	public static function boot() {

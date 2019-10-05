@@ -41,7 +41,7 @@ class LoansController extends Controller
             'styles' => 'alert-success'
         ]);
     }
-		
+	
 	public function destroy(Loan $loan)
     {
         $loan->delete();
@@ -50,12 +50,35 @@ class LoansController extends Controller
             'styles' => 'alert-danger'
         ]);
     }
-		
+	
 	public function show(Loan $loan)
     {	
     	return view('loans.show', compact('loan'));
     }
 
+    public function edit(Loan $loan)
+    {
+        $model = $loan;
+        $attrWithChoices = $this->attributesWithChoices();
+    	$columns = ColumnUtil::getColNamesAndTypes('loans', $attrWithChoices);
+		$columns['payrolls']['multiple'] = True;
+        session()->now('message', 'NOTE: Changing loan will reset payment schedule.');
+        session()->now('styles', 'alert-danger');
+        return view('loans.edit', compact('model', 'columns'));
+    }
+    
+    public function update(Request $request, Loan $loan)
+    {
+        [$validated_loan_data, $validated_payrolls_data, $validated_payment_schedule] = $this->validateRequest($request);
+        $validated_payment_schedule = json_decode($validated_payment_schedule['payment_schedule'], true);// 2nd args is to assoc, parse as hash instead of object
+        
+        Loan::updateWithRelationships($loan, $validated_loan_data, $validated_payrolls_data, $validated_payment_schedule);
+        return redirect('loans/' . $loan->id)->with([
+            'message' => "Loan successfully updated.",
+            'styles' => 'alert-success'
+        ]);
+    }
+    
     private function attributesWithChoices()
     {
         return [

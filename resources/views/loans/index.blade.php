@@ -44,7 +44,7 @@
 					@endaccessright
 
 					@accessright('loans_edit')
-						<a href="{{--{{ route('loans.edit', [$loan]) }}--}}" class="btn btn-warning mr-1">Edit</a>
+						<a href="{{ route('loans.edit', [$loan]) }}" class="btn btn-warning mr-1">Edit</a>
 					@endaccessright
 
 					@accessright('loans_delete')
