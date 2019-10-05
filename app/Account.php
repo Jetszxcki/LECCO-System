@@ -9,9 +9,9 @@ use App\TransactionDetail;
 class Account extends Model
 {
     // scopes
-	public function scopeNames($query)
+	public function scopeNoParent($query)
 	{
-		return $query->select('id', 'account_code');
+		return $query->where('parent_account', '')->get();
 	}
     
     public function transaction_details()
@@ -19,9 +19,9 @@ class Account extends Model
     	return $this->hasMany(TransactionDetail::class, 'account_code');
     }
 
-    public function parent_account()
+    public function parent()
     {
-    	return $this->hasOne($this, 'account_code');
+    	return $this->hasOne(Account::class, 'account_code', 'parent_account');
     }
     
     public function children()
@@ -34,4 +34,9 @@ class Account extends Model
 	{
 		return ucwords(str_replace('_', ' ', $column));
 	}
+
+    public function hasChildren()
+    {
+        return count($this->children) != 0;
+    }
 }

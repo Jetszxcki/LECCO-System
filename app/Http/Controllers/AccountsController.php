@@ -9,13 +9,14 @@ class AccountsController extends Controller
 {
     public function index()
     {
-        $main = Account::where('parent_account', '')->first();
+        $mains = Account::noParent();
         
         $attrWithChoices = $this->attributesWithChoices();
     	$columns = ColumnUtil::getColNamesAndTypes('accounts', $attrWithChoices);
         $model = new Account();
+        $unique_index = 0;
         
-        return view('chart_of_accounts.index', compact('main', 'columns', 'model'));
+        return view('chart_of_accounts.index', compact('mains', 'columns', 'model', 'unique_index'));
     }
     
     private function attributesWithChoices()
