@@ -56,7 +56,7 @@
             @endaccessright
 
             @accessright('chart_of_accounts_delete') 
-                @if($main->hasChildren())
+                @if(! $main->hasChildren())
                     <a class="btn btn-size btn-danger"></a> 
                 @endif
             @endaccessright

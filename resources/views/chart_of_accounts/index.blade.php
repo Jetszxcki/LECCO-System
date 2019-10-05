@@ -19,17 +19,17 @@
             @foreach ($mains as $main)
                 {{-- 1st level --}}
                 <div id="lvl-1-group-{{ $loop->index }}">
-                    @include('partials.row_level', [compact('main','loop'), 'level' => 1])
+                    @include('partials.accounts_row', [compact('main','loop'), 'level' => 1])
 
                     {{-- 2nd level --}}
                     <div id="lvl-2-group-{{ $loop->index }}-{{ $unique_index++ }}">
                         @foreach($main->children as $children)
-                            @include('partials.row_level', [compact('loop'), 'main' => $children, 'level' => 2])
+                            @include('partials.accounts_row', [compact('loop'), 'main' => $children, 'level' => 2])
 
                             {{-- 3rd level --}}
                             <div id="lvl-3-group-{{ $loop->index }}-{{ $unique_index++ }}">
                                 @foreach($children->children as $grand_children)
-                                    @include('partials.row_level', ['main' => $grand_children, 'level' => 3])
+                                    @include('partials.accounts_row', ['main' => $grand_children, 'level' => 3])
                                 @endforeach
 
                                @include('partials.add_account_btn', ['level' => 3])
