@@ -27,7 +27,13 @@
 						{{ $column_data['multiple']?'multiple':'' }}
 					>
 							@foreach ($column_data['choices'] as $key => $value)
-								<option value="{{ $key }}">{{ $value }}</option>
+								<option value="{{ $key }}" 
+                                    @if($column_data['multiple'])
+                                        {{ in_array($key, (old($column_name) ?? $model[$column_name]->pluck('id')->all()), false)? "selected": "" }}
+                                    @else
+                                        {{ (old($column_name) ?? $model[$column_name])==$key? "selected": "" }}
+                                    @endif
+                                >{{ $value }}</option>
 							@endforeach
 					</select>
 
