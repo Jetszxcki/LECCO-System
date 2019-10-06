@@ -20,9 +20,10 @@
 				<th nosearch class="col text-center py-5">No transactions added yet.</th>
 			@else
 				<th nosearch class="col-md-1">ID</th>
-				<th nosearch class="col-md-5">Journal</th>
-				<th nosearch class="col-md-1">Journal ID</th>
-				{{-- <th nosearch class="col d-flex flex-row justify-content-center">Actions</th> --}}
+				<th nosearch class="col-md-4">Journal</th>
+				<th nosearch class="col-md-2">Journal ID</th>
+				<th nosearch class="col-md-2">Created by</th>
+				<th nosearch class="col d-flex flex-row justify-content-center">Actions</th>
 			@endif
 		</tr>
 
@@ -31,6 +32,7 @@
 				<td nosearch class="col-md-1">{{ $transaction->id }}</td>
 				<td class="col-md-4">{{ $transaction->transaction_code }}</td>
 				<td class="col-md-2">{{ $transaction->transaction_code_id }}</td>
+				<td class="col-md-2">{{ $transaction->user_created->name }}</td>
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
 					{{-- @accessright('member_delete') --}}
 						<form action="{{ route('transactions.destroy', [$transaction]) }}" method="POST">

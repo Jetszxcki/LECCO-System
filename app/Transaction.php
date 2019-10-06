@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
 use App\TransactionDetail;
 use App\CheckVoucher;
 use App\User;
@@ -29,16 +30,31 @@ class Transaction extends Model
 
     public function user_created()
     {
-    	return $this->hasOne(User::class, 'created_by');
+    	return $this->hasOne(User::class, 'id', 'created_by');
     }
 
     public function user_updated()
     {
-    	return $this->hasOne(User::class, 'updated_by');
+    	return $this->hasOne(User::class, 'id', 'updated_by');
     }
 
     public function getColumnNameForView($column)
     {
         return ucwords(str_replace('_', ' ', $column));
     }
+    
+    // this is a recommended way to declare event handlers
+	public static function boot() {
+		parent::boot();
+
+		// create a event to happen on saving
+        static::saving(function($table)  {
+            $table->created_by = Auth::user()->id;
+        });
+        
+        // create a event to happen on updating
+        static::updating(function($table)  {
+            $table->updated_by = Auth::user()->id;
+        });
+	}
 }
