@@ -70,7 +70,7 @@ Route::patch('payment_schedule/up/{loan}/{payment_schedule}', 'PaymentSchedulesC
 Route::patch('payment_schedule/down/{loan}/{payment_schedule}', 'PaymentSchedulesController@paymentDown')->name('payment_schedule.down')->middleware(['auth', 'accessRight:loans_edit,loans_view_list']);
 
 // TRANSACTIONS
-Route::get('transactions', 'TransactionsController@index')->name('transactions.index')->middleware(['auth', 'accessRight:transacions_view_list']);
+Route::get('transactions', 'TransactionsController@index')->name('transactions.index')->middleware(['auth', 'accessRight:transactions_view_list']);
 Route::get('transactions/create', 'TransactionsController@create')->name('transactions.create')->middleware(['auth', 'accessRight:transactions_create,transactions_view_list']);
 Route::post('transactions', 'TransactionsController@store')->name('transactions.store')->middleware(['auth', 'accessRight:transactions_create,transactions_view_list']);
 Route::delete('transactions/{transaction}', 'TransactionsController@destroy')->name('transactions.destroy')->middleware(['auth', 'accessRight:transactions_delete,transactions_view_list']);
