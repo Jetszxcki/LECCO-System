@@ -12,13 +12,13 @@
                     <label class="col-md-4 col-form-label text-md-right">Loan</label>
                     <div class="col-md-6">
                         <!-- target="_blank" opens link to new tab -->
-                        <a href="{{ route('loans.show', [$model]) }}" target="_blank" class="btn btn-success mr-1">View loan in new tab</a>
+                        <a href="{{ route('loans.show', [$model]) }}" target="_blank" class="btn btn-success mr-1">View Loan in New Tab</a>
                     </div>
                 </div>
 				<form action="{{ route('loans.update', [$model]) }}" method="POST" enctype="multipart/form-data" id="loan-create-form">
 					<div id="payment-schedule-hidden-form" style="display:none"></div>
 					@method('PATCH')
-					@include('partials.form', [compact('columns'), 'route' => 'loans.index', 'buttonText' => 'Save changes'])
+					@include('partials.form', [compact('columns'), 'route' => 'loans.index', 'buttonText' => 'Save Changes'])
 				</form>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 		<div id="payment-schedule-holder">
 			<div class="card">
 				<div class="card-header text-md-center">PAYMENT SCHEDULES</div>
-				<div id="payment-schedule-details" class="card-body" style="height: 330px; overflow-y: auto"></div>
+				<div id="payment-schedule-details" class="card-body" style="height: 385px; overflow-y: auto"></div>
 			</div>
 		</div>
 	</div>

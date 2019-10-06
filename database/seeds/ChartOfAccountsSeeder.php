@@ -16,22 +16,8 @@ class ChartOfAccountsSeeder extends Seeder
         $account1_1 = Account::create([
 			'name' => 'Main',
 			'description' => 'this is account should be at level 1',
-			'parent_account' => '',
+			'parent_account' => 'none',
 			'account_code' => 'AAA-BBB',
-		]);
-
-		$account1_2 = Account::create([
-			'name' => 'Another Main',
-			'description' => 'this is account should be at level 1',
-			'parent_account' => '',
-			'account_code' => 'AAA-AAA',
-		]);
-
-		$account2_4 = Account::create([
-			'name' => 'Sub-1',
-			'description' => 'this is account should be at level 2',
-			'parent_account' => $account1_2->account_code,
-			'account_code' => 'AAA-AAA-CCC',
 		]);
         
         $account2_1 = Account::create([

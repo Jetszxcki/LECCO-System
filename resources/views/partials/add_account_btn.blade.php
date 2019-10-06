@@ -9,8 +9,11 @@
     @endif
 
     @accessright('chart_of_accounts_create')
-        <button class="btn btn-primary col-md-10" 
-        		style="line-height: 90%; letter-spacing: 1px;">
+        <button 
+            class="btn btn-primary col-md-10" 
+        	style="line-height: 90%; letter-spacing: 1px;"
+            onclick="setParentAccount({{ $level == 3 ? $children : $main }})" 
+        >
         	Add Account
         </button>
     @endaccessright

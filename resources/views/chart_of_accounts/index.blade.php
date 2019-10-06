@@ -4,6 +4,15 @@
 @section('content')
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Chart of Accounts</h2>
+
+        <button 
+            id="new-acct-btn" 
+            class="btn btn-primary" 
+            style="display: none;" 
+            onclick="cleanForm()"
+        >
+            New Account
+        </button>
 	</div>
 
 	@include('partials.flash')
@@ -16,70 +25,71 @@
     -->
     <div class="row" style="height: 400px;">
         <div id="main-table" class="col-md-7 pr-4">
-            @foreach ($mains as $main)
-                {{-- 1st level --}}
-                <div id="lvl-1-group-{{ $loop->index }}">
-                    @include('partials.accounts_row', [compact('main','loop'), 'level' => 1])
+            {{-- 1st level --}}
+            <div id="lvl-1-group">
+                @include('partials.accounts_row', ['account' => $main, 'level' => 1])
 
-                    {{-- 2nd level --}}
-                    <div id="lvl-2-group-{{ $loop->index }}-{{ $unique_index++ }}">
-                        @foreach($main->children as $children)
-                            @include('partials.accounts_row', [compact('loop'), 'main' => $children, 'level' => 2])
+                {{-- 2nd level --}}
+                <div id="lvl-2-group-{{ $unique_index++ }}">
+                    @foreach($main->children as $children)
+                        @include('partials.accounts_row', ['account' => $children, 'level' => 2])
 
-                            {{-- 3rd level --}}
-                            <div id="lvl-3-group-{{ $loop->index }}-{{ $unique_index++ }}">
-                                @foreach($children->children as $grand_children)
-                                    @include('partials.accounts_row', ['main' => $grand_children, 'level' => 3])
-                                @endforeach
+                        {{-- 3rd level --}}
+                        <div id="lvl-3-group-{{ $unique_index++ }}">
+                            @foreach($children->children as $grand_children)
+                                @include('partials.accounts_row', ['account' => $grand_children, 'level' => 3])
+                            @endforeach
 
-                               @include('partials.add_account_btn', ['level' => 3])
-                            </div>
+                           {{-- @include('partials.add_account_btn', ['level' => 3]) --}}
+                        </div>
+                        {{-- 3rd level end --}}
+                    @endforeach
 
-                        @endforeach
-
-                        @include('partials.add_account_btn', ['level' => 2])
-                    </div>
+                    {{-- @include('partials.add_account_btn', ['level' => 2]) --}}
                 </div>
-            @endforeach
-
-            @include('partials.add_account_btn', ['level' => 1])
+                {{-- 2nd level end --}}
+            </div>
+            {{-- 1st level end --}}
         </div>
 
         <div class="col-md-5">
-            <div class="card">
-                <div class="card-header text-md-center">NEW ACCOUNT</div>
-                <div class="card-body">
-                    <form action="{{-- {{ route('accounts.store') }} --}}" method="POST">
+            <div id="form-holder" class="card">
+                <div id="form-header" class="card-header text-md-center">NEW ACCOUNT</div>
+                <div id="form-body" class="card-body">
+
+                    <form id="form-main" action="{{ route('accounts.store') }}" method="POST">
                         @include('partials.form', [compact('columns'), 'route' => 'none', 'buttonText' => 'Add Account'])
                     </form>	
+
                 </div>
             </div>
 
             <div class="d-flex flex-row justify-content-between mt-4">
-                <div class="btn btn-size btn-success"></div>
+                <div class="b-rad-4 btn-size btn-success"></div>
                 <label class="legend-label">View</label>
-                <div class="btn btn-size btn-warning"></div>
+                <div class="b-rad-4 btn-size btn-warning"></div>
                 <label class="legend-label">Edit</label>
-                <div class="btn btn-size btn-danger"></div>
+                <div class="b-rad-4 btn-size btn-danger"></div>
                 <label class="legend-label">Delete</label>
-                <div class="btn btn-size btn-toggle"></div>
+                <div class="b-rad-4 btn-size btn-toggle"></div>
                 <label class="legend-label">Hide/Show Children</label>
             </div>
         </div>
     </div>
-@endsection
 
-<script>
-    function toggle(id) {
-        $(id).children().animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
-    }
-</script>
+    <script src="{{ asset('/js/accounts.js') }}"></script>
+
+@endsection
 
 {{-- scoped keyword signifies that the style is only applicable only to this file --}}
 <style scoped>
     #main-table {
         height: 400px;
         overflow-y: auto;
+    }
+
+    .b-rad-4 {
+        border-radius: 4px;
     }
 
     div.lvl-1, 

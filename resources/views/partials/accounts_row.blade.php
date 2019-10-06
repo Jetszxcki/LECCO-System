@@ -25,7 +25,7 @@
         <div class="lvl-1 col-md-10">
             <div class="col-md-1 btn-container">
                 <button class="btn btn-size btn-toggle" 
-                        onclick="toggle('#lvl-2-group-{{ $loop->index }}-{{ $unique_index }}')">
+                        onclick="toggle('#lvl-2-group-{{ $unique_index }}')">
                 </button>
             </div> 
 
@@ -34,7 +34,7 @@
         <div class="lvl-2 col-md-10">
             <div class="col-md-1 btn-container">
                 <button class="btn btn-size btn-toggle" 
-                        onclick="toggle('#lvl-3-group-{{ $loop->index }}-{{ $unique_index }}')">
+                        onclick="toggle('#lvl-3-group-{{ $unique_index }}')">
                 </button>
             </div> 
 
@@ -45,21 +45,34 @@
 
     @endif
 
-        <div class="col-md-9">{{ $main->account_code }} ({{ $main->name }})</div>
+        <div class="col-md-9">{{ $account->full_account_name }}</div>
         <div class="btn-container col-md-2">
-            @accessright('chart_of_accounts_view') 
-                <a class="btn btn-size btn-success mr-1"></a> 
+            @accessright('chart_of_accounts_view')
+                <a class="btn btn-size btn-success mr-1"
+                   onclick="viewMode('show', {{ $account }})"
+                >
+                </a>
             @endaccessright
 
             @accessright('chart_of_accounts_edit') 
-                <a class="btn btn-size btn-warning mr-1"></a> 
+                <a class="btn btn-size btn-warning" 
+                   onclick="viewMode('edit', {{ $account }})"
+                >
+                </a> 
             @endaccessright
 
             @accessright('chart_of_accounts_delete') 
-                @if(! $main->hasChildren())
-                    <a class="btn btn-size btn-danger"></a> 
+                @if(! $account->hasChildren())
+                    <form action="{{ route('accounts.destroy', [$account]) }}" method="POST" class="p-0 m-0 ml-1">
+                        @method('DELETE')
+                        @csrf
+
+                        <button type="submit" class="btn btn-size btn-danger" style="width: 20px"></button> 
+                    </form>
                 @endif
             @endaccessright
         </div>
     </div>
+
 </div>
+

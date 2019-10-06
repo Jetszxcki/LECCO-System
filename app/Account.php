@@ -7,12 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use App\TransactionDetail;
 
 class Account extends Model
-{
+{   
+    protected $guarded = [];
+    
     // scopes
-	public function scopeNoParent($query)
+	public function scopeMain($query)
 	{
-		return $query->where('parent_account', '')->get();
+		return $query->where('parent_account', 'none')->first();
 	}
+
+    // accessors
+    public function getFullAccountNameAttribute()
+    {
+        return "{$this->account_code} ({$this->name})";
+    }
     
     public function transaction_details()
     {

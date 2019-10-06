@@ -70,8 +70,8 @@
 					<small id="fileHelp" class="form-text text-muted">Can't process field type, this is the default inputfield</small>
 				@endif
 				@error($column_name)
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
+					<span id="err-{{ $column_name }}" class="invalid-feedback" role="alert">
+						{{ $message }}
 					</span>
 				@enderror
 			</div> 	
@@ -81,9 +81,9 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
-		<button type="submit" class="btn btn-primary">{{ $buttonText }}</button>	
+		<button id="form-btn" type="submit" class="btn btn-primary">{{ $buttonText }}</button>	
 		@if($route != 'none')
-			<a href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger">Cancel</a>
+			<a id="cancel-form-btn" href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger">Cancel</a>
 		@endif
 	</div>
 </div>
