@@ -23,8 +23,8 @@ class CreateTransactionsTable extends Migration
             // $table->string('disbursed_by');
             // $table->string('description');
             
-            // $table->string('created_by');
-            // $table->string('updated_by')->nullable();
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
