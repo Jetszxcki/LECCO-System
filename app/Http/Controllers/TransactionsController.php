@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Account;
 use App\Transaction;
 use App\ColumnUtil;
 
@@ -21,8 +22,10 @@ class TransactionsController extends Controller
     	$columns = ColumnUtil::getColNamesAndTypes('transactions', $attrWithChoices);
     	$columns['transaction_code_id']['type'] = 'none';
     	$model = new Transaction();
-
-    	return view('transactions.create', compact('columns', 'model'));
+        
+        $accounts = Account::all();
+        
+    	return view('transactions.create', compact('columns', 'model', 'accounts'));
     }
 
     public function store(Request $request)
@@ -79,7 +82,8 @@ class TransactionsController extends Controller
     {
     	return $request->validate([
     		'transaction_code' => 'required',
-    		'transaction_code_id' => 'required'
+    		'transaction_code_id' => 'required',
+            'transaction_details' => 'required'
     	]);
     }
 
