@@ -6,7 +6,7 @@
 			@continue
 	@endif
 	{{-- end --}}
-	@if ($column_name != 'id' && $column_name !='created_at' && $column_name != 'updated_at')
+	@if ( !in_array($column_name, array('id', 'created_at', 'updated_at', 'created_by', 'updated_by')) )
 		<div class="form-group row">	
 			@if ($column_name == 'member_id')
 				<label for="{{ $column_name }}" class="col-md-4 col-form-label text-md-right">Member</label>
