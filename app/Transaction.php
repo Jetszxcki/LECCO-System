@@ -22,7 +22,7 @@ class Transaction extends Model
     //this is to render a string form for forms when editing.
     public function scopeTransactionDetailsAsJson()
     {
-        return $this->transaction_details()->select(['account_code', 'debit', 'credit'])->get(); // use this to get details for form;
+        return json_encode($this->transaction_details()->select(['account_code', 'debit', 'credit'])->get()); // use this to get details for form;
     }
     
 
