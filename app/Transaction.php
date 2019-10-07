@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 use Auth;
 use App\TransactionDetail;
@@ -17,6 +18,13 @@ class Transaction extends Model
     {
         return $query->select('transaction_code_id')->where('transaction_code', $transaction_code)->get();
     }
+    
+    //this is to render a string form for forms when editing.
+    public function scopeTransactionDetailsAsJson()
+    {
+        return $this->transaction_details()->select(['account_code', 'debit', 'credit'])->get(); // use this to get details for form;
+    }
+    
 
     public function transaction_details()
     {
@@ -43,6 +51,17 @@ class Transaction extends Model
         return ucwords(str_replace('_', ' ', $column));
     }
     
+    public static function createWithDetails($transaction_data, $details_data){
+        DB::beginTransaction();
+        $transaction =  Transaction::create($transaction_data);
+        
+        foreach($details_data as $detail_data){
+            $detail_data['transaction_id'] = $transaction->id;
+            $transaction->transaction_details()->create($detail_data);
+        }
+        DB::commit();
+    }
+    
     // this is a recommended way to declare event handlers
 	public static function boot() {
 		parent::boot();
@@ -56,5 +75,12 @@ class Transaction extends Model
         static::updating(function($table)  {
             $table->updated_by = Auth::user()->id;
         });
+        
+        static::deleting(function($transaction) { // before delete() method call this
+            DB::beginTransaction();
+			// cleanup relationships (LOL)
+            $transaction = $transaction->transaction_details()->delete();
+			DB::commit();
+		});
 	}
 }

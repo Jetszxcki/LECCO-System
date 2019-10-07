@@ -8,7 +8,7 @@
 			<div class="card-header text-md-center">NEW TRANSACTION</div>
 			<div class="card-body">
 				<form action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="transaction_details" id="transaction_details" value="{{ old('transaction_details') ?? $model['transaction_details'] }}"/>
+                    <input type="hidden" name="transaction_details" id="transaction_details" value="{{ old('transaction_details') ?? $model->transaction_details_as_json }}"/>
 					@include('partials.form', [compact('columns'), 'route' => 'transactions.index', 'buttonText' => 'Add Transaction'])
 				</form>	
 			</div>

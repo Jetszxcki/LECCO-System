@@ -53,12 +53,15 @@ class TransactionsController extends Controller
             }
     	}
     	
-    	Transaction::create($this->validateRequest($request));
+        
+        [$main_data, $details_data] = $this->validateRequest($request);
+        $details_data = json_decode($details_data['transaction_details'], true);// 2nd args is to assoc, parse as hash instead of object
+    	Transaction::createWithDetails($main_data, $details_data);
 
     	return redirect('transactions')->with([
             'message' => "Transaction successfully added.",
             'styles' => 'alert-success'
-      ]);
+        ]);
     }
 
     public function destroy(Transaction $transaction)
@@ -70,6 +73,21 @@ class TransactionsController extends Controller
         ]);
     }
 
+    
+    public function edit(Transaction $transaction)
+    {
+        $model = $transaction;
+        $attrWithChoices = $this->attributesWithChoices();
+    	$columns = ColumnUtil::getColNamesAndTypes('transactions', $attrWithChoices);
+    	$columns['transaction_code_id']['type'] = 'none';
+        
+        $accounts = Account::all();
+        
+        session()->now('message', 'NOTE: Changing loan will reset payment schedule.');
+        session()->now('styles', 'alert-danger');
+        return view('loans.edit', compact('model', 'columns'));
+    }
+    
     private function attributesWithChoices()
     {
     	$journals = ['CV', 'APV', 'JV'];
@@ -80,11 +98,22 @@ class TransactionsController extends Controller
 
     private function validateRequest($request)
     {
-    	return $request->validate([
+    	$base_validation = $request->validate([
     		'transaction_code' => 'required',
     		'transaction_code_id' => 'required',
             'transaction_details' => 'required'
     	]);
+        
+        $main_data = $request->validate([
+    		'transaction_code' => 'required',
+    		'transaction_code_id' => 'required'
+    	]);
+        
+        $details_data = $request->validate([
+            'transaction_details' => 'required'
+    	]);
+        
+        return [$main_data, $details_data];
     }
 
     public function findFirstMissingID($array, $start, $end) 

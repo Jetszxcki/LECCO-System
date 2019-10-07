@@ -10,7 +10,7 @@ function addDetail(form){
     let credit = form.querySelector('[name=credit]').valueAsNumber;
     
     let detail_object = new Object();
-    detail_object.account = account;
+    detail_object.account_code = account;
     detail_object.debit = debit || 0;
     detail_object.credit = credit || 0;
     
@@ -51,7 +51,7 @@ function renderDetails(){
         
         let account_cell = document.createElement("TD");
         account_cell.setAttribute('class', 'col-md');
-        account_cell.innerHTML = getAccountById(item.account).account_code;
+        account_cell.innerHTML = getAccountById(item.account_code).account_code;
         
         let debit_cell = document.createElement("TD");
         debit_cell.setAttribute('class', 'col-md');

@@ -9,6 +9,8 @@ use App\Account;
 
 class TransactionDetail extends Model
 {
+    protected $guarded = [];
+    
     public function transaction()
     {
     	return $this->belongsTo(Transaction::class, 'transaction_id');
