@@ -72,7 +72,11 @@ class TransactionsController extends Controller
             'styles' => 'alert-danger'
         ]);
     }
-
+    
+    public function show(Transaction $transaction)
+    {	
+    	return view('transactions.show', compact('transaction'));
+    }
     
     public function edit(Transaction $transaction)
     {

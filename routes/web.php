@@ -73,6 +73,7 @@ Route::patch('payment_schedule/down/{loan}/{payment_schedule}', 'PaymentSchedule
 Route::get('transactions', 'TransactionsController@index')->name('transactions.index')->middleware(['auth', 'accessRight:transactions_view_list']);
 Route::get('transactions/create', 'TransactionsController@create')->name('transactions.create')->middleware(['auth', 'accessRight:transactions_create,transactions_view_list']);
 Route::post('transactions', 'TransactionsController@store')->name('transactions.store')->middleware(['auth', 'accessRight:transactions_create,transactions_view_list']);
+Route::get('transactions/{transaction}', 'TransactionsController@show')->name('transactions.show')->middleware(['auth', 'accessRight:transactions_view,transactions_view_list']);
 Route::delete('transactions/{transaction}', 'TransactionsController@destroy')->name('transactions.destroy')->middleware(['auth', 'accessRight:transactions_delete,transactions_view_list']);
 
 // CHART OF ACCOUNTS

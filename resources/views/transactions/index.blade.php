@@ -34,6 +34,7 @@
 				<td class="col-md-2">{{ $transaction->transaction_code_id }}</td>
 				<td class="col-md-2">{{ $transaction->user_created->name }}</td>
 				<td nosearch class="col d-flex flex-row align-items-center justify-content-center">
+                    <a href="{{ route('transactions.show', [$transaction]) }}" class="btn btn-success mr-1">View</a>
 					{{-- @accessright('member_delete') --}}
 						<form action="{{ route('transactions.destroy', [$transaction]) }}" method="POST">
 							@method('DELETE')

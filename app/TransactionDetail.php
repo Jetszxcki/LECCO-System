@@ -18,6 +18,6 @@ class TransactionDetail extends Model
 
     public function account()
     {
-    	return $this->belongsTo(Account::class, 'account_id');
+    	return $this->belongsTo(Account::class, 'account_code');
     }
 }

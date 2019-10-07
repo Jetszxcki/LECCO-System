@@ -25,6 +25,15 @@ class Transaction extends Model
         return json_encode($this->transaction_details()->select(['account_code', 'debit', 'credit'])->get()); // use this to get details for form;
     }
     
+    public function getTotalDebitAttribute()
+    {
+        return $this->transaction_details()->get()->sum(['debit']); // use this to get details for form;
+    }
+    
+    public function getTotalCreditAttribute()
+    {
+        return $this->transaction_details()->get()->sum(['credit']); // use this to get details for form;
+    }
 
     public function transaction_details()
     {
