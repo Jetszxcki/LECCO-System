@@ -83,15 +83,11 @@ class AccountsController extends Controller
 
     private function validatedRequest($request)
     {
-        $validator = $request->validate([
+        return $request->validate([
             'name' => 'required',
             'description' => 'nullable',
             'parent_account' => 'required',
             'account_code' => 'required|unique:accounts'
         ]);
-
-        if ($validator->fails()) {
-            dd('poat');
-        }
     }
 }
