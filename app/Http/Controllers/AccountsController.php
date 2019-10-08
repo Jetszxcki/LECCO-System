@@ -34,7 +34,7 @@ class AccountsController extends Controller
 
     public function update(Request $request, Account $account)
     {
-        $data = $this->validatedRequest($request);
+        $data = $this->validatedRequest($request, $account);
 
         $parent_code = $request['parent_account'];
         $account_code = $request['account_code'];
@@ -81,13 +81,13 @@ class AccountsController extends Controller
     //     ];
     // }
 
-    private function validatedRequest($request)
+    private function validatedRequest($request, $account = null)
     {
         return $request->validate([
             'name' => 'required',
             'description' => 'nullable',
             'parent_account' => 'required',
-            'account_code' => 'required|unique:accounts'
+            'account_code' => 'required|unique:accounts,account_code,' . ($account != null ? $account->id : '')
         ]);
     }
 }
