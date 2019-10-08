@@ -3,7 +3,10 @@ const form_header_id = '#form-header';
 const form_button_id = '#form-btn';
 const form_id = '#form-main';
 const patcher_id = '#patcher';
-const new_account_btn = '#new-acct-btn';
+const new_account_btn_id = '#new-acct-btn';
+const select_parent_btn_name = '[name="select-parent-btn"]';
+
+let CURRENT_VIEW_MODE = 'add';
 
 const form_input_ids = [
 	'input#name', 
@@ -16,10 +19,15 @@ function toggle(id) {
 	$(id).children().animate({ height: 'toggle', opacity: 'toggle' }, 'fast');
 }
 
+function changeHeaderName(header) {
+    $(form_header_id).html(header);
+}
+
 function reverseString(string) {
 	return string.split('').reverse().join('');
 }
 
+// disable input fields or not
 function disableFields(bool) {
 	for (id of form_input_ids) {
 		if (id !== 'input#parent_account') {
@@ -28,21 +36,14 @@ function disableFields(bool) {
 	}
 }
 
+// clear form input fields
 function clearInputs() {
 	for (id of form_input_ids) {
 		$(id).val('');
 	}
 }
 
-function cleanForm() {
-	$(form_header_id).html('NEW ACCOUNT');
-	$(form_button_id).show();
-
-	disableFields(false);
-	clearErrorNotifs();
-	clearInputs();	
-}
-
+// remove error messages and error borders
 function clearErrorNotifs() {
 	for (id of form_input_ids) {
 		let span_id = id.replace('input', 'span');
@@ -56,6 +57,7 @@ function clearErrorNotifs() {
 	}
 }
 
+// change form input values
 function setFormValues(account) {
 	for (id of form_input_ids) {
 		let column_name = id.substring(id.indexOf('#') + 1);
@@ -63,49 +65,68 @@ function setFormValues(account) {
 	}
 }
 
- // function triggered when add account button (row) is clicked
+ // set parent account field in form via click on button row
 function setParentAccount(account) {
-    const header_text = $(form_header_id).html();
-    const parent_account_input_text = $(form_input_ids[2]).val();
-
-    // if view mode is currently SHOW
-    if (header_text.includes('VIEW')) {
-    	cleanForm();
-    }
-   	// enable change of parent_account only when edit and create mode
-    else  {
-    	// disables the ADD ACCOUNT "row" button when editing an account with no parent
-    	if (header_text.includes('EDIT') && parent_account_input_text === 'none') {
-    		return;
-    	}
-    }
-
-   	// change parent_account input value in form
     $(form_input_ids[2]).val(account.account_code);
 }
 
-function viewMode(view_mode, account) {
-    if (view_mode === 'show') {
-        $(form_header_id).html(`VIEW - ${account.account_code} (${account.name})`);
-        $(form_button_id).hide();
+// show or hide set parent buttons (blue button)
+function hideSetParentButtons(bool, account, hasChildren) {
+    const get_parent_btns = {...$(select_parent_btn_name)};
 
-        processCreateRoute();
-        
-    } else if (view_mode === 'edit') {
-        $(form_header_id).html(`EDIT - ${account.account_code} (${account.name})`);
-        $(form_button_id).html('Save Changes');
-        $(form_button_id).show();
+    for (prop in get_parent_btns) {
+        let id = get_parent_btns[prop].id;
+        if (id !== undefined) {
+            if (! hasChildren) {
+                $(`#${id}`).css('visibility', bool ? 'hidden' : 'visible');
 
-        processUpdateRoute(account);
+                if (CURRENT_VIEW_MODE === 'edit') {
+                    let code = id.replace('select-parent-btn-', '');
+                    if (account.account_code === code) {
+                        $(`#${id}`).css('visibility', 'hidden');
+                    }
+                }
+            } else {
+                $(`#${id}`).css('visibility', 'hidden');
+            }
+        }
     }
-
-    $(new_account_btn).show();
-    disableFields(view_mode === 'show');
-    clearErrorNotifs();
-    setFormValues(account);
 }
 
-function processCreateRoute() {
+// change form contents according to view mode
+function viewMode(view_mode, account = null, hasChildren = false) {
+    CURRENT_VIEW_MODE = view_mode;
+
+    const addMode = view_mode === 'add';
+    const showMode = view_mode === 'show';
+    const editMode = view_mode === 'edit';
+    const account_name = account ? `${account.account_code} (${account.name})` : '';
+
+    if (addMode) {
+        $(form_button_id).html('Add Account');
+        changeHeaderName('NEW ACCOUNT');
+        setDefaultRoute();
+        clearInputs();  
+    } else if (showMode) {
+        changeHeaderName(`VIEW - ${account_name}`);
+        setDefaultRoute();
+    } else if (editMode) {
+        $(form_button_id).html('Save Changes');
+        changeHeaderName(`EDIT - ${account_name}`);
+        setUpdateRoute(account);
+    }
+
+    $(new_account_btn_id).css('visibility', addMode ? 'hidden' : 'visible');
+    $(form_button_id).css('visibility', showMode ? 'hidden' : 'visible');
+
+    hideSetParentButtons(showMode, editMode ? account : null, hasChildren);
+    disableFields(showMode);
+    clearErrorNotifs();
+    if (account) setFormValues(account);
+}
+
+// manual change of route to accounts.index
+function setDefaultRoute() {
 	let action = $(form_id).attr('action');
 
 	if (action.endsWith('/')) {
@@ -115,9 +136,12 @@ function processCreateRoute() {
     	action = reverseString(action);
     	$(form_id).attr('action', action);
     }
+
+    $(patcher_id).remove();
 }
 
-function processUpdateRoute(account) {
+// manual change of route to accounts.update
+function setUpdateRoute(account) {
     let action = $(form_id).attr('action');
 
     if (! action.endsWith('/')) {
@@ -129,10 +153,10 @@ function processUpdateRoute(account) {
 
     // converts the form to an "update form"
     let route = `${$(form_id).attr('action')}${account.id}/`;
-    // // created a removable @method('PATCH') since @method('PATCH') cannot be removed once called
+    // created a removable @method('PATCH') since @method('PATCH') cannot be removed once called
     let patcher_input = '<input id="patcher" type="hidden" name="_method" value="PATCH">';
 
     $(form_id).attr('action', route);
+    $(patcher_id).remove();
     $(form_id).append(patcher_input);
 }
-

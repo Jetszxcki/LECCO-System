@@ -5,15 +5,17 @@
 	@include('partials.flash')
 
 	<div class="d-flex flex-row justify-content-between">
-		<div class="card" style="width: 25%">
-			<div class="card-header">
+		<div class="card" style="width:30%">
+			<div class="card-header d-flex flex-row justify-content-center">
 				<img class="static-img" src="{{ asset('images/' . $member->profile_picture) }}" />
 			</div>
 		</div>
 
-		<div class="card" style="width: 72%">
+		<div class="card" style="width: 68%">
 			<div class="card-body">
-				
+				<div class="row">
+					<div class="col-md-12">{{ $member->full_name }}</div>
+				</div>
 			</div>
 		</div>
 	</div>

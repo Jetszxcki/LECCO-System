@@ -45,18 +45,32 @@
 
     @endif
 
-        <div class="col-md-9">{{ $account->full_account_name }}</div>
-        <div class="btn-container col-md-2">
+        <div class="col-md-{{ $level == 3 ? '10' : '8' }}">{{ $account->full_account_name }}</div>
+        <div class="btn-container col-md-{{ $level == 3 ? '2' : '3' }}">
+            @if ($level != 3)
+                @accessright('chart_of_accounts_create')
+                    <a 
+                        id="select-parent-btn-{{ $account->account_code }}"
+                        name="select-parent-btn" 
+                        class="btn btn-size btn-primary mr-1"
+                        onclick="setParentAccount({{ $account }})" 
+                    >
+                    </a>
+                @endaccessright
+            @endif
+
             @accessright('chart_of_accounts_view')
-                <a class="btn btn-size btn-success mr-1"
-                   onclick="viewMode('show', {{ $account }})"
+                <a 
+                    class="btn btn-size btn-success mr-1"
+                    onclick="viewMode('show', {{ $account }})"
                 >
                 </a>
             @endaccessright
 
             @accessright('chart_of_accounts_edit') 
-                <a class="btn btn-size btn-warning" 
-                   onclick="viewMode('edit', {{ $account }})"
+                <a 
+                    class="btn btn-size btn-warning" 
+                    onclick="viewMode('edit', {{ $account }}, {{ $account->hasChildren() }})"
                 >
                 </a> 
             @endaccessright

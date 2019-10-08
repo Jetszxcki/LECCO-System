@@ -49,6 +49,15 @@ class AccountsController extends Controller
             $notif['message'] = 'Unable to update. Account must not have the same parent account and account code.';
             $notif['styles'] = 'alert-danger';
         } else {
+            // check if account_code has been changed
+            if ($account_code != $account->account_code) {
+                if($account->hasChildren()) {
+                    foreach ($account->children as $child) {
+                        $child->parent_account = $account_code;
+                        $child->update($child->getAttributes());
+                    }
+                }
+            }
             $account->update($data);
         }
 
@@ -74,11 +83,15 @@ class AccountsController extends Controller
 
     private function validatedRequest($request)
     {
-        return $request->validate([
+        $validator = $request->validate([
             'name' => 'required',
-            'description' => '',
+            'description' => 'nullable',
             'parent_account' => 'required',
-            'account_code' => 'required'
+            'account_code' => 'required|unique:accounts'
         ]);
+
+        if ($validator->fails()) {
+            dd('poat');
+        }
     }
 }

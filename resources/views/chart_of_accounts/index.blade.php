@@ -8,8 +8,8 @@
         <button 
             id="new-acct-btn" 
             class="btn btn-primary" 
-            style="display: none;" 
-            onclick="cleanForm()"
+            style="visibility: hidden;" 
+            onclick="viewMode('add')"
         >
             New Account
         </button>
@@ -52,7 +52,7 @@
             {{-- 1st level end --}}
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5 mb-4">
             <div id="form-holder" class="card">
                 <div id="form-header" class="card-header text-md-center">NEW ACCOUNT</div>
                 <div id="form-body" class="card-body">
@@ -71,7 +71,11 @@
                 <label class="legend-label">Edit</label>
                 <div class="b-rad-4 btn-size btn-danger"></div>
                 <label class="legend-label">Delete</label>
-                <div class="b-rad-4 btn-size btn-toggle"></div>
+                <div class="b-rad-4 btn-size btn-primary"></div>
+                <label class="legend-label">Set as Parent Account</label>
+            </div>
+            <div class="d-flex flex-row justify-content-start mt-2">
+                <div class="b-rad-4 btn-size btn-toggle mr-3"></div>
                 <label class="legend-label">Hide/Show Children</label>
             </div>
         </div>
