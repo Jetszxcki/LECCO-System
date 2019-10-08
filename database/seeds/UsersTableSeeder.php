@@ -15,13 +15,13 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name' => 'admin',
             'email' => 'admin@lecco.com',
-            'password' => bcrypt('123456'),
+            'password' => bcrypt('leccosystemadmin'),
         ]);
 
         $user2 = User::create([
             'name' => 'admin2',
             'email' => 'admin2@lecco.com',
-            'password' => bcrypt('123456'),
+            'password' => bcrypt('leccosystemadmin'),
         ]);
 
          DB::table('access_rights')->insert([
@@ -78,7 +78,7 @@ class UsersTableSeeder extends Seeder
             // 'check_voucher_delete' => true,
         ]);
 
-          DB::table('access_rights')->insert([
+        DB::table('access_rights')->insert([
             'user_id' => $user2->id,
 
             'user_view_list' => true,
@@ -103,22 +103,29 @@ class UsersTableSeeder extends Seeder
             'loans_edit' => true,
             'loans_delete' => true,
 
+            'chart_of_accounts_view_list' => true,
+            'chart_of_accounts_view' => true,
+            'chart_of_accounts_create' => true,
+            'chart_of_accounts_edit' => true,
+            'chart_of_accounts_delete' => true,
+
+            'transactions_view_list' => true,
+            'transactions_view' => true,
+            'transactions_create' => true,
+            'transactions_edit' => true,
+            'transactions_delete' => true,
+
             'shares_view_list' => true,
             'shares_view' => true,
             'shares_create' => true,
             'shares_edit' => true,
             'shares_delete' => true,
 
-            // 'coa_view' => true,
-            // 'coa_create' => true,
-            // 'coa_edit' => true,
-            // 'coa_delete' => true,
-
             'signatories_view_list' => true,
             'signatories_create' => true,
             'signatories_edit' => true,
             'signatories_delete' => true,
-            
+
             // 'check_voucher_view' => true,
             // 'check_voucher_create' => true,
             // 'check_voucher_edit' => true,
