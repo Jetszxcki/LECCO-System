@@ -22,7 +22,6 @@ class SharesController extends Controller
         $attrWithChoices = $this->attributesWithChoices();
     	$columns = ColumnUtil::getColNamesAndTypes('shares', $attrWithChoices);
     	$model = new Share();
-    	// $members = Member::names()->get();
         
     	return view('shares.create', compact('columns', 'model'));
     }
@@ -80,19 +79,4 @@ class SharesController extends Controller
             'member_id' => Member::names()->get()->pluck('full_name', 'id')
         ];
     }
-
-	#transforms_column data for more user defined arguments
-	// private function getFormData()
-	// {
-	// 	$columns = ColumnUtil::getColNamesAndTypes('shares');
-	// 	foreach ($columns as $column_name => $column_type){
-	// 		$columns[$column_name] = [
-	// 			'type' => $column_type,
-	// 			'choices' => null,
-	// 		];
-	// 	}
-		
-	// 	$columns['member_id']['choices'] = Member::names()->get()->pluck('full_name', 'id');
-	// 	return $columns;
-	// }
 }

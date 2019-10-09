@@ -47,8 +47,8 @@ class LoanTypesController extends Controller
 
     public function update(Request $request, LoanType $loan_type)
     {
-        $loan_type->update($this->validateRequest($request));
-        return redirect('loan_types/' . $loan_type->name)->with([
+        $loan_type->update($this->validateRequest($request, $loan_type));
+        return redirect('loan_types')->with([
             'message' => "{$loan_type->name} successfully updated.",
             'styles' => 'alert-success'
         ]);
@@ -62,25 +62,11 @@ class LoanTypesController extends Controller
             'styles' => 'alert-danger'
         ]);
     }
-
-	#transforms_column data for more user defined arguments
-	// private function getFormData()
-	// {
-	// 	$columns = ColumnUtil::getColNamesAndTypes('loan_types');
-	// 	foreach ($columns as $column_name => $column_type){
-	// 		$columns[$column_name] = [
-	// 			'type' => $column_type,
-	// 			'choices' => null,
-	// 		];
-	// 	}
-		
-	// 	return $columns;
-	// }
 	
-    private function validateRequest($request)
+    private function validateRequest($request, $loan_type = null)
     {
         return $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:loan_types,name,' . ($loan_type != null ? $loan_type->id : ''),
             'interest_per_annum' => 'required',
             'amount_minimum' => 'required|lte:amount_maximum',
             'amount_maximum' => 'required|gte:amount_minimum',
