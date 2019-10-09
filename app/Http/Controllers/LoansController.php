@@ -127,7 +127,7 @@ class LoansController extends Controller
             'loan_type' => 'required',
             'amount' => 'required|gte:0',
             'term' => 'required|gte:0',
-            'remarks' => '',
+            'remarks' => 'nullable',
             'start_of_payment' => 'required',
             'interest_per_annum' => 'required|gte:0',
 		]);
