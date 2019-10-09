@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header text-md-center">NEW TRANSACTION</div>
 			<div class="card-body">
-				<form action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
+				<form onsubmit="return checkBalance()" action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="transaction_details" id="transaction_details" value="{{ old('transaction_details') ?? $model->transaction_details_as_json }}"/>
 					@include('partials.form', [compact('columns'), 'route' => 'transactions.index', 'buttonText' => 'Add Transaction'])
 				</form>	
@@ -19,6 +19,7 @@
 			<div class="card">
 				<div class="card-header text-md-center">Transaction Details</div>
 				<div id="transaction-details" class="card-body">
+                    <div class="row"><p id="transaction-details-error"></p></div>
                     <table class="container" id="transaction-details-table">
                         <thead>
                             <tr id="theader" class="d-flex p-1 mb-3 text-center">
@@ -34,7 +35,7 @@
                     </table>
                     <hr/>
                     <div class="container">
-                        <form onSubmit="addDetail(this)" action="javascript:void(0);">
+                        <form onSubmit="return addDetail(this)" action="javascript:void(0);">
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="account">Account</label>

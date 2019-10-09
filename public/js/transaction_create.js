@@ -72,6 +72,57 @@ function renderDetails(){
         
         table_body.appendChild(row);
     });
+    
+    let total_debit = 0;
+    let total_credit = 0;
+    transaction_details.forEach(function(item, index){
+        total_credit = item.credit;
+        total_debit = item.debit;
+    });
+    let row = document.createElement("TR");
+    row.setAttribute('class', 'p-1 mb-2 text-center');
+    
+    let account_cell = document.createElement("TD");
+    account_cell.setAttribute('class', 'col-md');
+    account_cell.innerHTML = `Total`;
+    
+    let debit_cell = document.createElement("TD");
+    debit_cell.setAttribute('class', 'col-md');
+    debit_cell.innerHTML = total_debit;
+    
+    let credit_cell = document.createElement("TD");
+    credit_cell.setAttribute('class', 'col-md');
+    credit_cell.innerHTML = total_credit;
+    
+    let delete_cell = document.createElement("TD");
+    delete_cell.setAttribute('class', 'col-md-1');
+    
+    row.appendChild(account_cell);
+    row.appendChild(debit_cell);
+    row.appendChild(credit_cell);
+    row.appendChild(delete_cell);
+    
+    table_body.appendChild(row);
+}
+
+function checkBalance(){
+    let transaction_details_field = document.getElementById("transaction_details");
+    let transaction_details = JSON.parse(transaction_details_field.value);
+    
+    let total_debit = 0;
+    let total_credit = 0;
+    transaction_details.forEach(function(item, index){
+        total_credit = item.credit;
+        total_debit = item.debit;
+    });
+    if(total_credit === total_debit){
+        transaction_details_error.innerHTML = "";
+        return true;
+    }else{
+        let transaction_details_error = document.getElementById("transaction-details-error");
+        transaction_details_error.innerHTML = "Transaction is not balanced!";
+        return false;
+    }
 }
 
 function getAccountById(id){
