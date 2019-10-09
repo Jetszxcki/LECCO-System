@@ -43,7 +43,7 @@
 							@method('DELETE')
 							@csrf
 
-							<button type="submit" class="btn btn-danger">Delete</button>
+							<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this member?')">Delete</button>
 						</form>
 					@endaccessright
 				</td>

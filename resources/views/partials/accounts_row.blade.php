@@ -81,7 +81,7 @@
                         @method('DELETE')
                         @csrf
 
-                        <button type="submit" class="btn btn-size btn-danger" style="width: 20px"></button> 
+                        <button type="submit" class="btn btn-size btn-danger" style="width: 20px" onclick="return confirm('Are you sure you want to delete this account?')"></button> 
                     </form>
                 @endif
             @endaccessright

@@ -14,7 +14,7 @@
 				@method('DELETE')
 				@csrf
 
-				<button type="submit" class="btn btn-danger">Delete</button>
+				<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this loan type?')">Delete</button>
 			</form>
 		@endaccessright
 	</div>

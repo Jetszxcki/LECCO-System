@@ -32,7 +32,7 @@
                                 <form action="{{ route('transactions.destroy', [$transaction]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this transaction?')">Delete</button>
                                 </form>
                             @endaccessright
                         </div>
