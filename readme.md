@@ -35,6 +35,10 @@
 - Repository: https://github.com/Jetszxcki/LECCO-System
 - SSH : git@github.com:Jetszxcki/LECCO-System.git
 
+#### Font Package:
+- Apply this step only if production of system is done in an offline environment (local).
+- Extract the Nunito.zip file (found at the repo) or download the font at https://fonts.google.com/specimen/Nunito and install it to your computer system.
+
 #### Run Laravel server:
 - Run: `php artisan serve`
     - If it runs but localhost:8000 keeps loading, run `php artisan config:cache` then restart server.
