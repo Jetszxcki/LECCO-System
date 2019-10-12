@@ -18,7 +18,7 @@ class CreateMembersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birthday');
-            $table->unsignedInteger('age');
+            // $table->unsignedInteger('age');
             $table->string('gender');
             $table->string('civil_status');
             $table->string('religion');

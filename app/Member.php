@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 use App\Share;
 use App\Loan;
@@ -20,6 +21,11 @@ class Member extends Model
 	{
 	    return "{$this->first_name} {$this->last_name}";
 	}
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes['birthday'])->age;
+    }
 
 	public function getBdayAttribute()
 	{
