@@ -17,11 +17,12 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('transaction_code');
             $table->bigInteger('transaction_code_id');
-            // $table->string('payee');
-            // $table->date('transaction_date');
-            // $table->date('date_disbursed')->nullable();
-            // $table->string('disbursed_by');
-            // $table->string('description');
+            
+            $table->string('payee');
+            $table->date('transaction_date');
+            $table->date('date_disbursed')->nullable();
+            $table->string('disbursed_by');
+            $table->string('description');
             
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->nullable();

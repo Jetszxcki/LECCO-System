@@ -54,6 +54,12 @@ class UsersTableSeeder extends Seeder
             'chart_of_accounts_create' => true,
             'chart_of_accounts_edit' => true,
             'chart_of_accounts_delete' => true,
+            
+            'check_vouchers_view_list' => true,
+            'check_vouchers_view' => true,
+            'check_vouchers_create' => true,
+            'check_vouchers_edit' => true,
+            'check_vouchers_delete' => true,
 
             'transactions_view_list' => true,
             'transactions_view' => true,
@@ -71,11 +77,6 @@ class UsersTableSeeder extends Seeder
             'signatories_create' => true,
             'signatories_edit' => true,
             'signatories_delete' => true,
-
-            // 'check_voucher_view' => true,
-            // 'check_voucher_create' => true,
-            // 'check_voucher_edit' => true,
-            // 'check_voucher_delete' => true,
         ]);
 
         DB::table('access_rights')->insert([
@@ -109,6 +110,12 @@ class UsersTableSeeder extends Seeder
             'chart_of_accounts_edit' => true,
             'chart_of_accounts_delete' => true,
 
+            'check_vouchers_view_list' => true,
+            'check_vouchers_view' => true,
+            'check_vouchers_create' => true,
+            'check_vouchers_edit' => true,
+            'check_vouchers_delete' => true,
+
             'transactions_view_list' => true,
             'transactions_view' => true,
             'transactions_create' => true,
@@ -125,11 +132,6 @@ class UsersTableSeeder extends Seeder
             'signatories_create' => true,
             'signatories_edit' => true,
             'signatories_delete' => true,
-
-            // 'check_voucher_view' => true,
-            // 'check_voucher_create' => true,
-            // 'check_voucher_edit' => true,
-            // 'check_voucher_delete' => true,
         ]);
     }
 }

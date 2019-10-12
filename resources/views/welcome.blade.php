@@ -30,29 +30,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{-- {{ config('app.name') }} --}}
-                </div>
-            </div>
-
-            <div class="bg-dark" style="width: 70%">
-                <button 
-                    class="navbar-toggler" 
-                    type="button" 
-                    data-toggle="collapse" 
-                    data-target="#navbarSupportedContent" 
-                    aria-controls="navbarSupportedContent" 
-                    aria-expanded="false" 
-                    aria-label="{{ __('Toggle navigation') }}"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link">
-                            </a>
-                    </ul>
+                    {{ config('app.name') }}
                 </div>
             </div>
         </div>

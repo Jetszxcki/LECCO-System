@@ -9,13 +9,7 @@
         </div>
     @endif
 
-    <div class="d-flex flex-wrap"{{--  id="draggable-div" --}}>
-        {{-- <a href="" class="btn btn-primary rounded-circle px-3 py-2" id="left-scroll-btn">
-            <span><</span>
-        </a>
-        <a href="" class="btn btn-primary rounded-circle px-3 py-2" id="right-scroll-btn">
-            <span>></span>
-        </a> --}}
+    <div class="d-flex flex-wrap">
 
         @accessright('user_view_list')
             @include('partials.home_panel', ['header' => 'USERS', 'href' => 'users.index', 'image' => 'user_btn_img.jpg'])
@@ -37,6 +31,10 @@
         @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'accounts.index', 'image' => 'user.jpg'])
         @endhasAccessRights
 
+        @accessright('check_vouchers_view_list')
+            @include('partials.home_panel', ['header' => 'CHECK VOUCHERS', 'href' => 'check_vouchers.index', 'image' => 'user.jpg'])
+        @endaccessright
+
         @accessright('transactions_view_list')
         @include('partials.home_panel', ['header' => 'TRANSACTIONS', 'href' => 'transactions.index', 'image' => 'user.jpg'])
         @endaccessright
@@ -49,15 +47,17 @@
             @include('partials.home_panel', ['header' => 'SIGNATORIES', 'href' => 'signatories.index', 'image' => 'signatory_btn_img.jpg'])
         @endaccessright
 
-    <script type="text/javascript">
-        const flashTimer = function () {
-            setTimeout(function() { 
-               $('#flash-msg').fadeOut(); 
-           }, 3000);
-        }
 
-        window.addEventListener('load', function() {
-            flashTimer();
-        });
-    </script>
+        <script type="text/javascript">
+            const flashTimer = function () {
+                setTimeout(function() { 
+                   $('#flash-msg').fadeOut(); 
+               }, 3000);
+            }
+
+            window.addEventListener('load', function() {
+                flashTimer();
+            });
+        </script>
+    </div>
 @endsection
