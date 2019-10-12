@@ -20,7 +20,7 @@ class CreateSharesTable extends Migration
             $table->decimal('price');
             $table->decimal('amount');
             $table->timestamps();
-			$table->foreign('member_id')->references('id')->on('members');
+			$table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
         });
     }
 
