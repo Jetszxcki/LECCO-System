@@ -76,8 +76,8 @@ function renderDetails(){
     let total_debit = 0;
     let total_credit = 0;
     transaction_details.forEach(function(item, index){
-        total_credit = item.credit;
-        total_debit = item.debit;
+        total_credit = total_credit + item.credit;
+        total_debit = total_debit + item.debit;
     });
     let row = document.createElement("TR");
     row.setAttribute('class', 'p-1 mb-2 text-center');
@@ -112,15 +112,15 @@ function checkBalance(){
     let total_debit = 0;
     let total_credit = 0;
     transaction_details.forEach(function(item, index){
-        total_credit = item.credit;
-        total_debit = item.debit;
+        total_credit = total_credit + item.credit;
+        total_debit = total_debit + item.debit;
     });
     if(total_credit === total_debit){
         transaction_details_error.innerHTML = "";
         return true;
     }else{
         let transaction_details_error = document.getElementById("transaction-details-error");
-        transaction_details_error.innerHTML = "Transaction is not balanced!";
+        transaction_details_error.innerHTML = "Transaction is not balanced! Credit = " + total_credit + "|Debit = " + total_debit;
         return false;
     }
 }
