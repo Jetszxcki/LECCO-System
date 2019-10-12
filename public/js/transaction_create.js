@@ -120,7 +120,7 @@ function checkBalance(){
         return true;
     }else{
         let transaction_details_error = document.getElementById("transaction-details-error");
-        transaction_details_error.innerHTML = "Transaction is not balanced! Credit = " + total_credit + "|Debit = " + total_debit;
+        transaction_details_error.innerHTML = "Transaction is not balanced!";
         return false;
     }
 }
