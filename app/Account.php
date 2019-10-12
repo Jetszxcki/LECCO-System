@@ -51,14 +51,17 @@ class Account extends Model
     }
     
     // change func name
-    public function getDetailsReportAttribute()
+    /*
+        journal : can be array form
+        start_date/end_date : work in progress
+    */
+    public function getDetailsReport($journal = 'CV', $start_date = NULL, $end_date = NULL)
     {
-        $journal = 'CV';
         $totals = [
             'main' => ['debit' => 0, 'credit' => 0],
             'children' => ['debit' => 0, 'credit' => 0]
         ];
-        $transactions =  Transaction::all()->where('transaction_code', $journal)->pluck('id');
+        $transactions =  Transaction::all()->whereIn('transaction_code', $journal)->pluck('id');
         $transaction_details = $this->transaction_details()->whereIn('transaction_id', $transactions)->get(['debit', 'credit']);
         $totals['main']['debit'] = $transaction_details->sum('debit');
         $totals['main']['credit'] = $transaction_details->sum('credit');
@@ -66,7 +69,7 @@ class Account extends Model
         if($this->hasChildren())
         {
             foreach($this->children()->get() as $child){
-                $child_totals = $child->details_report;
+                $child_totals = $child->getDetailsReport($journal);
                 $totals['children']['debit'] = $totals['children']['debit'] + $child_totals['total']['debit'];
                 $totals['children']['credit'] = $totals['children']['credit'] + $child_totals['total']['credit'];
             }
