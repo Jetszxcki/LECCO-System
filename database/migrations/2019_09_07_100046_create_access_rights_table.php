@@ -43,6 +43,12 @@ class CreateAccessRightsTable extends Migration
             $table->boolean('chart_of_accounts_edit')->default(false);
             $table->boolean('chart_of_accounts_delete')->default(false);
 
+            $table->boolean('check_vouchers_view_list')->default(true);
+            $table->boolean('check_vouchers_view')->default(true);
+            $table->boolean('check_vouchers_create')->default(false);
+            $table->boolean('check_vouchers_edit')->default(false);
+            $table->boolean('check_vouchers_delete')->default(false);
+
             $table->boolean('transactions_view_list')->default(true);
             $table->boolean('transactions_view')->default(true);
             $table->boolean('transactions_create')->default(false);
@@ -59,11 +65,6 @@ class CreateAccessRightsTable extends Migration
             $table->boolean('signatories_create')->default(false);
             $table->boolean('signatories_edit')->default(false);
             $table->boolean('signatories_delete')->default(false);
-
-            // $table->boolean('check_voucher_view')->default(true);
-            // $table->boolean('check_voucher_delete')->default(false);
-            // $table->boolean('check_voucher_create')->default(false);
-            // $table->boolean('check_voucher_edit')->default(false);
 
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
