@@ -39,13 +39,9 @@
                             @foreach($children->children as $grand_children)
                                 @include('partials.accounts_row', ['account' => $grand_children, 'level' => 3])
                             @endforeach
-
-                           {{-- @include('partials.add_account_btn', ['level' => 3]) --}}
                         </div>
                         {{-- 3rd level end --}}
                     @endforeach
-
-                    {{-- @include('partials.add_account_btn', ['level' => 2]) --}}
                 </div>
                 {{-- 2nd level end --}}
             </div>
