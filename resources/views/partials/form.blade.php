@@ -3,13 +3,15 @@
 @foreach ($columns as $column_name => $column_data)
 	{{-- for testing purposes --}}
 	@if($column_data['type'] == 'none')
-			@continue
+		@continue
 	@endif
 	{{-- end --}}
 	@if ( !in_array($column_name, array('id', 'created_at', 'updated_at', 'created_by', 'updated_by')) )
 		<div class="form-group row">	
 			@if ($column_name == 'member_id')
 				<label for="{{ $column_name }}" class="col-md-4 col-form-label text-md-right">Member</label>
+			@elseif ($column_name == 'cv_no')
+				<label for="{{ $column_name }}" class="col-md-4 col-form-label text-md-right">CV No</label>
 			@else
 	 			<label for="{{ $column_name }}" class="col-md-4 col-form-label text-md-right">{{ $model->getColumnNameForView($column_name) }}</label>
 	 		@endif
@@ -42,7 +44,7 @@
 					<input type="number" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" id="{{ $column_name }}" {{ $column_name == 'total' ? 'oninput=calculateAmount()' : '' }} @disabled($column_data) readonly @enddisabled>
 					
 				@elseif($column_data['type'] == 'string')
-					@if ($column_name == 'profile_picture')
+					@if (in_array($column_name, array('profile_picture', 'attachment')))
 						<input type="file" name="{{ $column_name }}" id="{{ $column_name }}" class="form-control-file @error($column_name) is-invalid @enderror" value="{{ old($column_name) ?? $model[$column_name] }}" aria-describedby="fileHelp">
 						<small id="fileHelp" class="form-text text-muted">Size of image should not be more than 2MB.</small>
 					@else
@@ -80,10 +82,10 @@
 @endforeach	
 
 <div class="form-group row mb-0">
-    <div class="col-md-6 offset-md-4">
-		<button id="form-btn" type="submit" class="btn btn-primary mb-2">{{ $buttonText }}</button>	
+    <div class="col-md-6 offset-md-4 d-flex flex-row">		
+		<button id="form-btn" type="submit" class="btn btn-primary">{{ $buttonText }}</button>	
 		@if($route != 'none')
-			<a id="cancel-form-btn" href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger">Cancel</a>
+			<a id="cancel-form-btn" href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger ml-2">Cancel</a>
 		@endif
 	</div>
 </div>
