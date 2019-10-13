@@ -74,6 +74,12 @@ class AccountsController extends Controller
         ]);
     }
     
+    public function summaryOfAccounts()
+    {
+        $main = Account::main();
+        return view('journal.journal_report', compact('main'));
+    }
+    
     // private function attributesWithChoices()
     // {
     //     return [
