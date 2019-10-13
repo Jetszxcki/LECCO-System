@@ -81,7 +81,7 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
-		<button id="form-btn" type="submit" class="btn btn-primary">{{ $buttonText }}</button>	
+		<button id="form-btn" type="submit" class="btn btn-primary mb-2">{{ $buttonText }}</button>	
 		@if($route != 'none')
 			<a id="cancel-form-btn" href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger">Cancel</a>
 		@endif

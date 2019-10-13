@@ -105,12 +105,18 @@ class TransactionsController extends Controller
     	$base_validation = $request->validate([
     		'transaction_code' => 'required',
     		'transaction_code_id' => 'required',
-            'transaction_details' => 'required'
+            'transaction_details' => 'required',
     	]);
         
         $main_data = $request->validate([
     		'transaction_code' => 'required',
-    		'transaction_code_id' => 'required'
+    		'transaction_code_id' => 'required',
+
+            'payee' => 'required',
+            'transaction_date' => 'required',
+            'date_disbursed' => 'nullable',
+            'disbursed_by' => 'required',
+            'description' => 'required',
     	]);
         
         $details_data = $request->validate([

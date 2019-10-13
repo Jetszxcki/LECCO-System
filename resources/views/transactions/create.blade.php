@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-	<div class="col-md-6">
+	<div class="col-md-5">
 		<div class="card">
 			<div class="card-header text-md-center">NEW TRANSACTION</div>
 			<div class="card-body">
@@ -14,11 +14,11 @@
 			</div>
 		</div>
 	</div>
-    <div class="col-md-6 p-0">
+    <div class="col-md-7 p-0">
 		<div id="transaction-details-holder" class="mb-2">
 			<div class="card">
-				<div class="card-header text-md-center">Transaction Details</div>
-				<div id="transaction-details" class="card-body">
+				<div class="card-header text-md-center">TRANSACTION DETAILS</div>
+				<div id="transaction-details" class="card-body pt-0">
                     <div class="row"><p id="transaction-details-error"></p></div>
                     <table class="container" id="transaction-details-table">
                         <thead>
@@ -52,7 +52,7 @@
                                 <div class="col-md-4">
                                     <select id="accounts_codes" name="account" class="form-control">
                                         @foreach($accounts as $account)
-                                            <option value="{{ $account->id }}">{{ $account->account_code }}({{ $account->name }})</option>
+                                            <option value="{{ $account->id }}">{{ $account->full_account_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
