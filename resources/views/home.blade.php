@@ -28,15 +28,15 @@
         @endaccessright
 
         @hasAccessRights(['chart_of_accounts_view_list', 'chart_of_accounts_create'])
-        @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'accounts.index', 'image' => 'user.jpg'])
+        @include('partials.home_panel', ['header' => 'CHART OF ACCOUNTS', 'href' => 'accounts.index', 'image' => 'coa_btn_img.jpg'])
         @endhasAccessRights
 
         @accessright('check_vouchers_view_list')
-            @include('partials.home_panel', ['header' => 'CHECK VOUCHERS', 'href' => 'check_vouchers.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'CHECK VOUCHERS', 'href' => 'check_vouchers.index', 'image' => 'cv_btn_img.jpg'])
         @endaccessright
 
         @accessright('transactions_view_list')
-        @include('partials.home_panel', ['header' => 'TRANSACTIONS', 'href' => 'transactions.index', 'image' => 'user.jpg'])
+            @include('partials.home_panel', ['header' => 'TRANSACTIONS', 'href' => 'transactions.index', 'image' => 'transaction_btn_img.jpg'])
         @endaccessright
 
         @accessright('shares_view_list')

@@ -5,14 +5,16 @@
 	<div class="form-group d-flex flex-row justify-content-between align-items-center">
 		<h2>Chart of Accounts</h2>
 
-        <button 
-            id="new-acct-btn" 
-            class="btn btn-primary" 
-            style="visibility: hidden;" 
-            onclick="viewMode('add')"
-        >
-            New Account
-        </button>
+        @accessright('chart_of_accounts_create')
+            <button 
+                id="new-acct-btn" 
+                class="btn btn-primary" 
+                style="visibility: hidden;" 
+                onclick="viewMode('add')"
+            >
+                New Account
+            </button>
+        @endaccessright
 	</div>
 
 	@include('partials.flash')
