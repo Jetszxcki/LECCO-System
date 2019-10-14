@@ -25,8 +25,10 @@ class LoansController extends Controller
     	$columns = ColumnUtil::getColNamesAndTypes('loans', $attrWithChoices);
 		$columns['payrolls']['multiple'] = True;
     	$model = new Loan();
+
+        $interests = LoanType::interests()->get();
         
-    	return view('loans.create', compact('columns', 'model'));
+    	return view('loans.create', compact('columns', 'model', 'interests'));
     }
 
 	public function store(Request $request)

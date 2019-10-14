@@ -29,6 +29,19 @@
 		</div>
 	</div>
 </div>
+{{-- script for $loan_types since separate .js file cannot handle php variables --}}
+<script type="text/javascript">
+	String.prototype.replaceAll = function(search, replacement) {
+        let target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+
+	var interests = `{{ json_encode($interests) }}`;
+	interests = interests.replaceAll('&quot;', '"');
+
+	interests = JSON.parse(interests);
+</script>
+
 <script src="{{ asset('/js/payment_schedule_form.js') }}"></script>
 <script src="{{ asset('/js/loan_util.js') }}"></script>
 <script src="{{ asset('/js/loan_create.js') }}"></script>

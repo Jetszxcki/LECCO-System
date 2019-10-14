@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header text-md-center">NEW TRANSACTION</div>
 			<div class="card-body">
-				<form onsubmit="return checkBalance()" action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
+				<form id="transaction-create-form" onsubmit="return checkBalance()" action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="transaction_details" id="transaction_details" value="{{ old('transaction_details') ?? $model->transaction_details_as_json }}"/>
 					@include('partials.form', [compact('columns'), 'route' => 'transactions.index', 'buttonText' => 'Add Transaction'])
 				</form>	
@@ -76,11 +76,11 @@
         /*  Loads all accounts in blade to javascript variable named "accounts" */
         // must be in here since it $accounts is in blade.php context and can't be accessed by other files types.
         String.prototype.replaceAll = function(search, replacement) {
-            var target = this;
+            let target = this;
             return target.replace(new RegExp(search, 'g'), replacement);
         };
         // do not use double quotation
-        var json_string = `{{ json_encode($accounts) }}`;
+        let json_string = `{{ json_encode($accounts) }}`;
         json_string = json_string.replaceAll('&quot;', '"');
         var accounts = JSON.parse(json_string);
     </script>

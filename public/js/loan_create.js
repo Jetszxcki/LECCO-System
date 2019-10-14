@@ -206,6 +206,16 @@ function set_interest(interest) {
 	$('input#interest_per_annum').val(interest);
 }
 
+function get_interest() {
+	let selected_id = parseInt($('#loan_type').val());
+
+	let interest = (interests.filter((loan_type) => {
+		return loan_type.id === selected_id;
+	}))[0].interest_per_annum;
+
+	return parseFloat(interest);
+}
+
 //add event listeners to specific form inputs
 window.addEventListener('load', function() {
 	// let loan_details = document.getElementById("loan-details");
@@ -220,7 +230,10 @@ window.addEventListener('load', function() {
 	interest_per_annum_field.addEventListener("keyup", update_loan_detail );
 	start_of_payment_field.addEventListener("change", update_loan_detail );
 	payrolls_field.addEventListener("change", update_loan_detail );
-	
+
+	// initialize interest per annum with currently selected
+	set_interest(get_interest());
+
 	// if( !(amount_field.value && term_field.value && interest_per_annum_field.value && start_of_payment_field.value) ){
 	// 	loan_details.innerHTML = "Cannot find all fields necessary..";
 	// 	return;

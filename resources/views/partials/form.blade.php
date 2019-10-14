@@ -27,6 +27,7 @@
 						id="{{ $column_name }}"
 						class="form-control @error($column_name) is-invalid @enderror"
 						{{ $column_data['multiple']?'multiple':'' }}
+						@if ($column_name == 'loan_type') onchange="set_interest(get_interest())" @endif
 					>
 							@foreach ($column_data['choices'] as $key => $value)
 								<option value="{{ $key }}" 

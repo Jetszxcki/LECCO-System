@@ -15,6 +15,11 @@ class LoanType extends Model
     	return $query->select('id', 'name');
     }
 
+    public function scopeInterests($query)
+    {
+        return $query->select('id', 'interest_per_annum');
+    }
+
     public function loans()
     {
         return $this->hasMany(Loan::class);
