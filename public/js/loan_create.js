@@ -202,10 +202,13 @@ function loan_payments_table(parent, details){
 	parent.appendChild(loan_payments_div);
 }
 
+function set_interest(interest) {
+	$('input#interest_per_annum').val(interest);
+}
+
 //add event listeners to specific form inputs
-$(document).ready(function() {
+window.addEventListener('load', function() {
 	// let loan_details = document.getElementById("loan-details");
-	
 	let amount_field = document.getElementById("amount");
 	let term_field = document.getElementById("term");
 	let interest_per_annum_field = document.getElementById("interest_per_annum");
@@ -222,7 +225,7 @@ $(document).ready(function() {
 	// 	loan_details.innerHTML = "Cannot find all fields necessary..";
 	// 	return;
 	// }
-    
+	
     // Dispatch/Trigger/Fire the event
     term_field.dispatchEvent(new Event('keyup'));
 });

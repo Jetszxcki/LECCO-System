@@ -136,7 +136,7 @@ function getAccountById(id){
     }
 }
 
-$(document).ready(function() {
+window.addEventListener('load', function() {
     let transaction_details_field = document.getElementById("transaction_details");
     console.log(transaction_details_field.value);
     console.log(accounts);
