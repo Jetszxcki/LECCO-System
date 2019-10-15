@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Summary of accounts')
+@section('title', 'General Ledger')
 
 <!-- 
     getDetailsReport() =
@@ -43,17 +43,28 @@
 </div>
 <div class="card" align="center">
     <div class="row card-header">
-        <div class="col-md-4"> Account </div>
-        <div class="col-md-1"> Debit </div>
-        <div class="col-md-1"> Credit </div>
-        <div class="col-md-1"> Debit </div>
-        <div class="col-md-1"> Credit </div>
-        <div class="col-md-1"> Debit </div>
-        <div class="col-md-1"> Credit </div>
+        <div class="container" align="left">
+            <h5>General Ledger</h5>
+            <h6>{{ date('F d, Y', strtotime($query_params['start_date'])) }} - {{ date('F d, Y', strtotime($query_params['end_date'])) }}</h6>
+            <h6>
+                @foreach($query_params['journal'] as $journal)
+                    <span class="badge badge-light">{{ $journal }}</span>
+                @endforeach
+            </h6>
+        </div>
     </div>
     <div class="card-body row">
 
         <div class="container border border-dark">
+        <div class="row border-bottom border-dark">
+            <div class="col-md-4"> Account </div>
+            <div class="col-md-1"> Debit </div>
+            <div class="col-md-1"> Credit </div>
+            <div class="col-md-1"> Debit </div>
+            <div class="col-md-1"> Credit </div>
+            <div class="col-md-1"> Debit </div>
+            <div class="col-md-1"> Credit </div>
+        </div>
             @include('partials.journal_report_row', ['account' => $main, 'level' => 1, 'query_params' => $query_params])
             
             @if($main->hasChildren() && !$main->getChildrenDetailsAreEmpty($query_params['journal'], $query_params['start_date'], $query_params['end_date']) )

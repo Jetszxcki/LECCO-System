@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 
 use App\Account;
+use App\Transaction;
 use App\ColumnUtil;
 
 class AccountsController extends Controller
@@ -79,8 +80,8 @@ class AccountsController extends Controller
     {
         $main = Account::main();
         $query_params['journal'] = array_key_exists('journal', $_GET)? $_GET['journal']: ['CV'];
-        $query_params['start_date'] = array_key_exists('start_date', $_GET)? $_GET['start_date']: NULL;
-        $query_params['end_date'] = array_key_exists('end_date', $_GET)? $_GET['end_date']: NULL;
+        $query_params['start_date'] = array_key_exists('start_date', $_GET)? $_GET['start_date']: Transaction::all()->min('transaction_date');
+        $query_params['end_date'] = array_key_exists('end_date', $_GET)? $_GET['end_date']: Transaction::all()->max('transaction_date');
         $query_params = collect($query_params);
         return view('journal.journal_report', compact('main', 'query_params'));
     }
