@@ -57,11 +57,19 @@ class Account extends Model
     */
     public function getDetailsReport($journal = 'CV', $start_date = NULL, $end_date = NULL)
     {
+        $transaction =  Transaction::all()->first()->transaction_date;
         $totals = [
             'main' => ['debit' => 0, 'credit' => 0],
             'children' => ['debit' => 0, 'credit' => 0]
         ];
-        $transactions =  Transaction::all()->whereIn('transaction_code', $journal)->pluck('id');
+        $start_date = $start_date?date(strval($start_date)):date("1000-01-01");
+        $end_date = $end_date?date(strval($end_date)):date("3000-01-01");
+        $transactions =  Transaction::all()
+                            ->whereIn('transaction_code', $journal)
+                            ->where('transaction_date', '>=', $start_date)
+                            ->where('transaction_date', '<=', $end_date)
+                            ->pluck('id');
+        
         $transaction_details = $this->transaction_details()->whereIn('transaction_id', $transactions)->get(['debit', 'credit']);
         $totals['main']['debit'] = $transaction_details->sum('debit');
         $totals['main']['credit'] = $transaction_details->sum('credit');
@@ -69,7 +77,7 @@ class Account extends Model
         if($this->hasChildren())
         {
             foreach($this->children()->get() as $child){
-                $child_totals = $child->getDetailsReport($journal);
+                $child_totals = $child->getDetailsReport($journal, $start_date, $end_date);
                 $totals['children']['debit'] = $totals['children']['debit'] + $child_totals['total']['debit'];
                 $totals['children']['credit'] = $totals['children']['credit'] + $child_totals['total']['credit'];
             }
@@ -81,5 +89,19 @@ class Account extends Model
         ];
         
         return collect($totals);
+    }
+    
+    public function getMainDetailsAreEmpty($journal = 'CV', $start_date = NULL, $end_date = NULL){
+        $totals = $this->getDetailsReport($journal, $start_date, $end_date);
+        return ($totals['main']['debit'] === 0 && $totals['main']['credit'] === 0);
+    }
+    
+    public function getChildrenDetailsAreEmpty($journal = 'CV', $start_date = NULL, $end_date = NULL){
+        $totals = $this->getDetailsReport($journal, $start_date, $end_date);
+        return ($totals['children']['debit'] === 0 && $totals['children']['credit'] === 0);
+    }
+    
+    public function getDetailsAreEmpty($journal = 'CV', $start_date = NULL, $end_date = NULL){
+        return ($this->getMainDetailsAreEmpty($journal, $start_date, $end_date) && $this->getChildrenDetailsAreEmpty($journal, $start_date, $end_date));
     }
 }
