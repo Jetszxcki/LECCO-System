@@ -108,6 +108,12 @@ function renderDetails(){
 function checkBalance(){
     let transaction_details_field = document.getElementById("transaction_details");
     let transaction_details = JSON.parse(transaction_details_field.value);
+    console.log(transaction_details);
+    if(transaction_details.length <= 0){
+        let transaction_details_error = document.getElementById("transaction-details-error");
+        transaction_details_error.innerHTML = "Transaction details cannot be empty!";
+        return false;
+    }
     
     let total_debit = 0;
     let total_credit = 0;

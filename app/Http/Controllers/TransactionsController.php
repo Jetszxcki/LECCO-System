@@ -30,30 +30,6 @@ class TransactionsController extends Controller
 
     public function store(Request $request)
     {
-    	// get all transactions with the same journal
-    	$transactions = Transaction::journal($request->transaction_code);
-
-    	if ($transactions->isEmpty()) {
-    		$request['transaction_code_id'] = 1;
-    	} else {
-            $journal_id_arr = $transactions->toArray();
-            $journal_id_arr = array_column($journal_id_arr, 'transaction_code_id');
-            array_push($journal_id_arr, "0");
-            sort($journal_id_arr);
-            $last_id_index = count($journal_id_arr) - 1;
-
-            $missing_transaction_id = $this->findFirstMissingID($journal_id_arr, 0, $last_id_index);
-            $max_transaction_id = $transactions->max('transaction_code_id');
-
-            // if there is a missing journal id   -->   e.g.(0,1,3,4,5...) 
-            if (($missing_transaction_id - 1) != $journal_id_arr[$last_id_index]) {
-                $request['transaction_code_id'] = $missing_transaction_id;
-            } else {
-                $request['transaction_code_id'] = $max_transaction_id + 1;
-            }
-    	}
-    	
-        
         [$main_data, $details_data] = $this->validateRequest($request);
         $details_data = json_decode($details_data['transaction_details'], true);// 2nd args is to assoc, parse as hash instead of object
     	Transaction::createWithDetails($main_data, $details_data);
@@ -104,13 +80,11 @@ class TransactionsController extends Controller
     {
     	$base_validation = $request->validate([
     		'transaction_code' => 'required',
-    		'transaction_code_id' => 'required',
             'transaction_details' => 'required',
     	]);
         
         $main_data = $request->validate([
     		'transaction_code' => 'required',
-    		'transaction_code_id' => 'required',
 
             'payee' => 'required',
             'transaction_date' => 'required',
@@ -125,17 +99,4 @@ class TransactionsController extends Controller
         
         return [$main_data, $details_data];
     }
-
-    public function findFirstMissingID($array, $start, $end) 
-    {
-        if ($start > $end)
-            return $start;
-
-        $mid = intval(($start + $end) / 2);
-
-        if ($mid == $array[$mid])
-            return $this->findFirstMissingID($array, $mid + 1, $end);
-
-        return $this->findFirstMissingID($array, $start, $mid - 1);
-    } 
 }

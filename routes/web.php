@@ -84,6 +84,7 @@ Route::delete('chart_of_accounts/{account}', 'AccountsController@destroy')->name
 
 // CHECK VOUCHERS
 Route::get('check_vouchers', 'CheckVouchersController@index')->name('check_vouchers.index')->middleware(['auth', 'accessRight:check_vouchers_view_list']);
+Route::post('check_vouchers', 'CheckVouchersController@store')->name('check_vouchers.store')->middleware(['auth', 'accessRight:check_vouchers_view_list,check_vouchers_create']);
 Route::get('check_vouchers/create', 'CheckVouchersController@create')->name('check_vouchers.create')->middleware(['auth', 'accessRight:check_vouchers_view_list,check_vouchers_create']);
 
 // SUMMARIES

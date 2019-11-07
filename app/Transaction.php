@@ -61,6 +61,16 @@ class Transaction extends Model
     }
     
     public static function createWithDetails($transaction_data, $details_data){
+    	$transactions = Transaction::journal($transaction_data['transaction_code']);
+    	if ($transactions->isEmpty()) {
+    		$transaction_data['transaction_code_id'] = 1;
+    	} else {
+            $ids = $transactions->pluck('transaction_code_id')->all();
+            $full_seq = range(1,max($ids));
+            $missing_nums = array_diff($full_seq,$ids);
+            $transaction_data['transaction_code_id'] = count($missing_nums) ? array_values($missing_nums)[0] : intval(max($ids))+1 ;
+    	}
+        
         DB::beginTransaction();
         $transaction =  Transaction::create($transaction_data);
         
@@ -69,6 +79,7 @@ class Transaction extends Model
             $transaction->transaction_details()->create($detail_data);
         }
         DB::commit();
+        return $transaction;
     }
     
     // this is a recommended way to declare event handlers

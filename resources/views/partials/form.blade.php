@@ -83,8 +83,10 @@
 @endforeach	
 
 <div class="form-group row mb-0">
-    <div class="col-md-6 offset-md-4 d-flex flex-row">		
-		<button id="form-btn" type="submit" class="btn btn-primary">{{ $buttonText }}</button>	
+    <div class="col-md-6 offset-md-4 d-flex flex-row">
+        @isset($buttonText)
+            <button id="form-btn" type="submit" class="btn btn-primary">{{ $buttonText }}</button>
+        @endisset
 		@if($route != 'none')
 			<a id="cancel-form-btn" href="{{ $route == 'previous' ? url()->previous() : route($route) }}" class="btn btn-danger ml-2">Cancel</a>
 		@endif
