@@ -3,7 +3,7 @@
 
 @section('content')
 	@include('partials.flash')
-	<div class="container col-sm-11">
+	<div class="container">
 		<div class="card mb-4">
 			<div class="card-header text-md-center">LOAN DETAILS</div>
 			<div id="loan-details" class="card-body">
@@ -52,6 +52,7 @@
 						</ul>
 					</div>
 				</div>
+				<hr>
 				<div class="d-flex flex-row justify-content-center">
 					@accessright('loans_edit')
 						<a href="{{ route('loans.edit', [$loan]) }}" class="btn btn-warning mr-2">Edit</a>
@@ -75,61 +76,64 @@
 			
 				@foreach($loan->payrolls()->get() as $payroll)
 					<div class="d-flex flex-row justify-content-center mb-1">
-						<h3 style="letter-spacing: 1px;">{{ $payroll->name }}</h3>
+						<h4 style="letter-spacing: 1px;">{{ $payroll->name }}</h4>
 					</div>
 					<div class="table">
-						<div class="row">
+						<div class="row text-center">
 							<div class="col-sm-1">Payment No.</div>
-							<div class="col-sm">Expected Payment Date</div>
-							<div class="col-sm">Actual Payment Date</div>
-							<div class="col-sm">Amount Paid</div>
-							<div class="col-sm">Interest</div>
-							<div class="col-sm">Principal Payment</div>
-							<div class="col-sm">Remaining Principal</div>
+							<div class="col-sm-2">Expected Payment Date</div>
+							<div class="col-sm-3">Actual Payment Date</div>
+							<div class="col-sm-1">Amount Paid</div>
+							<div class="col-sm-1">Interest</div>
+							<div class="col-sm-2">Principal Payment</div>
+							<div class="col-sm-2">Remaining Principal</div>
 						</div>
 						<hr>
 						@foreach($payroll->pivot->payment_schedules as $payment_schedule)
-							<div class="row">
+							<div class="row text-center">
 							<div class="col-sm-1">{{ $payment_schedule->term }}</div>
-							<div class="col-sm">{{ $payment_schedule->expected_payment_date }}</div>
-							<div class="col-sm-2">
+							<div class="col-sm-2">{{ $payment_schedule->expected_payment_date }}</div>
+							<div class="col-sm-3">
 							@if($loan->next_payment_schedule)
 								@if($loan->next_payment_schedule->id == $payment_schedule->id)
-									<form action="{{ route('payment_schedule.up', [$loan, $payment_schedule]) }}" method="POST">
+									<form action="{{ route('payment_schedule.up', [$loan, $payment_schedule]) }}" method="POST" class="d-flex flex-row justify-content-between">
 										@method('PATCH')
 										@csrf
 										<input
 											type="date"
 											name="actual_payment_date"
 											class="form-control"
+											style="font-size: 15px; height: 25px; width: 70%;"
 											value="{{ $payment_schedule->expected_payment_date }}"
 										/>
-										<input type="submit" class="btn btn-warning" value="Update"/>
+										<input type="submit" class="btn btn-warning" style="width: 30%; height: 25px; line-height: 50%" value="Update"/>
 									</form>
 								@else
-									{{ $payment_schedule->actual_payment_date }}
-									@if($loan->last_payment_schedule)
-										@if($loan->last_payment_schedule->id == $payment_schedule->id)
-											<form action="{{ route('payment_schedule.down', [$loan, $payment_schedule]) }}" method="POST">
-												@method('PATCH')
-												@csrf
-												<input
-													type="hidden"
-													name="actual_payment_date"
-													class="form-control"
-													value=""
-												/>
-												<input type="submit" class="btn btn-danger" value="Revert"/>
-											</form>
+									<div class="d-flex flex-row justify-content-between">
+										<label style="width: 70%">{{ $payment_schedule->actual_payment_date }}</label>
+										@if($loan->last_payment_schedule)
+											@if($loan->last_payment_schedule->id == $payment_schedule->id)
+												<form action="{{ route('payment_schedule.down', [$loan, $payment_schedule]) }}" method="POST" style="width: 30%">
+													@method('PATCH')
+													@csrf
+													<input
+														type="hidden"
+														name="actual_payment_date"
+														class="form-control"
+														value=""
+													/>
+													<input type="submit" class="btn btn-danger" style="height: 25px; line-height: 50%" value="Revert"/>
+												</form>
+											@endif
 										@endif
-									@endif
+									</div>
 								@endif
 							@endif
 							</div>
-							<div class="col-sm">{{ $payment_schedule->total_payment }}</div>
-							<div class="col-sm">{{ $payment_schedule->interest }}</div>
-							<div class="col-sm">{{ $payment_schedule->principal_payment }}</div>
-							<div class="col-sm">{{ $payment_schedule->remaining_principal }}</div>
+							<div class="col-sm-1">{{ $payment_schedule->total_payment }}</div>
+							<div class="col-sm-1">{{ $payment_schedule->interest }}</div>
+							<div class="col-sm-2">{{ $payment_schedule->principal_payment }}</div>
+							<div class="col-sm-2">{{ $payment_schedule->remaining_principal }}</div>
 						</div>
 						@endforeach
 					</div>
