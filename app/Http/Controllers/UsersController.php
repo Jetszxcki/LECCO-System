@@ -65,18 +65,42 @@ class UsersController extends Controller
 
     public function update_avatar(Request $request, User $user)
     {    	
+        $old_password = $request['old_password']; # old password field
+        $new_password = $request['password']; # new password field
+        $confirm_password = $request['password_confirmation']; # confirm password field
+
+        $are_pass_fields_nullable = ($old_password == '' && $new_password == '' && $confirm_password == '');
+        $requirement = $are_pass_fields_nullable ? 'nullable' : 'required';
+        $avatar_requirement = $request->avatar == null ? 'nullable' : 'required';
+
         $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => "{$avatar_requirement}|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            'old_password' => "{$requirement}",
+            'password' => "{$requirement}|min:7|confirmed",
         ]);
 
-		$avatarName = $user->id . 'user.' . $request->avatar->getClientOriginalExtension();
-        $request->avatar->move(public_path('images'), $avatarName);
-        $user->avatar = $avatarName;
+
+        if (! $are_pass_fields_nullable) {
+            if (password_verify($old_password, $user->password)) {
+                $user->password = password_hash($request['password'], PASSWORD_DEFAULT);
+            } else {
+                return redirect()->route('users.profile', [$user])->with([
+                    'message' => 'Password incorrect. Try again.',
+                    'styles' => 'alert-danger px-4'
+                ]);
+            }
+        }
+
+        if ($request->avatar != null) {
+            $avatarName = $user->id . 'user.' . $request->avatar->getClientOriginalExtension();
+            $request->avatar->move(public_path('images'), $avatarName);
+            $user->avatar = $avatarName;
+        }
         $user->save();
  
         return redirect()->route('users.profile', [$user])->with([
-        	'message' => 'Profile picture successfully changed.',
-        	'styles' => 'alert-success px-4'
-        ]);
+            'message' => 'Profile info successfully updated.',
+            'styles' => 'alert-success px-4'
+        ]);          
     }
 }
