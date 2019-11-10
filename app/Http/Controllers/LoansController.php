@@ -24,6 +24,8 @@ class LoansController extends Controller
     	$attrWithChoices = $this->attributesWithChoices();
     	$columns = ColumnUtil::getColNamesAndTypes('loans', $attrWithChoices);
 		$columns['payrolls']['multiple'] = True;
+		$columns['loan_type']['help_path'] = route('loan_types.index');
+		$columns['loan_type']['help_text'] = 'View Loan Types';
     	$model = new Loan();
 
         $interests = LoanType::interests()->get();
