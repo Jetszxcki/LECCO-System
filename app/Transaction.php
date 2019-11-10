@@ -9,6 +9,7 @@ use Auth;
 use App\TransactionDetail;
 use App\CheckVoucher;
 use App\User;
+use App\ColumnUtil;
 
 class Transaction extends Model
 {
@@ -66,8 +67,7 @@ class Transaction extends Model
     		$transaction_data['transaction_code_id'] = 1;
     	} else {
             $ids = $transactions->pluck('transaction_code_id')->all();
-            $full_seq = range(1,max($ids));
-            $missing_nums = array_diff($full_seq,$ids);
+            $missing_nums = ColumnUtil::getMissingInSequence($ids);
             $transaction_data['transaction_code_id'] = count($missing_nums) ? array_values($missing_nums)[0] : intval(max($ids))+1 ;
     	}
         

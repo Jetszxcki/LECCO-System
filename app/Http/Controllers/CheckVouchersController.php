@@ -23,10 +23,10 @@ class CheckVouchersController extends Controller
         $attrWithChoices = $this->attributesWithChoices();
         $columns = ColumnUtil::getColNamesAndTypes('check_vouchers', $attrWithChoices);
         $model = new CheckVoucher();
+		$model->cv_no = CheckVoucher::getNextCvNo();
         
     	$columns2 = ColumnUtil::getColNamesAndTypes('transactions');
     	$columns2['transaction_code_id']['type'] = 'none';
-    	$columns2['transaction_code']['type'] = 'none';
     	$columns2['transaction_code']['type'] = 'none';
         $model2 = new Transaction();
         
