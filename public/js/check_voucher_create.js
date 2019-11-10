@@ -5,11 +5,22 @@ var transaction_id_field = null;
 
 function check_new_transaction_flag(){
     let is_checked = new_transaction_flag.checked;
-    new_transaction_form.style.display = is_checked ? "":"none";
-    new_transaction_details_form.style.display = is_checked ? "":"none";
-    transaction_id_field.style.display = is_checked ? "none":"";
-    
+	toggleShow(new_transaction_form, is_checked);
+	toggleShow(new_transaction_details_form, is_checked);
+	toggleShow(transaction_id_field, !is_checked);
+    // new_transaction_form.style.display = is_checked ? "":"none";
+    // new_transaction_details_form.style.display = is_checked ? "":"none";
+    // transaction_id_field.style.display = is_checked ? "none":"";
     return !is_checked;
+}
+
+function toggleShow(elem, show){
+	let speed = 100;
+	if(show) {
+		$(elem).show(speed);
+	}else {
+		$(elem).hide(speed);
+	}
 }
 
 window.addEventListener('load', function() {
