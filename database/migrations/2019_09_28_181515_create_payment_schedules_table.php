@@ -19,6 +19,7 @@ class CreatePaymentSchedulesTable extends Migration
             $table->bigInteger('term');
             $table->date('expected_payment_date');
             $table->date('actual_payment_date')->nullable();
+            $table->decimal('penalty_interest',12,2)->default('0.00');
             $table->decimal('total_payment',12,2);
             $table->decimal('interest',12,2);
             $table->decimal('principal_payment',12,2);

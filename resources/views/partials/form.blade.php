@@ -78,7 +78,7 @@
 					</span>
 				@enderror
 				@if(isset($column_data['help_text']))
-					<small id="fileHelp" class="form-text text-muted">
+					<small id="help-{{ $column_name }}" class="form-text text-muted">
 						@if(isset($column_data['help_path']))
 							<a href="{{ $column_data['help_path'] }}" rel="noopener noreferrer" target="_blank">
 								{{ $column_data['help_text'] }}
