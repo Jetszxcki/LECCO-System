@@ -57,7 +57,7 @@ class Account extends Model
     */
     public function getDetailsReport($journal = 'CV', $start_date = NULL, $end_date = NULL)
     {
-        $transaction =  Transaction::all()->first()->transaction_date;
+        
         $totals = [
             'main' => ['debit' => 0, 'credit' => 0],
             'children' => ['debit' => 0, 'credit' => 0]

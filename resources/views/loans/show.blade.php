@@ -78,14 +78,15 @@
 					<div class="d-flex flex-row justify-content-center mb-1">
 						<h4 style="letter-spacing: 1px;">{{ $payroll->name }}</h4>
 					</div>
-					<div class="table">
+					<div class="table overflow-horizontal">
 						<div class="row text-center">
 							<div class="col-sm-1">Payment No.</div>
 							<div class="col-sm-2">Expected Payment Date</div>
 							<div class="col-sm-3">Actual Payment Date</div>
+							<div class="col-sm-1">Penalty Interest</div>
 							<div class="col-sm-1">Amount Paid</div>
 							<div class="col-sm-1">Interest</div>
-							<div class="col-sm-2">Principal Payment</div>
+							<div class="col-sm-1">Principal Payment</div>
 							<div class="col-sm-2">Remaining Principal</div>
 						</div>
 						<hr>
@@ -130,9 +131,10 @@
 								@endif
 							@endif
 							</div>
+							<div class="col-sm-1">{{ $payment_schedule->penalty_interest }}</div>
 							<div class="col-sm-1">{{ $payment_schedule->total_payment }}</div>
 							<div class="col-sm-1">{{ $payment_schedule->interest }}</div>
-							<div class="col-sm-2">{{ $payment_schedule->principal_payment }}</div>
+							<div class="col-sm-1">{{ $payment_schedule->principal_payment }}</div>
 							<div class="col-sm-2">{{ $payment_schedule->remaining_principal }}</div>
 						</div>
 						@endforeach

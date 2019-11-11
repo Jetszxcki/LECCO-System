@@ -47,4 +47,11 @@ class ColumnUtil extends Model
 
         return $columns;
     }
+	
+	public static function getMissingInSequence($sequence, $from_1 = True){
+		$start = $from_1 ? 1: min($sequence);
+		$end = max($sequence);
+        $full_seq = range($start,$end);
+		return array_diff($full_seq,$sequence);
+	}
 }

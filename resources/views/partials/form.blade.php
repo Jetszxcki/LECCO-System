@@ -77,6 +77,17 @@
 						{{ $message }}
 					</span>
 				@enderror
+				@if(isset($column_data['help_text']))
+					<small id="help-{{ $column_name }}" class="form-text text-muted">
+						@if(isset($column_data['help_path']))
+							<a href="{{ $column_data['help_path'] }}" rel="noopener noreferrer" target="_blank">
+								{{ $column_data['help_text'] }}
+							</a> 	
+						@else	
+							{{ $column_data['help_text'] }}
+						@endif
+					</small>
+				@endif
 			</div> 	
 		</div>
 	@endif
