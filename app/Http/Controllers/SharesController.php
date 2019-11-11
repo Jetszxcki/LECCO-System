@@ -14,7 +14,12 @@ class SharesController extends Controller
     public function index()
     {
         $shares = Share::all();
-		return view('shares.index', compact('shares'));
+        $members = Member::orderBy('first_name', 'asc')->get()
+                    ->reject(function ($member) {
+                        return sizeof($member->shares) === 0;
+                    });
+        
+		return view('shares.index', compact('shares', 'members'));
     }
 
     public function create()
@@ -35,9 +40,10 @@ class SharesController extends Controller
             'amount' => ''
     	]);
         
-    	Share::create($data);
+    	$new_share = Share::create($data);
+
     	return redirect('shares')->with([
-            'message' => 'New share successfully added.',
+            'message' => "A new share has been added to {$new_share->member->full_name}.",
             'styles' => 'alert-success'
         ]);
     }

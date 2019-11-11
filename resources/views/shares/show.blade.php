@@ -28,13 +28,15 @@
 				<td class="col-md-3">{{ $share->total_amount }}</td>
 			</tr>
 		@endforeach
-
-		<tr id="theader" class="d-flex p-1 text-center" style="background: white;">
-			<th nosearch class="col-md-3 c-black">Total:</th>
-			<th nosearch class="col-md-3 c-black">{{ $totals[0] }}</th>
-			<th nosearch class="col-md-3 c-black">{{ $totals[1] }}</th>
-			<th nosearch class="col-md-3 c-black">{{ $totals[2] }}</th>
-		</tr>
+		
+		@if (! $shares->isEmpty())
+			<tr id="theader" class="d-flex p-1 text-center" style="background: white;">
+				<th nosearch class="col-md-3 c-black">Total:</th>
+				<th nosearch class="col-md-3 c-black">{{ $totals[0] }}</th>
+				<th nosearch class="col-md-3 c-black">{{ $totals[1] }}</th>
+				<th nosearch class="col-md-3 c-black">{{ $totals[2] }}</th>
+			</tr>
+		@endif
 
 		@include('partials.search_not_found', ['model' => $shares])
 	</table>

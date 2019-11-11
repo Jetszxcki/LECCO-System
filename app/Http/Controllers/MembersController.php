@@ -95,7 +95,6 @@ class MembersController extends Controller
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
             'birthday' => 'required',
-            'age' => 'required|gte:0',
             'gender' => 'required',
             'civil_status' => 'required',
             'religion' =>'required',
@@ -106,15 +105,16 @@ class MembersController extends Controller
             'employer' => 'required',
             'department' => 'required',
             'position' => 'required',
-            'annual_income' => 'required',
+            'annual_income' => 'required|gte:0',
             'length_of_service(years)' => 'required|gte:0',
             'status_of_employment' => 'required',
-            'no_of_subscribed_shares' => 'required',
+            // 'no_of_subscribed_shares' => 'required',
             'years_to_fully_pay' => 'required|gte:0',
             'contact_no' => 'required',
             'date_accepted' => 'required',
             'BOD_resolution_number' => 'required',
-            'type_of_membership' => 'required'
+            'type_of_membership' => 'required',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
     }
 }

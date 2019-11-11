@@ -32,7 +32,7 @@ class CreateMembersTable extends Migration
             $table->decimal('annual_income');
             $table->unsignedInteger('length_of_service(years)');
             $table->string('status_of_employment');
-            $table->unsignedInteger('no_of_subscribed_shares');
+            // $table->unsignedInteger('no_of_subscribed_shares');
             $table->unsignedInteger('years_to_fully_pay');
             $table->string('profile_picture')->default('user.jpg');
             $table->string('contact_no');

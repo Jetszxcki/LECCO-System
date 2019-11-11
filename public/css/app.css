@@ -39,13 +39,6 @@ h2 {
     padding-bottom: 50px;
 }
 
-.scrolling-wrapper {
-	position: relative;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	white-space: nowrap;
-}
-
 a span {
 	color: white;
 }
@@ -58,7 +51,7 @@ a span {
 	color: white;
 	background: #212F3D;
 }
-
+ 
 .nav-logo-text {
 	color: white;
 	font-size: 23px;
@@ -80,27 +73,6 @@ tr {
 	display: flex;
 	box-shadow: .2rem .2rem .2rem black;
 }
-
-#left-scroll-btn, 
-#right-scroll-btn {
-	position: absolute;
-	z-index: 10;
-	transform: translateY(-50%);
-	top: 50%;
-	border: 0;
-    justify-self: center;
-    outline: 0;
-}
-
-#left-scroll-btn {
-    left: 0%;
-}
-
-#right-scroll-btn {
-	right: 0%;
-}
-
-
 
 html, body {
     background-color: #34495E;
